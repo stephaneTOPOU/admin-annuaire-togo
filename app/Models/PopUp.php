@@ -13,4 +13,6 @@ class PopUp extends Model
     {
         return $this->belongsTo(Admin::class);
     }
+
+    public $fillable = ['admin_id', 'image', 'pays_id','entreprise_id'];
 }

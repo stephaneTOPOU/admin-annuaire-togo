@@ -122,23 +122,6 @@
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <div class="form-group">
-                                                        <label>Description courte de l'entreprise</label>
-                                                        <textarea class="form-control" rows="5" placeholder="Enter ..." name="descriptionCourte"></textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Description longue de l'entreprise</label>
-                                                    <textarea class="form-control" rows="5" placeholder="Enter ..." name="descriptionLonge"></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
                                             <div class="col-md-3">
                                                 <div class="form-check">
                                                     <input type="checkbox" class="form-check-input" id="exampleCheck100" name="premium" value="1">

@@ -191,38 +191,6 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ route('slider2.index') }}" class="nav-link">
-                <i class="nav-icon fas fa-sliders-h"></i>
-                <p>
-                  Slider 2
-                </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ route('slider3.index') }}" class="nav-link">
-                <i class="nav-icon fas fa-sliders-h"></i>
-                <p>
-                  Slider 3
-                </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ route('sliderhaut.index') }}" class="nav-link">
-                <i class="nav-icon fas fa-sliders-h"></i>
-                <p>
-                  Slider Latéral Haut
-                </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ route('sliderbas.index') }}" class="nav-link">
-                <i class="nav-icon fas fa-sliders-h"></i>
-                <p>
-                  Slider Latéral Bas
-                </p>
-              </a>
-            </li>
-            <li class="nav-item">
               <a href="{{ route('sliderrecherche.index') }}" class="nav-link">
                 <i class="nav-icon fas fa-sliders-h"></i>
                 <p>

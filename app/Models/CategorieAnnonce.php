@@ -6,28 +6,27 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Annonce extends Model
+class CategorieAnnonce extends Model
 {
     use HasFactory;
 
     use Sluggable;
-
     public function Sluggable():array
     {
         return[
-            'slug_annonce' =>
+            'slug_cat_an' =>
             [
-                'source' => 'titre'
+                'source' => 'libelle'
             ]
         ];
     }
-    
+
     public $fillable = [
-        'titre', 'text1', 'image1', 'text2', 'image2', 'text3', 'image3', 'image4', 'image5', 'image6', 'video','slug_annonce','categorie_id'
+        'libelle', 'slug_cat_an'
     ];
 
-    public function Categorie()
+    public function Annonce()
     {
-        return $this->belongsTo(CategorieAnnonce::class);
+        return $this->hasMany(Annonce::class);
     }
 }

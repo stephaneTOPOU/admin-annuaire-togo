@@ -5,16 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Commentaire extends Model
+class Reponse_commentaire extends Model
 {
     use HasFactory;
 
-    public function entreprise()
+    public function commentaire()
     {
-        return $this->belongsTo(Entreprises::class);
+        return $this->belongsTo(Commentaire::class);
     }
 
     public $fillable = [
-        'entreprise_id', 'note', 'commentaire','nom','email'
+        'commentaire_id', 'commentaire','nom','email'
     ];
 }

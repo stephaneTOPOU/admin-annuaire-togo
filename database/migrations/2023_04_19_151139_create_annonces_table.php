@@ -22,12 +22,10 @@ class CreateAnnoncesTable extends Migration
             $table->string('image2');
             $table->longText('text3');
             $table->string('image3');
-            $table->longText('text4');
             $table->string('image4');
-            $table->longText('text5');
             $table->string('image5');
-            $table->longText('text6');
             $table->string('image6');
+            $table->string('video');
             $table->timestamps();
         });
     }

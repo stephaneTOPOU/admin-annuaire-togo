@@ -30,6 +30,10 @@ class User extends Authenticatable
         'photo2',
         'fonction',
         'description',
+        'facebook',
+        'google',
+        'twitter',
+        'linkedin',
         'password',
         'pays_id',
         'slug_user'

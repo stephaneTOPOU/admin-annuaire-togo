@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Entreprise;
 use App\Models\PopUp;
 use Exception;
 use Illuminate\Http\Request;
@@ -20,9 +21,12 @@ class PopupController extends Controller
     public function index()
     {
         $popups = DB::table('pays')
-            ->join('pop_ups', 'pays.id', '=', 'pop_ups.pays_id')
+            ->join('categories', 'pays.id', '=', 'categories.pays_id')
+            ->join('sous_categories', 'categories.id', '=', 'sous_categories.categorie_id')
+            ->join('entreprises', 'sous_categories.id', '=', 'entreprises.souscategorie_id')
+            ->join('pop_ups', 'entreprises.id', '=', 'pop_ups.entreprise_id')
             ->join('admins', 'admins.id', '=', 'pop_ups.admin_id')
-            ->select('*', 'pop_ups.id as identifiant', 'admins.name as admin')
+            ->select('*', 'pop_ups.id as identifiant', 'admins.name as admin', 'pays.libelle as pays')
             ->get();
 
         return view('popup.index', compact('popups'));
@@ -36,7 +40,8 @@ class PopupController extends Controller
     public function create()
     {
         $pays = Pays::all();
-        return view('popup.add', compact('pays'));
+        $entreprises = Entreprise::all();
+        return view('popup.add', compact('pays', 'entreprises'));
     }
 
     /**
@@ -49,7 +54,8 @@ class PopupController extends Controller
     {
         $data = $request->validate([
             'pays_id'=>'required|integer',
-            'image'=>'required|file'
+            'image'=>'required|file',
+            'entreprise_id'=>'required|integer'
         ]);
 
         try {
@@ -85,6 +91,7 @@ class PopupController extends Controller
                 $data->image = $filenametostore;
             }
 
+            $data->entreprise_id = $request->entreprise_id;
             $data->save();
             return redirect()->route('popup.index')->with('success', 'Popup ajouté avec succès');
         } catch (Exception $e) {
@@ -114,7 +121,8 @@ class PopupController extends Controller
         
         $popups = PopUp::find($popup);
         $pays = Pays::all();
-        return view('popup.update', compact('popups', 'pays'));
+        $entreprises = Entreprise::all();
+        return view('popup.update', compact('popups', 'pays', 'entreprises'));
     }
 
     /**
@@ -128,6 +136,7 @@ class PopupController extends Controller
     {
         $data = $request->validate([
             'pays_id'=>'required|integer',
+            'entreprise_id'=>'required|integer'
         ]);
 
         try {
@@ -163,6 +172,7 @@ class PopupController extends Controller
                 $data->image = $filenametostore;
             }
 
+            $data->entreprise_id = $request->entreprise_id;
             $data->update();
             return redirect()->route('popup.index')->with('success', 'Popup mis à jour avec succès');
         } catch (Exception $e) {

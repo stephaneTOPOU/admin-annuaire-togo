@@ -123,22 +123,6 @@
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <div class="form-group">
-                                                        <label>Description courte de l'entreprise</label>
-                                                        <textarea class="form-control" rows="5" placeholder="Enter ..." name="descriptionCourte" >{{old('descriptionCourte')?? $entreprises->descriptionCourte}}</textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Description longue de l'entreprise</label>
-                                                    <textarea class="form-control" rows="5" placeholder="Enter ..." name="descriptionLonge" > {{old('descriptionLonge')?? $entreprises->descriptionLonge}}</textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
                                             <div class="col-md-3">
                                                 <div class="form-check">
                                                     <input type="checkbox" class="form-check-input" id="exampleCheck100" name="premium" data-key="{{$entreprises->id}}"  value="1" @if($entreprises->premium == 1) checked  @endif @if($entreprises->premium == 0) unchecked  @endif>
