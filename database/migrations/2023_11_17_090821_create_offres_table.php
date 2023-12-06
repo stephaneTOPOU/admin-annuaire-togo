@@ -15,7 +15,6 @@ class CreateOffresTable extends Migration
     {
         Schema::create('offres', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('categorieOffres_id')->unsigned();
             $table->string('entreprise')->nullable();
             $table->string('site')->nullable();
             $table->string('facebook')->nullable();
@@ -33,11 +32,12 @@ class CreateOffresTable extends Migration
             $table->longText('lien')->nullable();
             $table->string('lieu')->nullable();
             $table->string('ville')->nullable();
-            $table->string('libelle')->nullable();
+            $table->string('description_courte')->nullable();
+            $table->string('categorie')->nullable();
             $table->date('date_lim')->nullable();
             $table->boolean('valide')->default(0);
+            $table->string('libelle')->nullable();
             $table->timestamps();
-            $table->foreign('categorieOffres_id')->references('id')->on('categorie_offres')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

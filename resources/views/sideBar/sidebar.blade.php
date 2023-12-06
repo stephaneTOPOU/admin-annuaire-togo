@@ -62,7 +62,15 @@
               <a href="{{ route('category.index') }}" class="nav-link">
                 <i class="nav-icon fas fa-th-large"></i>
                 <p>
-                  Categories
+                  Categories-Entreprise
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ route('category.index') }}" class="nav-link">
+                <i class="nav-icon fas fa-th-large"></i>
+                <p>
+                  Categories-Annonce
                 </p>
               </a>
             </li>
