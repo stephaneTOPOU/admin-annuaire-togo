@@ -3,6 +3,11 @@
 @include('header.header7')
 @include('header.header3')
 <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css') }}">
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+
 @include('header.header2')
 <link rel="stylesheet" href="{{ asset('assets/plugins/select2/css/select2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
@@ -28,7 +33,18 @@
                                     @method('PUT')
                                     <div class="card-body">
                                         <div class="row">
-                                            <div class="col-md-12">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Choisir une categorie</label>
+                                                    <select class="form-control select2" style="width: 100%;" name="pays_id">
+                                                        <option selected="selected">Categorie</option>
+                                                        @foreach ($categories as $categorie)
+                                                            <option value="{{ $categorie->id }}" @if(($categorie->id)==($annonces->categorie_id)) selected @endif>{{ $categorie->libelle }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label >Titre</label>
                                                     <input type="text" class="form-control" placeholder="Entrez le titre" name="titre" value="{{old('titre')?? $annonces->titre}}" required>
@@ -40,13 +56,13 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label >Premier Text</label>
-                                                    <textarea class="form-control" rows="4" placeholder="Enter ..." name="text1">{{old('text1')??$annonces->text1}}</textarea>
+                                                    <textarea id="summernote-1" name="text1">{{old('text1')??$annonces->text1}}</textarea>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label >Deuxieme Text</label>
-                                                    <textarea class="form-control" rows="4" placeholder="Enter ..." name="text2">{{old('text2')??$annonces->text2}}</textarea>
+                                                    <textarea id="summernote-2" name="text2">{{old('text2')??$annonces->text2}}</textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -55,7 +71,7 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="exampleInputFile1">Troisieme Text</label>
-                                                    <textarea class="form-control" rows="4" placeholder="Enter ..." name="text3">{{old('text3')??$annonces->text3}}</textarea>
+                                                    <textarea id="summernote-3" name="text3">{{old('text3')??$annonces->text3}}</textarea>
                                                 </div>
                                             </div>
                                             
@@ -64,33 +80,83 @@
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="exampleInputFile2">image1 </label>
+                                                    <label for="exampleInputFile1">image1 </label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile2" name="image1" value="{{old('image1')??$annonces->image1}}">
-                                                            <label class="custom-file-label" for="exampleInputFile2">{{old('image1')??$annonces->image1}}</label>
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile1" name="image1" value="{{old('image1')??$annonces->image1}}">
+                                                            <label class="custom-file-label" for="exampleInputFile1">{{old('image1')??$annonces->image1}}</label>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="exampleInputFile3">image2</label>
+                                                    <label for="exampleInputFile2">image2</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile3" name="image2" value="{{old('image2')??$annonces->image2}}">
-                                                            <label class="custom-file-label" for="exampleInputFile3">{{old('image2')??$annonces->image2}}</label>
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile2" name="image2" value="{{old('image2')??$annonces->image2}}">
+                                                            <label class="custom-file-label" for="exampleInputFile2">{{old('image2')??$annonces->image2}}</label>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="exampleInputFile3">Vidéo</label>
+                                                    <label for="exampleInputFile3">image3</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
                                                             <input type="file" class="custom-file-input" id="exampleInputFile3" name="image3" value="{{old('image3')??$annonces->image3}}">
                                                             <label class="custom-file-label" for="exampleInputFile3">{{old('image3')??$annonces->image3}}</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="exampleInputFile4">image4 </label>
+                                                    <div class="input-group">
+                                                        <div class="custom-file">
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile4" name="image4" value="{{old('image4')??$annonces->image4}}">
+                                                            <label class="custom-file-label" for="exampleInputFile4">{{old('image4')??$annonces->image4}}</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="exampleInputFile5">image5</label>
+                                                    <div class="input-group">
+                                                        <div class="custom-file">
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile5" name="image5" value="{{old('image5')??$annonces->image5}}">
+                                                            <label class="custom-file-label" for="exampleInputFile5">{{old('image5')??$annonces->image5}}</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="exampleInputFile6">image6</label>
+                                                    <div class="input-group">
+                                                        <div class="custom-file">
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile6" name="image6" value="{{old('image6')??$annonces->image6}}">
+                                                            <label class="custom-file-label" for="exampleInputFile6">{{old('image6')??$annonces->image6}}</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="exampleInputFile7">Vidéo</label>
+                                                    <div class="input-group">
+                                                        <div class="custom-file">
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile7" name="video" value="{{old('video')??$annonces->video}}">
+                                                            <label class="custom-file-label" for="exampleInputFile7">{{old('video')??$annonces->video}}</label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -107,6 +173,7 @@
                     </div>
                 </section>
         </div>
+        @include('summernote')
         @include('footer.footer')
 </div>
 @include('footer.footer3')

@@ -67,7 +67,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ route('category.index') }}" class="nav-link">
+              <a href="{{ route('category-annonce.index') }}" class="nav-link">
                 <i class="nav-icon fas fa-th-large"></i>
                 <p>
                   Categories-Annonce
@@ -107,42 +107,10 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ route('magazine.index') }}" class="nav-link">
-                <i class="nav-icon fas fa-newspaper"></i>
-                <p>
-                  Les magazines
-                </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ route('publiereportage.index') }}" class="nav-link">
-                <i class="nav-icon far fa-file"></i>
-                <p>
-                  Les publireportages
-                </p>
-              </a>
-            </li>
-            <li class="nav-item">
               <a href="{{ route('service.index') }}" class="nav-link">
                 <i class="nav-icon fas fa-tools"></i>
                 <p>
                   Présentation de l'entreprise
-                </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ route('image.index') }}" class="nav-link">
-                <i class="nav-icon fas fa-image"></i>
-                <p>
-                  Images de service
-                </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ route('partenaire.index') }}" class="nav-link">
-                <i class="nav-icon fas fa-handshake"></i>
-                <p>
-                  Partenaires des entreprises
                 </p>
               </a>
             </li>

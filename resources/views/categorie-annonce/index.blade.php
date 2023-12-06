@@ -16,53 +16,51 @@
                                     <div class="card-header">
                                         <div class="row">
                                             <div class="col-md-10">
-                                                <h3 class="card-title">Les annonces</h3>
+                                                <h3 class="card-title">Les categories des annonces</h3>
                                             </div>
                                             <div class="col-md-2">
-                                                <a href="{{route('annonce.create')}}" class="btn btn-block btn-success pull-right">  Ajouter  </a>
+                                                <a href="{{route('category-annonce.create')}}" class="btn btn-block btn-success pull-right">  Ajouter  </a>
                                             </div>
                                         </div>
                                     </div>
                                     <!-- /.card-header -->
                                     <div class="card-body">
+                                        @if(Session::has('success'))
+                                            <div class="alert alert-success" role="alert">{{Session::get('success') }}</div>
+                                        @endif
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
                                             <th>Id</th>
-                                            <th>Titre</th>
-                                            <th>Description</th>
-                                            <th>Image</th>
+                                            <th>Nom</th>
                                             <th>Date</th>
                                             <th>Action</th>
                                             </tr>
                                         </thead>
                                             <tbody>
-                                                @foreach ($annonces as $annonce)
+                                                @foreach ($cat as $categorie)
                                                     <tr>
-                                                        <td>{{ $annonce->id }}</td>
-                                                        <td>{{ $annonce->titre }}</td>
-                                                        <td>{{ $annonce->text1 }}</td>
-                                                        <td><img src="https://www.showroomafrica.com/assets/images/advertorial/{{$annonce->image1}}" width="60"></td>
-                                                        <td>{{ $annonce->created_at }}</td>
+                                                        <td>{{ $categorie->id }}</td>
+                                                        <td>{{ $categorie->libelle }}</td>
+                                                        <td>{{ $categorie->created_at }}</td>
                                                         <td>
                                                             <div class="btn-group">
-                                                                <a href="{{route('annonce.edit',$annonce->id)}}" class="btn btn-default">
+                                                                <a href="{{route('category-annonce.edit',$categorie->id)}}" class="btn btn-default">
                                                                     <i class="fas fa-edit"></i> Modifier
                                                                 </a>
                                                             </div>
-
-                                                            <button class="btn btn-default" onclick="deleteData({{ $annonce->id }})" data-id="{{ $annonce->id }}" data-target="#default{{ $annonce->id }}">
-                                                                <i class="fas fa-trash"></i> Supprimer
-                                                            </button>
-
-                                                            {{-- <form method="POST" action="{{ route('annonce.destroy',$annonce->id) }}" class="btn-group">
+                                                            {{-- <form method="POST" action="{{ route('category.destroy',$categorie->id) }}" class="btn-group">
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <button type="submit" href="" class="btn btn-default">
                                                                     <i class="fas fa-trash"></i> Supprimer
                                                                 </button>
                                                             </form> --}}
-        
+
+                                                            <button class="btn btn-default" onclick="deleteData({{ $categorie->id }})" data-id="{{ $categorie->id }}" data-target="#default{{ $categorie->id }}">
+                                                                <i class="fas fa-trash"></i> Supprimer
+                                                            </button>
+
                                                             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
                                                             <script>
 
@@ -81,18 +79,17 @@
                                                                 }).then((result) => {
                                                                 if (result.isConfirmed) {
 
-                                                                    //let url = "{{ route('annonce.destroy',['annonce' => $annonce->id]) }}"
-                                                                    let url = "{{url('annonce')}}/" + id
+                                                                    let url = "{{url('category-annonce')}}/" + id
                                                                     window.location.reload();
 
-                                                                    console.log(url);
+                                                                    //console.log(url);
                                                                     $.ajax({
                                                                         type: 'POST',
                                                                         url: url,
                                                                         data: {
                                                                         _method: 'DELETE',
                                                                         _token: "{{ csrf_token() }}",
-                                                                        annonce: id                                                                  
+                                                                        service: id                                                                  
                                                                         },
                                                                         
                                                                         success: function () {
@@ -102,7 +99,6 @@
                                                                             'success'
                                                                         )
                                                                         table.dataTable({ ajax: "data.json"}).ajax.reload();
-                                                                        
                                                                     },
 
                                                                         error: function(){
@@ -123,9 +119,7 @@
                                         <tfoot>
                                             <tr>
                                                 <th>Id</th>
-                                                <th>Titre</th>
-                                                <th>Description</th>
-                                                <th>Image</th>
+                                                <th>Nom</th>
                                                 <th>Date</th>
                                                 <th>Action</th>
                                             </tr>
