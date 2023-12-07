@@ -23,7 +23,7 @@ class Annonce extends Model
     }
     
     public $fillable = [
-        'titre', 'text1', 'image1', 'text2', 'image2', 'text3', 'image3', 'image4', 'image5', 'image6', 'video','slug_annonce','categorie_id'
+        'titre', 'text1', 'image1', 'text2', 'image2', 'text3', 'image3', 'image4', 'image5', 'image6', 'video','slug_annonce','categorie_id', 'descriptionCourte',
     ];
 
     public function Categorie()

@@ -50,6 +50,7 @@ class AnnonceController extends Controller
             $data = new Annonce();
             $data->categorie_id = $request->categorie_id;
             $data->titre = $request->titre;
+            $data->descriptionCourte = $request->descriptionCourte;
             $data->text1 = $request->text1;
             $data->text2 = $request->text2;
             $data->text3 = $request->text3;
@@ -253,6 +254,7 @@ class AnnonceController extends Controller
             $data = Annonce::find($annonce);
             $data->categorie_id = $request->categorie_id;
             $data->titre = $request->titre;
+            $data->descriptionCourte = $request->descriptionCourte;
             $data->text1 = $request->text1;
             $data->text2 = $request->text2;
             $data->text3 = $request->text3;

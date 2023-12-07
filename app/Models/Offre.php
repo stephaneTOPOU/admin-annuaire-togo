@@ -23,7 +23,6 @@ class Offre extends Model
     }
 
     protected $fillable = [
-        'categorieOffres_id',
         'entreprise',
         'site',
         'facebook',
@@ -38,8 +37,10 @@ class Offre extends Model
         'lien',
         'lieu',
         'libelle',
+        'categorie',
         'date_lim',
-        'valide'
+        'valide',
+        'description_courte'
     ];
 
     public function Categorie()

@@ -32,6 +32,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoryAnnonceController;
 use App\Http\Controllers\PartenaireController;
 use App\Http\Controllers\DevisController;
+use App\Http\Controllers\OffreController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -83,6 +84,7 @@ Route::resource('/partenaire', PartenaireController::class);
 Route::resource('/devis', DevisController::class);
 Route::resource('/blog', BlogController::class);
 Route::resource('/category-annonce',CategoryAnnonceController::class);
+Route::resource('/offre',OffreController::class);
 });
 
 Route::get('login',[App\Http\Controllers\AuthController::class,'login'])->name('login');

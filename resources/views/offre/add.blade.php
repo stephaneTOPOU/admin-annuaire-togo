@@ -23,97 +23,70 @@
                         <div class="">
                             <div class="card card-primary">
                                 <div class="card-header">
-                                    <h3 class="card-title">Modifier une annonce</h3>
+                                    <h3 class="card-title">Ajouter une offre</h3>
                                 </div>
                                 @if(Session::has('success'))
                                     <div class="alert alert-success" role="alert">{{Session::get('success') }}</div>
                                 @endif
-                                <form role="form" method="POST" action="{{ route('annonce.update',$annonces->id) }}" enctype="multipart/form-data">
+                                <form role="form" method="POST" action="{{ route('offre.store') }}" enctype="multipart/form-data">
                                     @csrf
-                                    @method('PUT')
                                     <div class="card-body">
                                         <div class="row">
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label>Choisir une categorie</label>
-                                                    <select class="form-control select2" style="width: 100%;" name="pays_id">
-                                                        <option selected="selected">Categorie</option>
-                                                        @foreach ($categories as $categorie)
-                                                            <option value="{{ $categorie->id }}" @if(($categorie->id)==($annonces->categorie_id)) selected @endif>{{ $categorie->libelle }}</option>
-                                                        @endforeach
-                                                    </select>
+                                                    <label >Catégorie</label>
+                                                    <input type="text" class="form-control" placeholder="Entrez la catégorie" name="categorie" required>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label >Entreprise</label>
+                                                    <input type="text" class="form-control" placeholder="Entrez le nom de l'entrprise" name="entreprise" required>
+                                                </div>
+                                            </div>                                            
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label >Titre</label>
-                                                    <input type="text" class="form-control" placeholder="Entrez le titre" name="titre" value="{{old('titre')?? $annonces->titre}}" required>
+                                                    <input type="text" class="form-control" placeholder="Entrez le titre" name="titre" required>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label >Description courte</label>
-                                                    <input type="text" class="form-control" placeholder="Entrez la description courte" name="descriptionCourte" value="{{old('descriptionCourte')?? $annonces->descriptionCourte}}" required>
+                                                    <input type="text" class="form-control" placeholder="Entrez la description courte" name="description_courte" required>
                                                 </div>
                                             </div>
                                         </div>
+
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label >Premier Text</label>
-                                                    <textarea id="summernote-1" name="text1">{{old('text1')??$annonces->text1}}</textarea>
+                                                    <label >Description du poste</label>
+                                                    <textarea id="summernote-1" name="description"></textarea>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label >Deuxieme Text</label>
-                                                    <textarea id="summernote-2" name="text2">{{old('text2')??$annonces->text2}}</textarea>
+                                                    <label >Mission</label>
+                                                    <textarea id="summernote-2" name="mission"></textarea>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-md-12">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="exampleInputFile1">Troisieme Text</label>
-                                                    <textarea id="summernote-3" name="text3">{{old('text3')??$annonces->text3}}</textarea>
+                                                    <label for="exampleInputFile1">Profil</label>
+                                                    <textarea id="summernote-3" name="profil"></textarea>
                                                 </div>
                                             </div>
-                                            
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="exampleInputFile1">image1 </label>
-                                                    <div class="input-group">
-                                                        <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile1" name="image1" value="{{old('image1')??$annonces->image1}}">
-                                                            <label class="custom-file-label" for="exampleInputFile1">{{old('image1')??$annonces->image1}}</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="exampleInputFile2">image2</label>
-                                                    <div class="input-group">
-                                                        <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile2" name="image2" value="{{old('image2')??$annonces->image2}}">
-                                                            <label class="custom-file-label" for="exampleInputFile2">{{old('image2')??$annonces->image2}}</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="exampleInputFile3">image3</label>
-                                                    <div class="input-group">
-                                                        <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile3" name="image3" value="{{old('image3')??$annonces->image3}}">
-                                                            <label class="custom-file-label" for="exampleInputFile3">{{old('image3')??$annonces->image3}}</label>
-                                                        </div>
-                                                    </div>
+                                                    <label for="exampleInputFile1">Dossier</label>
+                                                    <textarea id="summernote-4" name="dossier"></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -121,55 +94,62 @@
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="exampleInputFile4">image4 </label>
-                                                    <div class="input-group">
-                                                        <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile4" name="image4" value="{{old('image4')??$annonces->image4}}">
-                                                            <label class="custom-file-label" for="exampleInputFile4">{{old('image4')??$annonces->image4}}</label>
-                                                        </div>
-                                                    </div>
+                                                    <label >Email</label>
+                                                    <input type="text" class="form-control" placeholder="Entrez le lien" name="lien">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="exampleInputFile5">image5</label>
-                                                    <div class="input-group">
-                                                        <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile5" name="image5" value="{{old('image5')??$annonces->image5}}">
-                                                            <label class="custom-file-label" for="exampleInputFile5">{{old('image5')??$annonces->image5}}</label>
-                                                        </div>
-                                                    </div>
+                                                    <label >Site</label>
+                                                    <input type="text" class="form-control" placeholder="Entrez le Site" name="site">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="exampleInputFile6">image6</label>
-                                                    <div class="input-group">
-                                                        <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile6" name="image6" value="{{old('image6')??$annonces->image6}}">
-                                                            <label class="custom-file-label" for="exampleInputFile6">{{old('image6')??$annonces->image6}}</label>
-                                                        </div>
-                                                    </div>
+                                                    <label >Lieu</label>
+                                                    <input type="text" class="form-control" placeholder="Entrez le lieu" name="lieu">
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-md-12">
+                                            <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="exampleInputFile7">Vidéo</label>
-                                                    <div class="input-group">
-                                                        <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile7" name="video" value="{{old('video')??$annonces->video}}">
-                                                            <label class="custom-file-label" for="exampleInputFile7">{{old('video')??$annonces->video}}</label>
-                                                        </div>
-                                                    </div>
+                                                    <label >Facebook</label>
+                                                    <input type="text" class="form-control" placeholder="Facebook" name="facebook">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label >Twitter</label>
+                                                    <input type="text" class="form-control" placeholder="Twitter" name="twitter">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label >Linkedin</label>
+                                                    <input type="text" class="form-control" placeholder="Entrez le Linkedin" name="linkedin">
                                                 </div>
                                             </div>
                                         </div>
 
+                                        <div class="row">
+                                            <div class="col-md-9">
+                                                <div class="form-group">
+                                                    <label >Date limite</label>
+                                                    <input type="date" class="form-control" placeholder="" name="date_lim">
+                                                </div>
+                                                
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-check">
+                                                    <input type="checkbox" class="form-check-input" id="exampleCheck101" name="valide" value="1">
+                                                    <label class="form-check-label" for="exampleCheck101">Validé l'offre</label>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="card-footer">
-                                        <button type="submit" class="btn btn-primary">Modifier</button>
+                                        <button type="submit" class="btn btn-primary">Ajouter</button>
                                         </div>
                                     </div>
                                 </form>

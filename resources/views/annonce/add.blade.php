@@ -32,7 +32,7 @@
                                     @csrf
                                     <div class="card-body">
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Choisir la categorie</label>
                                                     <select class="form-control select2" style="width: 100%;" name="categorie_id">
@@ -43,13 +43,18 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label >Titre</label>
                                                     <input type="text" class="form-control" placeholder="Entrez le titre" name="titre" required>
                                                 </div>
                                             </div>
-                                            
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label >Description courte</label>
+                                                    <input type="text" class="form-control" placeholder="Entrez la description courte" name="descriptionCourte" required>
+                                                </div>
+                                            </div>                                            
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">

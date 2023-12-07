@@ -99,6 +99,38 @@
               </a>
             </li>
             <li class="nav-item">
+              <a href="{{ route('offre.index') }}" class="nav-link">
+                <i class="nav-icon fas fa-briefcase"></i>
+                <p>
+                  Les offres
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-ad"></i>
+                <p>
+                  Publicités
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-photo-video"></i>
+                <p>
+                  Média-pub
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-user"></i>
+                <p>
+                  Témoignages
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
               <a href="{{ route('pharmacie-garde.index') }}" class="nav-link">
                 <i class="nav-icon fas fa-clinic-medical"></i>
                 <p>
