@@ -10,6 +10,7 @@ use Cviebrock\EloquentSluggable\Sluggable;
 class Offre extends Model
 {
     use HasFactory;
+    
     use Sluggable;
 
     public function Sluggable():array
@@ -43,8 +44,4 @@ class Offre extends Model
         'description_courte'
     ];
 
-    public function Categorie()
-    {
-        return $this->hasOne(CategorieOffres::class);
-    }
 }

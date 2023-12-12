@@ -5,9 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use Cviebrock\EloquentSluggable\Sluggable;
+
 class Pub extends Model
 {
     use HasFactory;
+
+    use Sluggable;
+
+    public function Sluggable():array
+    {
+        return [
+
+            'slug_pub'=>[
+                'source'=> 'titre'
+            ]
+        ];
+    }
 
     public $fillable = [
         'entreprise', 

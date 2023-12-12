@@ -107,7 +107,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="{{ route('pub.index') }}" class="nav-link">
                 <i class="nav-icon fas fa-ad"></i>
                 <p>
                   Publicités
@@ -115,7 +115,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="{{ route('media-pub.index') }}" class="nav-link">
                 <i class="nav-icon fas fa-photo-video"></i>
                 <p>
                   Média-pub
