@@ -54,7 +54,7 @@
                                                         @endif
                                                         
                                                         @if ($media->youtube)
-                                                            <td><iframe width="90%" height="100px" src="{{ $media->youtube }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                            <td><iframe width="100%" height="100px" src="{{ $media->youtube }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                                             allowfullscreen></iframe></td>
                                                         @endif
                                                         
