@@ -18,9 +18,9 @@ class CreatePubsTable extends Migration
             $table->string('entreprise');
             $table->string('titre');
             $table->string('slug_pub')->unique();
-            $table->string('sousTitre')->nullable();
-            $table->string('description')->nullable();
-            $table->string('detail')->nullable();
+            $table->longText('sousTitre')->nullable();
+            $table->longText('description')->nullable();
+            $table->longText('detail')->nullable();
             $table->string('image1')->nullable();
             $table->string('image2')->nullable();
             $table->string('image3')->nullable();
