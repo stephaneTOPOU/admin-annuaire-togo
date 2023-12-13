@@ -18,30 +18,27 @@
                         <div class="">
                             <div class="card card-primary">
                                 <div class="card-header">
-                                    <h3 class="card-title">Ajouter un média pour la publicité </h3>
+                                    <h3 class="card-title">Ajouter un témoignage </h3>
                                 </div>
                                 @if(Session::has('success'))
                                     <div class="alert alert-success" role="alert">{{Session::get('success') }}</div>
                                 @endif
-                                <form role="form" method="POST" action="{{ route('media-pub.store') }}" enctype="multipart/form-data">
+                                <form role="form" method="POST" action="{{ route('testimony.store') }}" enctype="multipart/form-data">
                                     @csrf
                                     <div class="card-body">
-                                        <div class="form-group">
-                                            <label>Trouver une entreprise</label>
-                                            <select class="form-control select2" style="width: 100%;" name="pubs_id">
-                                                <option selected="selected">Entreprise</option>
-                                                @foreach ($pubs as $pub)
-                                                    <option value="{{ $pub->id }}">{{ $pub->entreprise }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="exampleInputFile">Image</label>
+                                                    <label >Nom</label>
+                                                    <input type="text" class="form-control" placeholder="Entrez le nom du témoin" name="nom" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="exampleInputFile">Photo</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="imageSpot">
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="image" required>
                                                             <label class="custom-file-label" for="exampleInputFile">Choisir l'image</label>
                                                         </div>
                                                     </div>
@@ -49,21 +46,19 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="exampleInputFile">Vidéos</label>
-                                                    <div class="input-group">
-                                                        <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="videoSpot">
-                                                            <label class="custom-file-label" for="exampleInputFile">Choisir la vidéo</label>
-                                                        </div>
-                                                    </div>
+                                                    <label >Note d'étoile</label>
+                                                    <input type="number" class="form-control" placeholder="Entrez la note d'étoile" name="note" required>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
+                                        </div>
+                                        
+                                        <div class="row">
+                                            <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label >Lien youtube</label>
-                                                    <input type="text" class="form-control" placeholder="Entrez le lien youtube" name="youtube">
+                                                    <label >Méssage</label>
+                                                    <textarea class="form-control" rows="6" placeholder="Enter ..." name="message" required></textarea>
                                                 </div>
-                                            </div>                                            
+                                            </div>                                     
                                         </div>
 
                                         <div class="card-footer">

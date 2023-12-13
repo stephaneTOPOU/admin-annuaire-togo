@@ -208,7 +208,7 @@ class MediaPubController extends Controller
     {
         try {
             $mediaPub->delete();
-            return redirect()->back()->with('success','Publicité supprimée avec succès');
+            return redirect()->back()->with('success','Média supprimé avec succès');
         } catch (Exception $e) {
             return redirect()->back()->with('success', $e->getMessage());
         }

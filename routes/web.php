@@ -35,6 +35,7 @@ use App\Http\Controllers\DevisController;
 use App\Http\Controllers\MediaPubController;
 use App\Http\Controllers\OffreController;
 use App\Http\Controllers\PubController;
+use App\Http\Controllers\TemoignageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -89,6 +90,7 @@ Route::resource('/category-annonce',CategoryAnnonceController::class);
 Route::resource('/offre',OffreController::class);
 Route::resource('/pub', PubController::class);
 Route::resource('media-pub', MediaPubController::class);
+Route::resource('testimony', TemoignageController::class);
 });
 
 Route::get('login',[App\Http\Controllers\AuthController::class,'login'])->name('login');
