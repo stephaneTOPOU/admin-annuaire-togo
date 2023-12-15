@@ -16,8 +16,8 @@ class CreateServicesTable extends Migration
         Schema::create('services', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('entreprise_id')->unsigned();
-            $table->string('libelle')->nullable();
-            $table->string('description')->nullable();
+            $table->longText('libelle')->nullable();
+            $table->longText('description')->nullable();
             $table->timestamps();
             $table->foreign('entreprise_id')->references('id')->on('entreprises')->onDelete('cascade');
         });

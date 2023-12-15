@@ -72,22 +72,22 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="exampleInputFile2">image </label>
+                                                    <label for="exampleInputFile2">Image </label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
                                                             <input type="file" class="custom-file-input" id="exampleInputFile2" name="image2">
-                                                            <label class="custom-file-label" for="exampleInputFile2">Choisir l'image 2</label>
+                                                            <label class="custom-file-label" for="exampleInputFile2">Choisir l'image</label>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="exampleInputFile3">image</label>
+                                                    <label for="exampleInputFile3">Vidéo</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
                                                             <input type="file" class="custom-file-input" id="exampleInputFile3" name="image3">
-                                                            <label class="custom-file-label" for="exampleInputFile3">Choisir l'image 3</label>
+                                                            <label class="custom-file-label" for="exampleInputFile3">Choisir la vidéo</label>
                                                         </div>
                                                     </div>
                                                 </div>

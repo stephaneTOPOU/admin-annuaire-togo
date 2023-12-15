@@ -73,7 +73,7 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="exampleInputFile">image</label>
+                                                    <label for="exampleInputFile">Image</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
                                                             <input type="file" class="custom-file-input" id="exampleInputFile" name="image2" value="{{old('image2')??$services->image2}}">
@@ -84,7 +84,7 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="exampleInputFile">image</label>
+                                                    <label for="exampleInputFile">Vidéo</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
                                                             <input type="file" class="custom-file-input" id="exampleInputFile" name="image3" value="{{old('image3')??$services->image3}}">

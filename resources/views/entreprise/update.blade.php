@@ -125,14 +125,41 @@
                                         <div class="row">
                                             <div class="col-md-3">
                                                 <div class="form-check">
+                                                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="est_souscrit" data-key="{{$entreprises->id}}"  value="1" @if($entreprises->est_souscrit == 1) checked  @endif @if($entreprises->est_souscrit == 0) unchecked  @endif>
+                                                    <label class="form-check-label" for="exampleCheck1">estSouscrit</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-check">
                                                     <input type="checkbox" class="form-check-input" id="exampleCheck100" name="premium" data-key="{{$entreprises->id}}"  value="1" @if($entreprises->premium == 1) checked  @endif @if($entreprises->premium == 0) unchecked  @endif>
                                                     <label class="form-check-label" for="exampleCheck100">estPremium</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-check">
+                                                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="a_publireportage" data-key="{{$entreprises->id}}"  value="1" @if($entreprises->a_publireportage == 1) checked  @endif @if($entreprises->a_publireportage == 0) unchecked  @endif>
+                                                    <label class="form-check-label" for="exampleCheck1">estBusiness</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-check">
                                                     <input type="checkbox" class="form-check-input" id="exampleCheck101" name="basic" data-key="{{$entreprises->id}}"  value="1" @if($entreprises->basic == 1) checked  @endif @if($entreprises->basic == 0) unchecked  @endif>
                                                     <label class="form-check-label" for="exampleCheck101">estBasic</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-check">
+                                                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="est_pharmacie" data-key="{{$entreprises->id}}"  value="1" @if($entreprises->est_pharmacie == 1) checked  @endif @if($entreprises->est_pharmacie == 0) unchecked  @endif>
+                                                    <label class="form-check-label" for="exampleCheck1">estPharmacie</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-check">
+                                                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="pharmacie_de_garde" data-key="{{$entreprises->id}}"  value="1" @if($entreprises->pharmacie_de_garde == 1) checked  @endif @if($entreprises->pharmacie_de_garde == 0) unchecked  @endif>
+                                                    <label class="form-check-label" for="exampleCheck1">estDeGarde</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
@@ -150,9 +177,9 @@
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-md-3">
+                                            <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="exampleInputFile">Logo</label>
+                                                    <label for="exampleInputFile">Logo de l'entreprise</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
                                                             <input type="file" class="custom-file-input" id="exampleInputFile" name="logo" value="{{old('logo')?? $entreprises->logo}}">
@@ -161,7 +188,32 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="exampleInputFile">image (page de recherche)</label>
+                                                    <div class="input-group">
+                                                        <div class="custom-file">
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="photo3" value="{{old('photo3')?? $entreprises->photo3}}">
+                                                            <label class="custom-file-label" for="exampleInputFile">{{old('photo3')?? $entreprises->photo3}}</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="exampleInputFile">Image entreprise relative</label>
+                                                    <div class="input-group">
+                                                        <div class="custom-file">
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="publireportage1" value="{{old('publireportage1')?? $entreprises->publireportage1}}">
+                                                            <label class="custom-file-label" for="exampleInputFile">{{old('publireportage1')?? $entreprises->publireportage1}}</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row">
+                                            <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="exampleInputFile">Image pharmacie </label>
                                                     <div class="input-group">
@@ -172,7 +224,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="exampleInputFile">Image Couverture(Profil)</label>
                                                     <div class="input-group">
@@ -183,18 +235,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            {{-- <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label for="exampleInputFile">Image honneur</label>
-                                                    <div class="input-group">
-                                                        <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="photo3" value="{{old('photo3')?? $entreprises->photo3}}">
-                                                            <label class="custom-file-label" for="exampleInputFile">{{old('photo3')?? $entreprises->photo3}}</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div> --}}
-                                            <div class="col-md-3">
+                                            <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="exampleInputFile">sélection d'entrprise</label>
                                                     <div class="input-group">
@@ -206,166 +247,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <div class="row">
-                                            <div class="col-md-2">
-                                                <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="est_souscrit" data-key="{{$entreprises->id}}"  value="1" @if($entreprises->est_souscrit == 1) checked  @endif @if($entreprises->est_souscrit == 0) unchecked  @endif>
-                                                    <label class="form-check-label" for="exampleCheck1">estSouscrit</label>
-                                                </div>
-                                            </div>
-                                            
-                                            {{-- <div class="col-md-2">
-                                                <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="elus" data-key="{{$entreprises->id}}"  value="1" @if($entreprises->elus == 1) checked  @endif @if($entreprises->elus == 0) unchecked  @endif>
-                                                    <label class="form-check-label" for="exampleCheck1">elus</label>
-                                                </div>
-                                            </div> --}}
-                                            <div class="col-md-2">
-                                                <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="est_pharmacie" data-key="{{$entreprises->id}}"  value="1" @if($entreprises->est_pharmacie == 1) checked  @endif @if($entreprises->est_pharmacie == 0) unchecked  @endif>
-                                                    <label class="form-check-label" for="exampleCheck1">estPharmacie</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="pharmacie_de_garde" data-key="{{$entreprises->id}}"  value="1" @if($entreprises->pharmacie_de_garde == 1) checked  @endif @if($entreprises->pharmacie_de_garde == 0) unchecked  @endif>
-                                                    <label class="form-check-label" for="exampleCheck1">estDeGarde</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="a_publireportage" data-key="{{$entreprises->id}}"  value="1" @if($entreprises->a_publireportage == 1) checked  @endif @if($entreprises->a_publireportage == 0) unchecked  @endif>
-                                                    <label class="form-check-label" for="exampleCheck1">apublireportage</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="a_magazine" data-key="{{$entreprises->id}}"  value="1" @if($entreprises->a_magazine == 1) checked  @endif @if($entreprises->a_magazine == 0) unchecked  @endif>
-                                                    <label class="form-check-label" for="exampleCheck1">amagazine</label>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="exampleInputFile">Image du publireportage</label>
-                                                    <div class="input-group">
-                                                        <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="publireportage1" value="{{old('publireportage1')?? $entreprises->publireportage1}}">
-                                                            <label class="custom-file-label" for="exampleInputFile">{{old('publireportage1')?? $entreprises->publireportage1}}</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="exampleInputFile">Image du magazine</label>
-                                                    <div class="input-group">
-                                                        <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="magazineimage1" value="{{old('magazineimage1')?? $entreprises->magazineimage1}}">
-                                                            <label class="custom-file-label" for="exampleInputFile">{{old('magazineimage1')?? $entreprises->magazineimage1}}</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="exampleInputFile">Vidéo</label>
-                                                    <div class="input-group">
-                                                        <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="video" value="{{old('video')?? $entreprises->video}}">
-                                                            <label class="custom-file-label" for="exampleInputFile">{{old('video')?? $entreprises->video}}</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            {{-- <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label for="exampleInputFile">publireportage image 2</label>
-                                                    <div class="input-group">
-                                                        <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="publireportage2" value="{{old('publireportage2')?? $entreprises->publireportage2}}">
-                                                            <label class="custom-file-label" for="exampleInputFile">{{old('publireportage2')?? $entreprises->publireportage2}}</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label for="exampleInputFile">publireportage image 3</label>
-                                                    <div class="input-group">
-                                                        <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="publireportage3" value="{{old('publireportage3')?? $entreprises->publireportage3}}">
-                                                            <label class="custom-file-label" for="exampleInputFile">{{old('publireportage3')?? $entreprises->publireportage3}}</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label for="exampleInputFile">publireportage image 4</label>
-                                                    <div class="input-group">
-                                                        <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="publireportage4" value="{{old('publireportage4')?? $entreprises->publireportage4}}">
-                                                            <label class="custom-file-label" for="exampleInputFile">{{old('publireportage4')?? $entreprises->publireportage4}}</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div> --}}
-                                        </div>
-
-                                        {{-- <div class="row">
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label for="exampleInputFile">magazine image 2</label>
-                                                    <div class="input-group">
-                                                        <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="magazineimage2" value="{{old('magazineimage2')?? $entreprises->magazineimage2}}">
-                                                            <label class="custom-file-label" for="exampleInputFile">{{old('magazineimage2')?? $entreprises->magazineimage2}}</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label for="exampleInputFile">magazine image 3</label>
-                                                    <div class="input-group">
-                                                        <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="magazineimage3" value="{{old('magazineimage3')?? $entreprises->magazineimage3}}">
-                                                            <label class="custom-file-label" for="exampleInputFile">{{old('magazineimage3')?? $entreprises->magazineimage3}}</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div> --}}
-                                        
-                                        {{-- <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Ville de l'entreprise</label>
-                                                    <select class="form-control select2" style="width: 100%;" name="ville">
-                                                        <option selected="selected">Ville ici</option>
-                                                        @foreach ($villes as $ville)
-                                                            <option value="{{ $ville->libelle }}" {{ $entreprises->ville == $ville->libelle ? 'selected' : '' }}>{{ $ville->libelle }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Pays de l'entreprise</label>
-                                                    <select class="form-control select2" style="width: 100%;" name="pays">
-                                                        <option selected="selected">Pays ici</option>
-                                                        @foreach ($pays as $pay)
-                                                            <option value="{{ $pay->libelle }}" {{ $entreprises->pays == $pay->libelle ? 'selected' : '' }}>{{ $pay->libelle }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div> --}}
-
                                         <div class="card-footer">
                                         <button type="submit" class="btn btn-primary">Modifier</button>
                                         </div>

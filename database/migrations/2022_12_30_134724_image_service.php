@@ -14,11 +14,11 @@ class ImageService extends Migration
     public function up()
     {
         Schema::table('services', function (Blueprint $table) {
-            $table->string('image1')->nullable();
+            $table->longText('image1')->nullable();
             $table->string('image2')->nullable();
             $table->string('image3')->nullable();
             $table->string('image4')->nullable();
-            $table->string('image5')->nullable();
+            $table->longText('image5')->nullable();
             $table->string('image6')->nullable();
             $table->string('image7')->nullable();
             $table->string('image8')->nullable();

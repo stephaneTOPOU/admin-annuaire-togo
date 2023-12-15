@@ -124,14 +124,41 @@
                                         <div class="row">
                                             <div class="col-md-3">
                                                 <div class="form-check">
+                                                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="est_souscrit" value="1">
+                                                    <label class="form-check-label" for="exampleCheck1">estSouscrit</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-check">
                                                     <input type="checkbox" class="form-check-input" id="exampleCheck100" name="premium" value="1">
                                                     <label class="form-check-label" for="exampleCheck100">estPremium</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-check">
+                                                    <input type="checkbox" class="form-check-input" id="exampleCheck101" name="a_publireportage" value="1">
+                                                    <label class="form-check-label" for="exampleCheck101">estBusiness</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-check">
                                                     <input type="checkbox" class="form-check-input" id="exampleCheck101" name="basic" value="1">
                                                     <label class="form-check-label" for="exampleCheck101">estBasic</label>
+                                                </div>
+                                            </div>                                            
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-check">
+                                                    <input type="checkbox" class="form-check-input" id="exampleCheck4" name="est_pharmacie" value="1">
+                                                    <label class="form-check-label" for="exampleCheck4">estPharmacie</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-check">
+                                                    <input type="checkbox" class="form-check-input" id="exampleCheck5" name="pharmacie_de_garde" value="1">
+                                                    <label class="form-check-label" for="exampleCheck5">estDeGarde</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
@@ -149,9 +176,9 @@
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-md-3">
+                                            <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="exampleInputFile">Logo</label>
+                                                    <label for="exampleInputFile">Logo de l'entreprise</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
                                                             <input type="file" class="custom-file-input" id="exampleInputFile" name="logo">
@@ -160,7 +187,31 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="exampleInputFile">image (page de recherche)</label>
+                                                    <div class="input-group">
+                                                        <div class="custom-file">
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="photo3">
+                                                            <label class="custom-file-label" for="exampleInputFile">Choisir l'image</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="exampleInputFile">Image entreprise relative</label>
+                                                    <div class="input-group">
+                                                        <div class="custom-file">
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="publireportage1">
+                                                            <label class="custom-file-label" for="exampleInputFile">Choisir l'image</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="exampleInputFile">Image pharmacie </label>
                                                     <div class="input-group">
@@ -171,7 +222,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="exampleInputFile">Image Couverture(Profil)</label>
                                                     <div class="input-group">
@@ -182,18 +233,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            {{-- <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label for="exampleInputFile">Autre image</label>
-                                                    <div class="input-group">
-                                                        <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="photo3">
-                                                            <label class="custom-file-label" for="exampleInputFile">Choisir l'image</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div> --}}
-                                            <div class="col-md-3">
+                                            <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="exampleInputFile">sélection d'entreprise</label>
                                                     <div class="input-group">
@@ -205,166 +245,7 @@
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <div class="row">
-                                            <div class="col-md-2">
-                                                <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="est_souscrit" value="1">
-                                                    <label class="form-check-label" for="exampleCheck1">estSouscrit</label>
-                                                </div>
-                                            </div>
-                                            {{-- <div class="col-md-2">
-                                                <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="exampleCheck3" name="elus" value="1">
-                                                    <label class="form-check-label" for="exampleCheck3">elus</label>
-                                                </div>
-                                            </div> --}}
-                                            <div class="col-md-2">
-                                                <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="exampleCheck4" name="est_pharmacie" value="1">
-                                                    <label class="form-check-label" for="exampleCheck4">estPharmacie</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="exampleCheck5" name="pharmacie_de_garde" value="1">
-                                                    <label class="form-check-label" for="exampleCheck5">estDeGarde</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="exampleCheck6" name="a_publireportage" value="1">
-                                                    <label class="form-check-label" for="exampleCheck6">apublireportage</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="exampleCheck7" name="a_magazine" value="1">
-                                                    <label class="form-check-label" for="exampleCheck7">amagazine</label>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="exampleInputFile">Image du publireportage</label>
-                                                    <div class="input-group">
-                                                        <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="publireportage1">
-                                                            <label class="custom-file-label" for="exampleInputFile">Choisir l'image</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="exampleInputFile">Image du magazine</label>
-                                                    <div class="input-group">
-                                                        <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="magazineimage1">
-                                                            <label class="custom-file-label" for="exampleInputFile">Choisir l'image</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="exampleInputFile">Vidéo</label>
-                                                    <div class="input-group">
-                                                        <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="video">
-                                                            <label class="custom-file-label" for="exampleInputFile">Choisir une vidéo </label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            {{-- <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label for="exampleInputFile">publireportage image 2</label>
-                                                    <div class="input-group">
-                                                        <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="publireportage2">
-                                                            <label class="custom-file-label" for="exampleInputFile">Choisir image 2</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label for="exampleInputFile">publireportage image 3</label>
-                                                    <div class="input-group">
-                                                        <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="publireportage3">
-                                                            <label class="custom-file-label" for="exampleInputFile">Choisir image 3</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label for="exampleInputFile">publireportage image 4</label>
-                                                    <div class="input-group">
-                                                        <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="publireportage4">
-                                                            <label class="custom-file-label" for="exampleInputFile">Choisir image 4</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div> --}}
-                                        </div>
-
-                                        {{-- <div class="row">
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label for="exampleInputFile">magazine image 2</label>
-                                                    <div class="input-group">
-                                                        <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="magazineimage2">
-                                                            <label class="custom-file-label" for="exampleInputFile">Choisir image 2</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label for="exampleInputFile">magazine image 3</label>
-                                                    <div class="input-group">
-                                                        <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="magazineimage3">
-                                                            <label class="custom-file-label" for="exampleInputFile">Choisir image 3</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div> --}}
                                         
-                                        {{-- <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Ville de l'entreprise</label>
-                                                    <select class="form-control select2" style="width: 100%;" name="ville">
-                                                        <option selected="selected">Ville ici</option>
-                                                        @foreach ($villes as $ville)
-                                                            <option value="{{ $ville->libelle }}">{{ $ville->libelle }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Pays de l'entreprise</label>
-                                                    <select class="form-control select2" style="width: 100%;" name="pays">
-                                                        <option selected="selected">Pays ici</option>
-                                                        @foreach ($pays as $pay)
-                                                            <option value="{{ $pay->libelle }}">{{ $pay->libelle }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div> --}}
-
                                         <div class="card-footer">
                                         <button type="submit" class="btn btn-primary">Ajouter</button>
                                         </div>
