@@ -120,6 +120,28 @@ class ServiceController extends Controller
             }
 
             $data->image5 = $request->image5;
+            $data->image8 = $request->image8;
+
+            if ($request->hasFile('image7') ) {
+
+                //get filename with extension
+                $filenamewithextension = $request->file('image7')->getClientOriginalName();
+        
+                //get filename without extension
+                $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+        
+                //get file extension
+                $extension = $request->file('image7')->getClientOriginalExtension();
+        
+                //filename to store
+                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+
+                //Upload File to external server
+                Storage::disk('ftp14')->put($filenametostore, fopen($request->file('image7'), 'r+'));
+
+                //Upload name to database
+                $data->image7 = $filenametostore;
+            }
 
             $data->save();
             return redirect()->back()->with('success', 'Service Ajouté avec succès');
@@ -232,6 +254,28 @@ class ServiceController extends Controller
             }
 
             $data->image5 = $request->image5;
+            $data->image8 = $request->image8;
+
+            if ($request->hasFile('image7') ) {
+
+                //get filename with extension
+                $filenamewithextension = $request->file('image7')->getClientOriginalName();
+        
+                //get filename without extension
+                $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+        
+                //get file extension
+                $extension = $request->file('image7')->getClientOriginalExtension();
+        
+                //filename to store
+                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+
+                //Upload File to external server
+                Storage::disk('ftp14')->put($filenametostore, fopen($request->file('image7'), 'r+'));
+
+                //Upload name to database
+                $data->image7 = $filenametostore;
+            }
 
             $data->update();
             return redirect()->back()->with('success', 'Service modifié avec succès');

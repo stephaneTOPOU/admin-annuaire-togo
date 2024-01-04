@@ -57,6 +57,31 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
+                                                    <label for="exampleInputFile2">Image de presentation</label>
+                                                    <div class="input-group">
+                                                        <div class="custom-file">
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile2" name="image2">
+                                                            <label class="custom-file-label" for="exampleInputFile2">Choisir l'image</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="exampleInputFile3">Image de presentation 2</label>
+                                                    <div class="input-group">
+                                                        <div class="custom-file">
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile3" name="image3">
+                                                            <label class="custom-file-label" for="exampleInputFile3">Choisir l'image</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
                                                     <label for="exampleInputFile1">Notre mission (suite)</label>
                                                     <textarea class="form-control" rows="4" placeholder="Enter ..." name="image1"></textarea>
                                                 </div>
@@ -72,13 +97,8 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="exampleInputFile2">Image </label>
-                                                    <div class="input-group">
-                                                        <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile2" name="image2">
-                                                            <label class="custom-file-label" for="exampleInputFile2">Choisir l'image</label>
-                                                        </div>
-                                                    </div>
+                                                    <label >Lien youtube</label>
+                                                    <input type="text" class="form-control" placeholder="Entrez le Lien youtube" name="image8">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -86,7 +106,7 @@
                                                     <label for="exampleInputFile3">Vidéo</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile3" name="image3">
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile3" name="image7">
                                                             <label class="custom-file-label" for="exampleInputFile3">Choisir la vidéo</label>
                                                         </div>
                                                     </div>
