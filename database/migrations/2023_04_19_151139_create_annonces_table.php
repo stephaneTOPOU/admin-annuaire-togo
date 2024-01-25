@@ -16,16 +16,16 @@ class CreateAnnoncesTable extends Migration
         Schema::create('annonces', function (Blueprint $table) {
             $table->id();
             $table->string('titre');
-            $table->longText('text1');
-            $table->string('image1');
-            $table->longText('text2');
-            $table->string('image2');
-            $table->longText('text3');
-            $table->string('image3');
-            $table->string('image4');
-            $table->string('image5');
-            $table->string('image6');
-            $table->string('video');
+            $table->longText('text1')->nullable();
+            $table->string('image1')->nullable();
+            $table->longText('text2')->nullable();
+            $table->string('image2')->nullable();
+            $table->longText('text3')->nullable();
+            $table->string('image3')->nullable();
+            $table->string('image4')->nullable();
+            $table->string('image5')->nullable();
+            $table->string('image6')->nullable();
+            $table->string('video')->nullable();
             $table->timestamps();
         });
     }
