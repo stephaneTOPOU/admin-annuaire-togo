@@ -10,7 +10,9 @@
 <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css') }}">
 
 
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+</script>
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 
@@ -18,124 +20,155 @@
 
 <div class="wrapper">
     @include('navBar.navbar')
-        @include('sideBar.sidebar')
-        <div class="content-wrapper">
-            @include('content-header.content-header')
-                <section class="content">
-                    <div class="container-fluid">
-                        <div class="">
-                            <div class="card card-primary">
-                                <div class="card-header">
-                                    <h3 class="card-title">Modifier un blog</h3>
-                                </div>
-                                @if(Session::has('success'))
-                                    <div class="alert alert-success" role="alert">{{Session::get('success') }}</div>
-                                @endif
-                                <form role="form" method="POST" action="{{ route('blog.update',$blogs->id) }}" enctype="multipart/form-data">
-                                    @csrf
-                                    @method('PUT')
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label >Titre</label>
-                                                    <input type="text" class="form-control" placeholder="Entrez le titre du blog" name="titre" value="{{old('titre')?? $blogs->titre}}">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label >Description courte</label>
-                                                    <input type="text" class="form-control" placeholder="Entrez la Description courte du blog" name="descriptionCourte" value="{{old('descriptionCourte')?? $blogs->descriptionCourte}}">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="form-group col-md-6"><label>Premier paragraphe</label><textarea id="summernote-1" name="description1">{{old('description1')?? $blogs->description1}}</textarea></div>
-                                            <div class="form-group col-md-6"><label>Deuxième paragraphe</label><textarea id="summernote-2" name="description2">{{old('description2')?? $blogs->description2}}</textarea></div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="exampleInputFile">Image 1</label>
-                                                    <div class="input-group">
-                                                        <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="image1" value="{{old('image1')?? $blogs->image1}}">
-                                                            <label class="custom-file-label" for="exampleInputFile">{{old('image1')?? $blogs->image1}}</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="exampleInputFile">Image 2</label>
-                                                    <div class="input-group">
-                                                        <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="image2" value="{{old('image2')?? $blogs->image2}}">
-                                                            <label class="custom-file-label" for="exampleInputFile">{{old('image2')?? $blogs->image2}}</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="exampleInputFile">Image 3</label>
-                                                    <div class="input-group">
-                                                        <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="image3" value="{{old('image3')?? $blogs->image3}}">
-                                                            <label class="custom-file-label" for="exampleInputFile">{{old('image3')?? $blogs->image3}}</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="form-group col-md-6"><label>Troisième paragraphe</label><textarea id="summernote-3" name="description3">{{old('description3')?? $blogs->description3}}</textarea></div>
-                                            <div class="form-group col-md-6"><label>Quatrième paragraphe</label><textarea id="summernote-4" name="description4">{{old('description4')?? $blogs->description4}}</textarea></div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="exampleInputFile">Video 1</label>
-                                                    <div class="input-group">
-                                                        <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="video1" value="{{old('video1')?? $blogs->video1}}">
-                                                            <label class="custom-file-label" for="exampleInputFile">{{old('video1')?? $blogs->video1}}</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="exampleInputFile">Video 2</label>
-                                                    <div class="input-group">
-                                                        <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="video2" value="{{old('video2')?? $blogs->video2}}">
-                                                            <label class="custom-file-label" for="exampleInputFile">{{old('video2')?? $blogs->video2}}</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="form-group col-md-12"><label>Cinquième paragraphe</label><textarea id="summernote-5" name="description5">{{old('description5')?? $blogs->description5}}</textarea></div>
-                                        </div>
-
-                                        <div class="card-footer">
-                                        <button type="submit" class="btn btn-primary">Modifier</button>
+    @include('sideBar.sidebar')
+    <div class="content-wrapper">
+        @include('content-header.content-header')
+        <section class="content">
+            <div class="container-fluid">
+                <div class="">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Modifier un blog</h3>
+                        </div>
+                        @if (Session::has('success'))
+                            <div class="alert alert-success" role="alert">{{ Session::get('success') }}</div>
+                        @endif
+                        <form role="form" method="POST" action="{{ route('blog.update', $blogs->id) }}"
+                            enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Titre</label>
+                                            <input type="text" class="form-control"
+                                                placeholder="Entrez le titre du blog" name="titre"
+                                                value="{{ old('titre') ?? $blogs->titre }}">
                                         </div>
                                     </div>
-                                </form>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Description courte</label>
+                                            <input type="text" class="form-control"
+                                                placeholder="Entrez la Description courte du blog"
+                                                name="descriptionCourte"
+                                                value="{{ old('descriptionCourte') ?? $blogs->descriptionCourte }}">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-6"><label>Premier paragraphe</label>
+                                        <textarea id="summernote-1" name="description1">{{ old('description1') ?? $blogs->description1 }}</textarea>
+                                    </div>
+                                    <div class="form-group col-md-6"><label>Deuxième paragraphe</label>
+                                        <textarea id="summernote-2" name="description2">{{ old('description2') ?? $blogs->description2 }}</textarea>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="exampleInputFile">Image 1</label>
+                                            <div class="input-group">
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input"
+                                                        id="exampleInputFile" name="image1"
+                                                        value="{{ old('image1') ?? $blogs->image1 }}">
+                                                    <label class="custom-file-label"
+                                                        for="exampleInputFile">{{ old('image1') ?? $blogs->image1 }}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="exampleInputFile">Image 2</label>
+                                            <div class="input-group">
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input"
+                                                        id="exampleInputFile" name="image2"
+                                                        value="{{ old('image2') ?? $blogs->image2 }}">
+                                                    <label class="custom-file-label"
+                                                        for="exampleInputFile">{{ old('image2') ?? $blogs->image2 }}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="exampleInputFile">Image 3</label>
+                                            <div class="input-group">
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input"
+                                                        id="exampleInputFile" name="image3"
+                                                        value="{{ old('image3') ?? $blogs->image3 }}">
+                                                    <label class="custom-file-label"
+                                                        for="exampleInputFile">{{ old('image3') ?? $blogs->image3 }}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-6"><label>Troisième paragraphe</label>
+                                        <textarea id="summernote-3" name="description3">{{ old('description3') ?? $blogs->description3 }}</textarea>
+                                    </div>
+                                    <div class="form-group col-md-6"><label>Quatrième paragraphe</label>
+                                        <textarea id="summernote-4" name="description4">{{ old('description4') ?? $blogs->description4 }}</textarea>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="exampleInputFile">Video 1</label>
+                                            <div class="input-group">
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input"
+                                                        id="exampleInputFile" name="video1"
+                                                        value="{{ old('video1') ?? $blogs->video1 }}">
+                                                    <label class="custom-file-label"
+                                                        for="exampleInputFile">{{ old('video1') ?? $blogs->video1 }}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="exampleInputFile">Video 2</label>
+                                            <div class="input-group">
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input"
+                                                        id="exampleInputFile" name="video2"
+                                                        value="{{ old('video2') ?? $blogs->video2 }}">
+                                                    <label class="custom-file-label"
+                                                        for="exampleInputFile">{{ old('video2') ?? $blogs->video2 }}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-12"><label>Cinquième paragraphe</label>
+                                        <textarea id="summernote-5" name="description5">{{ old('description5') ?? $blogs->description5 }}</textarea>
+                                    </div>
+                                </div>
+
+                                <div class="card-footer">
+                                    <button type="submit" class="btn btn-primary">Modifier</button>
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
-                </section>
-        </div>
-        @include('footer.footer')
+                </div>
+            </div>
+        </section>
+    </div>
+    @include('footer.footer')
 </div>
 @include('footer.footer18')
 @include('footer.footer3')
@@ -152,28 +185,32 @@
 @include('footer.footer17')
 
 <script type="text/javascript">
-    $(document).ready(function () {
+    $(document).ready(function() {
         bsCustomFileInput.init();
     });
-    </script>
+</script>
 
-    <script>
-        $(function () {
+<script>
+    $(function() {
         //Initialize Select2 Elements
         $('.select2').select2()
-    
+
         //Initialize Select2 Elements
         $('.select2bs4').select2({
             theme: 'bootstrap4'
         })
-    
+
         //Datemask dd/mm/yyyy
-        $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+        $('#datemask').inputmask('dd/mm/yyyy', {
+            'placeholder': 'dd/mm/yyyy'
+        })
         //Datemask2 mm/dd/yyyy
-        $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+        $('#datemask2').inputmask('mm/dd/yyyy', {
+            'placeholder': 'mm/dd/yyyy'
+        })
         //Money Euro
         $('[data-mask]').inputmask()
-    
+
         //Date range picker
         $('#reservationdate').datetimepicker({
             format: 'L'
@@ -185,49 +222,50 @@
             timePicker: true,
             timePickerIncrement: 30,
             locale: {
-            format: 'MM/DD/YYYY hh:mm A'
+                format: 'MM/DD/YYYY hh:mm A'
             }
         })
         //Date range as a button
-        $('#daterange-btn').daterangepicker(
-            {
-            ranges   : {
-                'Today'       : [moment(), moment()],
-                'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
-                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                'This Month'  : [moment().startOf('month'), moment().endOf('month')],
-                'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        $('#daterange-btn').daterangepicker({
+                ranges: {
+                    'Today': [moment(), moment()],
+                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                    'This Month': [moment().startOf('month'), moment().endOf('month')],
+                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1,
+                        'month').endOf('month')]
+                },
+                startDate: moment().subtract(29, 'days'),
+                endDate: moment()
             },
-            startDate: moment().subtract(29, 'days'),
-            endDate  : moment()
-            },
-            function (start, end) {
-            $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+            function(start, end) {
+                $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format(
+                    'MMMM D, YYYY'))
             }
         )
-    
+
         //Timepicker
         $('#timepicker').datetimepicker({
             format: 'LT'
         })
-        
+
         //Bootstrap Duallistbox
         $('.duallistbox').bootstrapDualListbox()
-    
+
         //Colorpicker
         $('.my-colorpicker1').colorpicker()
         //color picker with addon
         $('.my-colorpicker2').colorpicker()
-    
+
         $('.my-colorpicker2').on('colorpickerChange', function(event) {
             $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
         });
-    
-        $("input[data-bootstrap-switch]").each(function(){
+
+        $("input[data-bootstrap-switch]").each(function() {
             $(this).bootstrapSwitch('state', $(this).prop('checked'));
         });
-    
-        })
-    </script>
+
+    })
+</script>
 @include('footer.footer2')

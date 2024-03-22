@@ -55,148 +55,148 @@ class AnnonceController extends Controller
             $data->text2 = $request->text2;
             $data->text3 = $request->text3;
 
-            if ($request->hasFile('image1') ) {
+            if ($request->hasFile('image1')) {
 
                 //get filename with extension
                 $filenamewithextension = $request->file('image1')->getClientOriginalName();
-        
+
                 //get filename without extension
                 $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-        
+
                 //get file extension
                 $extension = $request->file('image1')->getClientOriginalExtension();
-        
+
                 //filename to store
-                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
 
                 //Upload File to external server
-                Storage::disk('ftp22')->put($filenametostore, fopen($request->file('image1'), 'r+'));
+                Storage::disk('ftp9')->put($filenametostore, fopen($request->file('image1'), 'r+'));
 
                 //Upload name to database
                 $data->image1 = $filenametostore;
             }
 
-            if ($request->hasFile('image2') ) {
+            if ($request->hasFile('image2')) {
 
                 //get filename with extension
                 $filenamewithextension = $request->file('image2')->getClientOriginalName();
-        
+
                 //get filename without extension
                 $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-        
+
                 //get file extension
                 $extension = $request->file('image2')->getClientOriginalExtension();
-        
+
                 //filename to store
-                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
 
                 //Upload File to external server
-                Storage::disk('ftp22')->put($filenametostore, fopen($request->file('image2'), 'r+'));
+                Storage::disk('ftp9')->put($filenametostore, fopen($request->file('image2'), 'r+'));
 
                 //Upload name to database
                 $data->image2 = $filenametostore;
             }
 
-            if ($request->hasFile('image3') ) {
+            if ($request->hasFile('image3')) {
 
                 //get filename with extension
                 $filenamewithextension = $request->file('image3')->getClientOriginalName();
-        
+
                 //get filename without extension
                 $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-        
+
                 //get file extension
                 $extension = $request->file('image3')->getClientOriginalExtension();
-        
+
                 //filename to store
-                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
 
                 //Upload File to external server
-                Storage::disk('ftp23')->put($filenametostore, fopen($request->file('image3'), 'r+'));
+                Storage::disk('ftp9')->put($filenametostore, fopen($request->file('image3'), 'r+'));
 
                 //Upload name to database
                 $data->image3 = $filenametostore;
             }
 
-            if ($request->hasFile('image4') ) {
+            if ($request->hasFile('image4')) {
 
                 //get filename with extension
                 $filenamewithextension = $request->file('image4')->getClientOriginalName();
-        
+
                 //get filename without extension
                 $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-        
+
                 //get file extension
                 $extension = $request->file('image4')->getClientOriginalExtension();
-        
+
                 //filename to store
-                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
 
                 //Upload File to external server
-                Storage::disk('ftp22')->put($filenametostore, fopen($request->file('image4'), 'r+'));
+                Storage::disk('ftp9')->put($filenametostore, fopen($request->file('image4'), 'r+'));
 
                 //Upload name to database
                 $data->image4 = $filenametostore;
             }
 
-            if ($request->hasFile('image5') ) {
+            if ($request->hasFile('image5')) {
 
                 //get filename with extension
                 $filenamewithextension = $request->file('image5')->getClientOriginalName();
-        
+
                 //get filename without extension
                 $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-        
+
                 //get file extension
                 $extension = $request->file('image5')->getClientOriginalExtension();
-        
+
                 //filename to store
-                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
 
                 //Upload File to external server
-                Storage::disk('ftp22')->put($filenametostore, fopen($request->file('image5'), 'r+'));
+                Storage::disk('ftp9')->put($filenametostore, fopen($request->file('image5'), 'r+'));
 
                 //Upload name to database
                 $data->image5 = $filenametostore;
             }
 
-            if ($request->hasFile('image6') ) {
+            if ($request->hasFile('image6')) {
 
                 //get filename with extension
                 $filenamewithextension = $request->file('image6')->getClientOriginalName();
-        
+
                 //get filename without extension
                 $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-        
+
                 //get file extension
                 $extension = $request->file('image6')->getClientOriginalExtension();
-        
+
                 //filename to store
-                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
 
                 //Upload File to external server
-                Storage::disk('ftp22')->put($filenametostore, fopen($request->file('image6'), 'r+'));
+                Storage::disk('ftp9')->put($filenametostore, fopen($request->file('image6'), 'r+'));
 
                 //Upload name to database
                 $data->image6 = $filenametostore;
             }
 
-            if ($request->hasFile('video') ) {
+            if ($request->hasFile('video')) {
 
                 //get filename with extension
                 $filenamewithextension = $request->file('video')->getClientOriginalName();
-        
+
                 //get filename without extension
                 $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-        
+
                 //get file extension
                 $extension = $request->file('video')->getClientOriginalExtension();
-        
+
                 //filename to store
-                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
 
                 //Upload File to external server
-                Storage::disk('ftp22')->put($filenametostore, fopen($request->file('video'), 'r+'));
+                Storage::disk('ftp9')->put($filenametostore, fopen($request->file('video'), 'r+'));
 
                 //Upload name to database
                 $data->video = $filenametostore;
@@ -246,8 +246,6 @@ class AnnonceController extends Controller
     {
         $data = $request->validate([
             'categorie_id' => 'required|integer',
-            'titre' => 'required|string',
-            'text1' => 'required|string'
         ]);
 
         try {
@@ -259,148 +257,148 @@ class AnnonceController extends Controller
             $data->text2 = $request->text2;
             $data->text3 = $request->text3;
 
-            if ($request->hasFile('image1') ) {
+            if ($request->hasFile('image1')) {
 
                 //get filename with extension
                 $filenamewithextension = $request->file('image1')->getClientOriginalName();
-        
+
                 //get filename without extension
                 $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-        
+
                 //get file extension
                 $extension = $request->file('image1')->getClientOriginalExtension();
-        
+
                 //filename to store
-                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
 
                 //Upload File to external server
-                Storage::disk('ftp22')->put($filenametostore, fopen($request->file('image1'), 'r+'));
+                Storage::disk('ftp9')->put($filenametostore, fopen($request->file('image1'), 'r+'));
 
                 //Upload name to database
                 $data->image1 = $filenametostore;
             }
 
-            if ($request->hasFile('image2') ) {
+            if ($request->hasFile('image2')) {
 
                 //get filename with extension
                 $filenamewithextension = $request->file('image2')->getClientOriginalName();
-        
+
                 //get filename without extension
                 $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-        
+
                 //get file extension
                 $extension = $request->file('image2')->getClientOriginalExtension();
-        
+
                 //filename to store
-                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
 
                 //Upload File to external server
-                Storage::disk('ftp22')->put($filenametostore, fopen($request->file('image2'), 'r+'));
+                Storage::disk('ftp9')->put($filenametostore, fopen($request->file('image2'), 'r+'));
 
                 //Upload name to database
                 $data->image2 = $filenametostore;
             }
 
-            if ($request->hasFile('image3') ) {
+            if ($request->hasFile('image3')) {
 
                 //get filename with extension
                 $filenamewithextension = $request->file('image3')->getClientOriginalName();
-        
+
                 //get filename without extension
                 $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-        
+
                 //get file extension
                 $extension = $request->file('image3')->getClientOriginalExtension();
-        
+
                 //filename to store
-                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
 
                 //Upload File to external server
-                Storage::disk('ftp23')->put($filenametostore, fopen($request->file('image3'), 'r+'));
+                Storage::disk('ftp9')->put($filenametostore, fopen($request->file('image3'), 'r+'));
 
                 //Upload name to database
                 $data->image3 = $filenametostore;
             }
 
-            if ($request->hasFile('image4') ) {
+            if ($request->hasFile('image4')) {
 
                 //get filename with extension
                 $filenamewithextension = $request->file('image4')->getClientOriginalName();
-        
+
                 //get filename without extension
                 $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-        
+
                 //get file extension
                 $extension = $request->file('image4')->getClientOriginalExtension();
-        
+
                 //filename to store
-                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
 
                 //Upload File to external server
-                Storage::disk('ftp22')->put($filenametostore, fopen($request->file('image4'), 'r+'));
+                Storage::disk('ftp9')->put($filenametostore, fopen($request->file('image4'), 'r+'));
 
                 //Upload name to database
                 $data->image4 = $filenametostore;
             }
 
-            if ($request->hasFile('image5') ) {
+            if ($request->hasFile('image5')) {
 
                 //get filename with extension
                 $filenamewithextension = $request->file('image5')->getClientOriginalName();
-        
+
                 //get filename without extension
                 $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-        
+
                 //get file extension
                 $extension = $request->file('image5')->getClientOriginalExtension();
-        
+
                 //filename to store
-                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
 
                 //Upload File to external server
-                Storage::disk('ftp22')->put($filenametostore, fopen($request->file('image5'), 'r+'));
+                Storage::disk('ftp9')->put($filenametostore, fopen($request->file('image5'), 'r+'));
 
                 //Upload name to database
                 $data->image5 = $filenametostore;
             }
 
-            if ($request->hasFile('image6') ) {
+            if ($request->hasFile('image6')) {
 
                 //get filename with extension
                 $filenamewithextension = $request->file('image6')->getClientOriginalName();
-        
+
                 //get filename without extension
                 $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-        
+
                 //get file extension
                 $extension = $request->file('image6')->getClientOriginalExtension();
-        
+
                 //filename to store
-                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
 
                 //Upload File to external server
-                Storage::disk('ftp22')->put($filenametostore, fopen($request->file('image6'), 'r+'));
+                Storage::disk('ftp9')->put($filenametostore, fopen($request->file('image6'), 'r+'));
 
                 //Upload name to database
                 $data->image6 = $filenametostore;
             }
 
-            if ($request->hasFile('video') ) {
+            if ($request->hasFile('video')) {
 
                 //get filename with extension
                 $filenamewithextension = $request->file('video')->getClientOriginalName();
-        
+
                 //get filename without extension
                 $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-        
+
                 //get file extension
                 $extension = $request->file('video')->getClientOriginalExtension();
-        
+
                 //filename to store
-                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
 
                 //Upload File to external server
-                Storage::disk('ftp22')->put($filenametostore, fopen($request->file('video'), 'r+'));
+                Storage::disk('ftp9')->put($filenametostore, fopen($request->file('video'), 'r+'));
 
                 //Upload name to database
                 $data->video = $filenametostore;
@@ -424,7 +422,7 @@ class AnnonceController extends Controller
         //$annonces = Annonce::find($annonce);
         try {
             $annonce->delete();
-            return redirect()->back()->with('success','Annonce supprimée avec succès');
+            return redirect()->back()->with('success', 'Annonce supprimée avec succès');
         } catch (Exception $e) {
             return redirect()->back()->with('success', $e->getMessage());
         }

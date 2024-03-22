@@ -18,13 +18,12 @@ class GallerieController extends Controller
      */
     public function index()
     {
-        $galleries = DB::table('pays')
-        ->join('categories', 'pays.id', '=', 'categories.pays_id')
-        ->join('sous_categories', 'sous_categories.categorie_id', '=', 'categories.id')
-        ->join('entreprises', 'entreprises.souscategorie_id', '=', 'sous_categories.id')
-        ->join('gallerie_images', 'entreprises.id', '=', 'gallerie_images.entreprise_id')
-        ->select('*', 'entreprises.nom as entreprise', 'gallerie_images.id as identifiant', 'pays.libelle as pays')
-        ->get();
+        $galleries = DB::table('categories')
+            ->join('sous_categories', 'sous_categories.categorie_id', '=', 'categories.id')
+            ->join('entreprises', 'entreprises.souscategorie_id', '=', 'sous_categories.id')
+            ->join('gallerie_images', 'entreprises.id', '=', 'gallerie_images.entreprise_id')
+            ->select('*', 'entreprises.nom as entreprise', 'gallerie_images.id as identifiant')
+            ->get();
         return view('gallerie.index', compact('galleries'));
     }
 
@@ -35,12 +34,7 @@ class GallerieController extends Controller
      */
     public function create()
     {
-        $entreprises = DB::table('pays')
-            ->join('categories', 'pays.id', '=', 'categories.pays_id')
-            ->join('sous_categories', 'sous_categories.categorie_id', '=', 'categories.id')
-            ->join('entreprises', 'entreprises.souscategorie_id', '=', 'sous_categories.id')
-            ->select('*', 'entreprises.nom as entreprise', 'pays.libelle as pays')
-            ->get();
+        $entreprises = Entreprise::all();
 
         return view('gallerie.add', compact('entreprises'));
     }
@@ -61,23 +55,23 @@ class GallerieController extends Controller
         try {
             $data = new Gallerie_image();
             $data->entreprise_id = $request->entreprise_id;
-            
-            if ($request->hasFile('galerie_image') ) {
+
+            if ($request->hasFile('galerie_image')) {
 
                 //get filename with extension
                 $filenamewithextension = $request->file('galerie_image')->getClientOriginalName();
-        
+
                 //get filename without extension
                 $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-        
+
                 //get file extension
                 $extension = $request->file('galerie_image')->getClientOriginalExtension();
-        
+
                 //filename to store
-                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
 
                 //Upload File to external server
-                Storage::disk('ftp')->put($filenametostore, fopen($request->file('galerie_image'), 'r+'));
+                Storage::disk('ftp15')->put($filenametostore, fopen($request->file('galerie_image'), 'r+'));
 
                 //Upload name to database
                 $data->galerie_image = $filenametostore;
@@ -109,16 +103,11 @@ class GallerieController extends Controller
      */
     public function edit($gallerie)
     {
-        $entreprises = DB::table('pays')
-            ->join('categories', 'pays.id', '=', 'categories.pays_id')
-            ->join('sous_categories', 'sous_categories.categorie_id', '=', 'categories.id')
-            ->join('entreprises', 'entreprises.souscategorie_id', '=', 'sous_categories.id')
-            ->select('*', 'entreprises.nom as entreprise', 'pays.libelle as pays')
-            ->get();
+        $entreprises = Entreprise::all();
 
         $galleries = Gallerie_image::find($gallerie);
 
-        return view('gallerie.update', compact('entreprises','galleries'));
+        return view('gallerie.update', compact('entreprises', 'galleries'));
     }
 
     /**
@@ -137,23 +126,23 @@ class GallerieController extends Controller
         try {
             $data = Gallerie_image::find($gallerie);
             $data->entreprise_id = $request->entreprise_id;
-            
-            if ($request->hasFile('galerie_image') ) {
+
+            if ($request->hasFile('galerie_image')) {
 
                 //get filename with extension
                 $filenamewithextension = $request->file('galerie_image')->getClientOriginalName();
-        
+
                 //get filename without extension
                 $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-        
+
                 //get file extension
                 $extension = $request->file('galerie_image')->getClientOriginalExtension();
-        
+
                 //filename to store
-                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
 
                 //Upload File to external server
-                Storage::disk('ftp')->put($filenametostore, fopen($request->file('galerie_image'), 'r+'));
+                Storage::disk('ftp15')->put($filenametostore, fopen($request->file('galerie_image'), 'r+'));
 
                 //Upload name to database
                 $data->galerie_image = $filenametostore;

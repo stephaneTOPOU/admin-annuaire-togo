@@ -18,12 +18,11 @@ class PartenaireController extends Controller
      */
     public function index()
     {
-        $partenaires = DB::table('pays')
-            ->join('categories', 'pays.id', '=', 'categories.pays_id')
+        $partenaires = DB::table('categories')
             ->join('sous_categories', 'sous_categories.categorie_id', '=', 'categories.id')
             ->join('entreprises', 'entreprises.souscategorie_id', '=', 'sous_categories.id')
             ->join('partenaires', 'entreprises.id', '=', 'partenaires.entreprise_id')
-            ->select('*', 'entreprises.nom as entreprise', 'partenaires.id as identifiant', 'pays.libelle as pays')
+            ->select('*', 'entreprises.nom as entreprise', 'partenaires.id as identifiant')
             ->get();
         return view('partenaire.index', compact('partenaires'));
     }
@@ -35,11 +34,10 @@ class PartenaireController extends Controller
      */
     public function create()
     {
-        $entreprises = DB::table('pays')
-            ->join('categories', 'pays.id', '=', 'categories.pays_id')
+        $entreprises = DB::table('categories')
             ->join('sous_categories', 'sous_categories.categorie_id', '=', 'categories.id')
             ->join('entreprises', 'entreprises.souscategorie_id', '=', 'sous_categories.id')
-            ->select('*', 'entreprises.nom as entreprise', 'pays.libelle as pays')
+            ->select('*', 'entreprises.nom as entreprise')
             ->get();
         return view('partenaire.add', compact('entreprises'));
     }
@@ -76,7 +74,7 @@ class PartenaireController extends Controller
                 $filenametostore = $filename.'_'.uniqid().'.'.$extension;
 
                 //Upload File to external server
-                Storage::disk('ftp24')->put($filenametostore, fopen($request->file('image'), 'r+'));
+                Storage::disk('ftp8')->put($filenametostore, fopen($request->file('image'), 'r+'));
 
                 //Upload name to database
                 $data->image = $filenametostore;
@@ -108,11 +106,10 @@ class PartenaireController extends Controller
      */
     public function edit($partenaire)
     {
-        $entreprises = DB::table('pays')
-            ->join('categories', 'pays.id', '=', 'categories.pays_id')
+        $entreprises = DB::table('categories')
             ->join('sous_categories', 'sous_categories.categorie_id', '=', 'categories.id')
             ->join('entreprises', 'entreprises.souscategorie_id', '=', 'sous_categories.id')
-            ->select('*', 'entreprises.nom as entreprise', 'pays.libelle as pays')
+            ->select('*', 'entreprises.nom as entreprise')
             ->get();
 
         $partenaires = Partenaire::find($partenaire);
@@ -152,7 +149,7 @@ class PartenaireController extends Controller
                 $filenametostore = $filename.'_'.uniqid().'.'.$extension;
 
                 //Upload File to external server
-                Storage::disk('ftp24')->put($filenametostore, fopen($request->file('image'), 'r+'));
+                Storage::disk('ftp8')->put($filenametostore, fopen($request->file('image'), 'r+'));
 
                 //Upload name to database
                 $data->image = $filenametostore;
@@ -173,9 +170,9 @@ class PartenaireController extends Controller
      */
     public function destroy($partenaire)
     {
-        $galleries = Partenaire::find($partenaire);
+        $partenaires = Partenaire::find($partenaire);
         try {
-            $galleries->delete();
+            $partenaires->delete();
             return redirect()->back()->with('success', 'Partenaire supprimée avec succès');
         } catch (Exception $e) {
             return redirect()->back()->with('success', $e->getMessage());

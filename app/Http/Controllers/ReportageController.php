@@ -18,11 +18,10 @@ class ReportageController extends Controller
      */
     public function index()
     {
-        $reportages = DB::table('pays')
-        ->join('reportages', 'pays.id', '=', 'reportages.pays_id')
-        ->join('admins', 'admins.id', '=', 'reportages.admin_id')
-        ->select('*', 'admins.name as admin', 'reportages.id as identifiant','pays.libelle as pays')
-        ->get();
+        $reportages = DB::table('reportages')
+            ->join('admins', 'admins.id', '=', 'reportages.admin_id')
+            ->select('*', 'admins.name as admin', 'reportages.id as identifiant')
+            ->get();
         return view('reportage.index', compact('reportages'));
     }
 
@@ -66,9 +65,8 @@ class ReportageController extends Controller
      */
     public function edit($reportage)
     {
-        $reportages = Reportage::find($reportage);
-        $pays = Pays::all();
-        return view('reportage.update',compact('reportages', 'pays'));
+        $reportages = Reportage::find($reportage);        
+        return view('reportage.update', compact('reportages'));
     }
 
     /**
@@ -81,19 +79,17 @@ class ReportageController extends Controller
     public function update(Request $request, $reportage)
     {
         $data = $request->validate([
-            'video'=>'required|string',
-            'pays_id'=>'required|integer'
+            'video' => 'required|string',            
         ]);
 
         try {
             $data = Reportage::find($reportage);
 
-            $data->admin_id =  Auth::user()->id;
-            $data->pays_id = $request->pays_id;
+            $data->admin_id =  Auth::user()->id;        
             $data->video = $request->video;
 
             $data->update();
-            return redirect()->back()->with('success', 'Lien mis à jour avec succès');
+            return redirect()->back()->with('success', 'Reportage mis à jour avec succès');
         } catch (Exception $e) {
             return redirect()->back()->with('success', $e->getMessage());
         }

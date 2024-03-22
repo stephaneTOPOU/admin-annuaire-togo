@@ -19,11 +19,10 @@ class RechercheController extends Controller
      */
     public function index()
     {
-        $sliders = DB::table('pays')
-        ->join('slider_recherches', 'pays.id', '=', 'slider_recherches.pays_id')
-        ->join('admins', 'admins.id', '=', 'slider_recherches.admin_id')
-        ->select('*', 'admins.name as admin', 'slider_recherches.id as identifiant')
-        ->get();
+        $sliders = DB::table('slider_recherches')
+            ->join('admins', 'admins.id', '=', 'slider_recherches.admin_id')
+            ->select('*', 'admins.name as admin', 'slider_recherches.id as identifiant')
+            ->get();
         return view('slider-recherche.index', compact('sliders'));
     }
 
@@ -33,9 +32,8 @@ class RechercheController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        $pays = Pays::all();
-        return view('slider-recherche.add', compact('pays'));
+    {        
+        return view('slider-recherche.add');
     }
 
     /**
@@ -47,38 +45,36 @@ class RechercheController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'image'=>'required|file|max:1024',
-            'pays_id'=>'required|integer'
+            'image' => 'required|file|max:1024',
         ]);
 
         try {
             $data = new SliderRecherche();
 
             $data->admin_id =  Auth::user()->id;
-            $data->pays_id = $request->pays_id;
             
             // if ($request->image) {
             //     $filename = time() . rand(1, 50) . '.' . $request->image->extension();
             //     $img = $request->file('image')->storeAs('sliders', $filename, 'public');
             //     $data->image = $img;
             // }
-            
-            if ($request->hasFile('image') ) {
+
+            if ($request->hasFile('image')) {
 
                 //get filename with extension
                 $filenamewithextension = $request->file('image')->getClientOriginalName();
-        
+
                 //get filename without extension
                 $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-        
+
                 //get file extension
                 $extension = $request->file('image')->getClientOriginalExtension();
-        
+
                 //filename to store
-                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
 
                 //Upload File to external server
-                Storage::disk('ftp18')->put($filenametostore, fopen($request->file('image'), 'r+'));
+                Storage::disk('ftp17')->put($filenametostore, fopen($request->file('image'), 'r+'));
 
                 //Upload name to database
                 $data->image = $filenametostore;
@@ -110,9 +106,8 @@ class RechercheController extends Controller
      */
     public function edit($slider)
     {
-        $sliders = SliderRecherche::find($slider);
-        $pays = Pays::all();
-        return view('slider-recherche.update', compact('sliders', 'pays'));
+        $sliders = SliderRecherche::find($slider);        
+        return view('slider-recherche.update', compact('sliders'));
     }
 
     /**
@@ -125,15 +120,13 @@ class RechercheController extends Controller
     public function update(Request $request, $slider)
     {
         $data = $request->validate([
-            'image'=>'required|file|max:1024',
-            'pays_id'=>'required|integer'
+            'image' => 'required|file|max:1024',
         ]);
 
         try {
             $data = SliderRecherche::find($slider);
 
             $data->admin_id =  Auth::user()->id;
-            $data->pays_id = $request->pays_id;
             
             // if ($request->image) {
             //     $filename = time() . rand(1, 50) . '.' . $request->image->extension();
@@ -141,22 +134,22 @@ class RechercheController extends Controller
             //     $data->image = $img;
             // }
 
-            if ($request->hasFile('image') ) {
+            if ($request->hasFile('image')) {
 
                 //get filename with extension
                 $filenamewithextension = $request->file('image')->getClientOriginalName();
-        
+
                 //get filename without extension
                 $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-        
+
                 //get file extension
                 $extension = $request->file('image')->getClientOriginalExtension();
-        
+
                 //filename to store
-                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
 
                 //Upload File to external server
-                Storage::disk('ftp18')->put($filenametostore, fopen($request->file('image'), 'r+'));
+                Storage::disk('ftp17')->put($filenametostore, fopen($request->file('image'), 'r+'));
 
                 //Upload name to database
                 $data->image = $filenametostore;

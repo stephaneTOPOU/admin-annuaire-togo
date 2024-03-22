@@ -20,8 +20,7 @@ class Slider1Controller extends Controller
      */
     public function index()
     {
-        $slider1s = DB::table('pays')
-        ->join('slider1s', 'pays.id', '=', 'slider1s.pays_id')
+        $slider1s = DB::table('slider1s')
         ->join('admins', 'admins.id', '=', 'slider1s.admin_id')
         ->select('*', 'admins.name as admin', 'slider1s.id as identifiant')
         ->get();
@@ -35,8 +34,7 @@ class Slider1Controller extends Controller
      */
     public function create()
     {
-        $pays = Pays::all();
-        return view('slider1.add', compact('pays'));
+        return view('slider1.add');
     }
 
     /**
@@ -49,15 +47,13 @@ class Slider1Controller extends Controller
     {
         $data = $request->validate([
             'image'=>'required|file|max:1024',
-            'pays_id'=>'required|integer'
         ]);
 
         try {
             $data = new Slider1();
 
             $data->admin_id =  Auth::user()->id;
-            $data->pays_id = $request->pays_id;
-            
+                        
             // if ($request->image) {
             //     $filename = time() . rand(1, 50) . '.' . $request->image->extension();
             //     $img = $request->file('image')->storeAs('sliders', $filename, 'public');
@@ -79,14 +75,14 @@ class Slider1Controller extends Controller
                 $filenametostore = $filename.'_'.uniqid().'.'.$extension;
 
                 //Upload File to external server
-                Storage::disk('ftp16')->put($filenametostore, fopen($request->file('image'), 'r+'));
+                Storage::disk('ftp17')->put($filenametostore, fopen($request->file('image'), 'r+'));
 
                 //Upload name to database
                 $data->image = $filenametostore;
             }
 
             $data->save();
-            return redirect()->back()->with('success', 'Image Ajoutée avec succès');
+            return redirect()->back()->with('success', 'Slider Ajoutée avec succès');
         } catch (Exception $e) {
             return redirect()->back()->with('success', $e->getMessage());
         }
@@ -112,8 +108,7 @@ class Slider1Controller extends Controller
     public function edit($slider1)
     {
         $slider1s = Slider1::find($slider1);
-        $pays = Pays::all();
-        return view('slider1.update', compact('slider1s', 'pays'));
+        return view('slider1.update', compact('slider1s'));
     }
 
     /**
@@ -127,13 +122,11 @@ class Slider1Controller extends Controller
     {
         $data = $request->validate([
             'image'=>'required|file|max:1024',
-            'pays_id'=>'required|integer'
         ]);
 
         try {
             $data = Slider1::find($slider1);
             
-            $data->pays_id = $request->pays_id;
             $data->admin_id =  Auth::user()->id;
             
             // if ($request->image) {
@@ -157,7 +150,7 @@ class Slider1Controller extends Controller
                 $filenametostore = $filename.'_'.uniqid().'.'.$extension;
 
                 //Upload File to external server
-                Storage::disk('ftp16')->put($filenametostore, fopen($request->file('image'), 'r+'));
+                Storage::disk('ftp17')->put($filenametostore, fopen($request->file('image'), 'r+'));
 
                 //Upload name to database
                 $data->image = $filenametostore;
@@ -181,7 +174,7 @@ class Slider1Controller extends Controller
         $slider1s = Slider1::find($slider1);
         try {
             $slider1s->delete();
-            return redirect()->back()->with('success', 'Image supprimée avec succès');
+            return redirect()->back()->with('success', 'Slider supprimé avec succès');
         } catch (Exception $e) {
             return redirect()->back()->with('success', $e->getMessage());
         }

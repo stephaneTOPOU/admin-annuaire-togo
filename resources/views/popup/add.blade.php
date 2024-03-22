@@ -27,19 +27,8 @@
                                     @csrf
                                     
                                     <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label>Trouver pays</label>
-                                                    <select class="form-control select2" style="width: 100%;" name="pays_id">
-                                                        <option selected="selected">Pays</option>
-                                                        @foreach ($pays as $pay)
-                                                            <option value="{{ $pay->id }}">{{ $pay->libelle }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
+                                        <div class="row">                                            
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Choisir une entreprise</label>
                                                     <select class="form-control select2" style="width: 100%;" name="entreprise_id">
@@ -50,12 +39,12 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="exampleInputFile">Image</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="image" >
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="image[]" multiple >
                                                             <label class="custom-file-label" for="exampleInputFile">Choisir l'image</label>
                                                         </div>
                                                     </div>

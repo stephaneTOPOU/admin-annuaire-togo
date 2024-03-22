@@ -18,10 +18,7 @@ class BannerController extends Controller
      */
     public function index()
     {
-        $banners = DB::table('pays')
-            ->join('banners', 'pays.id', '=', 'banners.pays_id')
-            ->select('*', 'banners.id as identifiant')
-            ->get();
+        $banners = Banner::all();
         return view('banner.index', compact('banners'));
     }
 
@@ -32,8 +29,7 @@ class BannerController extends Controller
      */
     public function create()
     {
-        $pays = Pays::all();
-        return view('banner.add', compact('pays'));
+        return view('banner.add');
     }
 
     /**
@@ -45,38 +41,34 @@ class BannerController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'image'=>'required|file|max:1024',
-            'pays_id'=>'required|integer'
+            'image' => 'required|file|max:1024',
         ]);
 
         try {
             $data = new Banner();
 
-            //$data->admin_id =  Auth::user()->id;
-            $data->pays_id = $request->pays_id;
-            
             // if ($request->image) {
             //     $filename = time() . rand(1, 50) . '.' . $request->image->extension();
             //     $img = $request->file('image')->storeAs('sliders', $filename, 'public');
             //     $data->image = $img;
             // }
 
-            if ($request->hasFile('image') ) {
+            if ($request->hasFile('image')) {
 
                 //get filename with extension
                 $filenamewithextension = $request->file('image')->getClientOriginalName();
-        
+
                 //get filename without extension
                 $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-        
+
                 //get file extension
                 $extension = $request->file('image')->getClientOriginalExtension();
-        
+
                 //filename to store
-                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
 
                 //Upload File to external server
-                Storage::disk('ftp2')->put($filenametostore, fopen($request->file('image'), 'r+'));
+                Storage::disk('ftp1')->put($filenametostore, fopen($request->file('image'), 'r+'));
 
                 //Upload name to database
                 $data->image = $filenametostore;
@@ -108,9 +100,8 @@ class BannerController extends Controller
      */
     public function edit($banner)
     {
-        $pays = Pays::all();
         $banners = Banner::find($banner);
-        return view('banner.update', compact('pays', 'banners'));
+        return view('banner.update', compact('banners'));
     }
 
     /**
@@ -123,37 +114,34 @@ class BannerController extends Controller
     public function update(Request $request, $banner)
     {
         $data = $request->validate([
-            'pays_id'=>'required|integer'
+            'image' => 'required|file|max:1024',
         ]);
 
         try {
             $data = Banner::find($banner);
 
-            //$data->admin_id =  Auth::user()->id;
-            $data->pays_id = $request->pays_id;
-            
             // if ($request->image) {
             //     $filename = time() . rand(1, 50) . '.' . $request->image->extension();
             //     $img = $request->file('image')->storeAs('sliders', $filename, 'public');
             //     $data->image = $img;
             // }
 
-            if ($request->hasFile('image') ) {
+            if ($request->hasFile('image')) {
 
                 //get filename with extension
                 $filenamewithextension = $request->file('image')->getClientOriginalName();
-        
+
                 //get filename without extension
                 $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-        
+
                 //get file extension
                 $extension = $request->file('image')->getClientOriginalExtension();
-        
+
                 //filename to store
-                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
 
                 //Upload File to external server
-                Storage::disk('ftp2')->put($filenametostore, fopen($request->file('image'), 'r+'));
+                Storage::disk('ftp1')->put($filenametostore, fopen($request->file('image'), 'r+'));
 
                 //Upload name to database
                 $data->image = $filenametostore;

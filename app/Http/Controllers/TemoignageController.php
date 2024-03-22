@@ -49,28 +49,28 @@ class TemoignageController extends Controller
         try {
             $data = new Temoignage();
             $data->nom = $request->nom;
-            
-            if ($request->hasFile('image') ) {
+
+            if ($request->hasFile('image')) {
 
                 //get filename with extension
                 $filenamewithextension = $request->file('image')->getClientOriginalName();
-        
+
                 //get filename without extension
                 $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-        
+
                 //get file extension
                 $extension = $request->file('image')->getClientOriginalExtension();
-        
+
                 //filename to store
-                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
-        
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
+
                 //Upload File to external server
-                Storage::disk('ftp28')->put($filenametostore, fopen($request->file('image'), 'r+'));
+                Storage::disk('ftp13')->put($filenametostore, fopen($request->file('image'), 'r+'));
 
                 //Upload name to database
                 $data->image = $filenametostore;
             }
-            
+
             $data->note = $request->note;
             $data->message = $request->message;
 
@@ -124,28 +124,28 @@ class TemoignageController extends Controller
             $data = Temoignage::find($temoignage);
 
             $data->nom = $request->nom;
-            
-            if ($request->hasFile('image') ) {
+
+            if ($request->hasFile('image')) {
 
                 //get filename with extension
                 $filenamewithextension = $request->file('image')->getClientOriginalName();
-        
+
                 //get filename without extension
                 $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-        
+
                 //get file extension
                 $extension = $request->file('image')->getClientOriginalExtension();
-        
+
                 //filename to store
-                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
-        
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
+
                 //Upload File to external server
-                Storage::disk('ftp28')->put($filenametostore, fopen($request->file('image'), 'r+'));
+                Storage::disk('ftp13')->put($filenametostore, fopen($request->file('image'), 'r+'));
 
                 //Upload name to database
                 $data->image = $filenametostore;
             }
-            
+
             $data->note = $request->note;
             $data->message = $request->message;
 
@@ -162,11 +162,12 @@ class TemoignageController extends Controller
      * @param  \App\Models\Temoignage  $temoignage
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Temoignage $temoignage)
+    public function destroy($temoignage)
     {
+        $temoignages = Temoignage::find($temoignage);
         try {
-            $temoignage->delete();
-            return redirect()->back()->with('success','Témoignage supprimé avec succès');
+            $temoignages->delete();
+            return redirect()->back()->with('success', 'Témoignage supprimé avec succès');
         } catch (Exception $e) {
             return redirect()->back()->with('success', $e->getMessage());
         }

@@ -18,12 +18,11 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $services = DB::table('pays')
-            ->join('categories', 'pays.id', '=', 'categories.pays_id')
+        $services = DB::table('categories')
             ->join('sous_categories', 'sous_categories.categorie_id', '=', 'categories.id')
             ->join('entreprises', 'entreprises.souscategorie_id', '=', 'sous_categories.id')
             ->join('services', 'entreprises.id', '=', 'services.entreprise_id')
-            ->select('*', 'entreprises.nom as entreprise', 'services.id as identifiant', 'pays.libelle as pays')
+            ->select('*', 'entreprises.nom as entreprise', 'services.id as identifiant')
             ->get();
 
         return view('service.index', compact('services'));
@@ -36,11 +35,10 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        $entreprises = DB::table('pays')
-            ->join('categories', 'pays.id', '=', 'categories.pays_id')
+        $entreprises = DB::table('categories')
             ->join('sous_categories', 'sous_categories.categorie_id', '=', 'categories.id')
             ->join('entreprises', 'entreprises.souscategorie_id', '=', 'sous_categories.id')
-            ->select('*', 'entreprises.nom as entreprise', 'pays.libelle as pays')
+            ->select('*', 'entreprises.nom as entreprise')
             ->get();
 
         return view('service.add', compact('entreprises'));
@@ -71,19 +69,19 @@ class ServiceController extends Controller
             //     $data->image2 = $img2;
             // }
 
-            if ($request->hasFile('image2') ) {
+            if ($request->hasFile('image2')) {
 
                 //get filename with extension
                 $filenamewithextension = $request->file('image2')->getClientOriginalName();
-        
+
                 //get filename without extension
                 $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-        
+
                 //get file extension
                 $extension = $request->file('image2')->getClientOriginalExtension();
-        
+
                 //filename to store
-                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
 
                 //Upload File to external server
                 Storage::disk('ftp14')->put($filenametostore, fopen($request->file('image2'), 'r+'));
@@ -98,19 +96,19 @@ class ServiceController extends Controller
             //     $data->image3 = $img3;
             // }
 
-            if ($request->hasFile('image3') ) {
+            if ($request->hasFile('image3')) {
 
                 //get filename with extension
                 $filenamewithextension = $request->file('image3')->getClientOriginalName();
-        
+
                 //get filename without extension
                 $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-        
+
                 //get file extension
                 $extension = $request->file('image3')->getClientOriginalExtension();
-        
+
                 //filename to store
-                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
 
                 //Upload File to external server
                 Storage::disk('ftp14')->put($filenametostore, fopen($request->file('image3'), 'r+'));
@@ -122,19 +120,19 @@ class ServiceController extends Controller
             $data->image5 = $request->image5;
             $data->image8 = $request->image8;
 
-            if ($request->hasFile('image7') ) {
+            if ($request->hasFile('image7')) {
 
                 //get filename with extension
                 $filenamewithextension = $request->file('image7')->getClientOriginalName();
-        
+
                 //get filename without extension
                 $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-        
+
                 //get file extension
                 $extension = $request->file('image7')->getClientOriginalExtension();
-        
+
                 //filename to store
-                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
 
                 //Upload File to external server
                 Storage::disk('ftp14')->put($filenametostore, fopen($request->file('image7'), 'r+'));
@@ -205,19 +203,19 @@ class ServiceController extends Controller
             //     $data->image2 = $img2;
             // }
 
-            if ($request->hasFile('image2') ) {
+            if ($request->hasFile('image2')) {
 
                 //get filename with extension
                 $filenamewithextension = $request->file('image2')->getClientOriginalName();
-        
+
                 //get filename without extension
                 $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-        
+
                 //get file extension
                 $extension = $request->file('image2')->getClientOriginalExtension();
-        
+
                 //filename to store
-                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
 
                 //Upload File to external server
                 Storage::disk('ftp14')->put($filenametostore, fopen($request->file('image2'), 'r+'));
@@ -232,19 +230,19 @@ class ServiceController extends Controller
             //     $data->image3 = $img3;
             // }
 
-            if ($request->hasFile('image3') ) {
+            if ($request->hasFile('image3')) {
 
                 //get filename with extension
                 $filenamewithextension = $request->file('image3')->getClientOriginalName();
-        
+
                 //get filename without extension
                 $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-        
+
                 //get file extension
                 $extension = $request->file('image3')->getClientOriginalExtension();
-        
+
                 //filename to store
-                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
 
                 //Upload File to external server
                 Storage::disk('ftp14')->put($filenametostore, fopen($request->file('image3'), 'r+'));
@@ -256,19 +254,19 @@ class ServiceController extends Controller
             $data->image5 = $request->image5;
             $data->image8 = $request->image8;
 
-            if ($request->hasFile('image7') ) {
+            if ($request->hasFile('image7')) {
 
                 //get filename with extension
                 $filenamewithextension = $request->file('image7')->getClientOriginalName();
-        
+
                 //get filename without extension
                 $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-        
+
                 //get file extension
                 $extension = $request->file('image7')->getClientOriginalExtension();
-        
+
                 //filename to store
-                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
 
                 //Upload File to external server
                 Storage::disk('ftp14')->put($filenametostore, fopen($request->file('image7'), 'r+'));

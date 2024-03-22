@@ -17,9 +17,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = DB::table('pays')
-            ->join('categories', 'pays.id', '=', 'categories.pays_id')
-            ->select('*', 'pays.libelle as pays', 'categories.libelle as categorie', 'categories.id as identifiant')
+        $categories = DB::table('categories')
+            ->select('*', 'categories.libelle as categorie', 'categories.id as identifiant')
             ->get();
         return view('categorie.index', compact('categories'));
     }
@@ -31,8 +30,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $pays = Pays::all();
-        return view('categorie.add', compact('pays'));
+        return view('categorie.add');
     }
 
     /**
@@ -45,12 +43,10 @@ class CategoryController extends Controller
     {
         $data = $request->validate([
             'libelle'=>'required|string',
-            'pays_id'=>'required|integer'
         ]);
 
         try {
             $data = new Categories();
-            $data->pays_id = $request->pays_id;
             $data->libelle = $request->libelle;
             $data->save();
             return redirect()->back()->with('success','Catégorie Ajouté avec succès');
@@ -79,8 +75,7 @@ class CategoryController extends Controller
     public function edit($categorie)
     {
         $categories = Categories::find($categorie);
-        $pays = Pays::all();
-        return view('categorie.update', compact('categories', 'pays'));
+        return view('categorie.update', compact('categories'));
     }
 
     /**
@@ -95,12 +90,10 @@ class CategoryController extends Controller
         
         $data = $request->validate([
             'libelle'=>'required|string',
-            'pays_id'=>'required|integer'
         ]);
 
         try {
-            $data = Categories::find($categorie);
-            $data->pays_id = $request->pays_id;
+            $data = Categories::find($categorie);            
             $data->libelle = $request->libelle;
             $data->update();
             return redirect()->back()->with('success','Catégorie mise à jour avec succès');

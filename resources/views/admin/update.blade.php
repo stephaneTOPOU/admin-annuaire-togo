@@ -18,36 +18,27 @@
                         <div class="">
                             <div class="card card-primary">
                                 <div class="card-header">
-                                    <h3 class="card-title">Modifier un admin</h3>
+                                    <h3 class="card-title">Modifier un admins</h3>
                                 </div>
                                 
-                                <form role="form" method="POST" action="{{ route('admin.update',$admin->id) }}">
+                                <form role="form" method="POST" action="{{ route('admin.update',$admins->id) }}">
                                     @csrf
                                     @method('PUT')
                                     @if(Session::has('success'))
                                         <div class="alert alert-success" role="alert">{{Session::get('success') }}</div>
                                     @endif
-                                    <div class="card-body">
-                                        <div class="form-group">
-                                            <label>Trouver pays</label>
-                                            <select class="form-control select2" style="width: 100%;" name="pays_id">
-                                                <option selected="selected">Pays</option>
-                                                @foreach ($pays as $pay)
-                                                    <option value="{{ $pay->id }}" @if(($pay->id)==($admin->pays_id)) selected @endif>{{ $pay->libelle }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+                                    <div class="card-body">                                        
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label >Nom</label>
-                                                    <input type="text" class="form-control" value="{{old('name')?? $admin->name}}" required name="name">
+                                                    <input type="text" class="form-control" value="{{old('name')?? $admins->name}}" required name="name">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label >Prénom</label>
-                                                    <input type="text" class="form-control" value="{{old('prenoms')?? $admin->prenoms}}" required name="prenoms">
+                                                    <input type="text" class="form-control" value="{{old('prenoms')?? $admins->prenoms}}" required name="prenoms">
                                                 </div>
                                             </div>
                                             
@@ -57,13 +48,13 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail1">Email </label>
-                                                    <input type="email" class="form-control"  id="exampleInputEmail1" value="{{old('email')?? $admin->email}}" required name="email">
+                                                    <input type="email" class="form-control"  id="exampleInputEmail1" value="{{old('email')?? $admins->email}}" required name="email">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="exampleInputPassword1">Mot de passe</label>
-                                                    <input type="password" class="form-control" id="exampleInputPassword1" value="{{old('password')?? $admin->password}}" required name="password">
+                                                    <input type="password" class="form-control" id="exampleInputPassword1" value="{{old('password')?? $admins->password}}" required name="password">
                                                 </div>
                                             </div>
                                         </div>
@@ -90,7 +81,7 @@
 <script src="{{ asset('assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js') }}"></script>
 @include('footer.footer13')
 <script src="{{ asset('assets/plugins/bootstrap-switch/js/bootstrap-switch.min.js') }}"></script>
-<script src="{{ asset('assets/dist/js/adminlte.min.js') }}"></script>
+<script src="{{ asset('assets/dist/js/adminslte.min.js') }}"></script>
 @include('footer.footer17')
 
 <script type="text/javascript">

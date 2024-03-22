@@ -152,7 +152,7 @@ class OffreController extends Controller
     {
         try {
             $offre->delete();
-            return redirect()->back()->with('success','Offre supprimée avec succès');
+            return redirect()->back()->with('success', 'Offre supprimée avec succès');
         } catch (Exception $e) {
             return redirect()->back()->with('success', $e->getMessage());
         }

@@ -26,16 +26,7 @@
                                 <form role="form" method="POST" action="{{ route('category.update',$categories->id) }}">
                                     @csrf
                                     @method('PUT')
-                                    <div class="card-body">
-                                        <div class="form-group">
-                                            <label>Trouver pays</label>
-                                            <select class="form-control select2" style="width: 100%;" name="pays_id">
-                                                <option selected="selected">Pays</option>
-                                                @foreach ($pays as $pay)
-                                                    <option value="{{ $pay->id }}" @if(($pay->id)==($categories->pays_id)) selected @endif>{{ $pay->libelle }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+                                    <div class="card-body">                                        
                                         <div class="form-group">
                                             <label>Nom de la catégorie</label>
                                             <input type="text" class="form-control" value="{{old('libelle')?? $categories->libelle}}" placeholder="Entrez le nom" name="libelle" required>

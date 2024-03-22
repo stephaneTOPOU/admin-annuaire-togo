@@ -51,49 +51,49 @@ class MediaPubController extends Controller
         try {
             $data = new MediaPub();
             $data->pubs_id = $request->pubs_id;
-            
-            if ($request->hasFile('imageSpot') ) {
+
+            if ($request->hasFile('imageSpot')) {
 
                 //get filename with extension
                 $filenamewithextension = $request->file('imageSpot')->getClientOriginalName();
-        
+
                 //get filename without extension
                 $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-        
+
                 //get file extension
                 $extension = $request->file('imageSpot')->getClientOriginalExtension();
-        
+
                 //filename to store
-                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
-        
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
+
                 //Upload File to external server
-                Storage::disk('ftp28')->put($filenametostore, fopen($request->file('imageSpot'), 'r+'));
+                Storage::disk('ftp11')->put($filenametostore, fopen($request->file('imageSpot'), 'r+'));
 
                 //Upload name to database
                 $data->imageSpot = $filenametostore;
             }
 
-            if ($request->hasFile('videoSpot') ) {
+            if ($request->hasFile('videoSpot')) {
 
                 //get filename with extension
                 $filenamewithextension = $request->file('videoSpot')->getClientOriginalName();
-        
+
                 //get filename without extension
                 $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-        
+
                 //get file extension
                 $extension = $request->file('videoSpot')->getClientOriginalExtension();
-        
+
                 //filename to store
-                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
-        
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
+
                 //Upload File to external server
-                Storage::disk('ftp28')->put($filenametostore, fopen($request->file('videoSpot'), 'r+'));
+                Storage::disk('ftp12')->put($filenametostore, fopen($request->file('videoSpot'), 'r+'));
 
                 //Upload name to database
                 $data->videoSpot = $filenametostore;
             }
-            
+
             $data->youtube = $request->youtube;
 
             $data->save();
@@ -146,49 +146,49 @@ class MediaPubController extends Controller
             $data = MediaPub::find($mediaPub);
 
             $data->pubs_id = $request->pubs_id;
-            
-            if ($request->hasFile('imageSpot') ) {
+
+            if ($request->hasFile('imageSpot')) {
 
                 //get filename with extension
                 $filenamewithextension = $request->file('imageSpot')->getClientOriginalName();
-        
+
                 //get filename without extension
                 $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-        
+
                 //get file extension
                 $extension = $request->file('imageSpot')->getClientOriginalExtension();
-        
+
                 //filename to store
-                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
-        
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
+
                 //Upload File to external server
-                Storage::disk('ftp28')->put($filenametostore, fopen($request->file('imageSpot'), 'r+'));
+                Storage::disk('ftp11')->put($filenametostore, fopen($request->file('imageSpot'), 'r+'));
 
                 //Upload name to database
                 $data->imageSpot = $filenametostore;
             }
 
-            if ($request->hasFile('videoSpot') ) {
+            if ($request->hasFile('videoSpot')) {
 
                 //get filename with extension
                 $filenamewithextension = $request->file('videoSpot')->getClientOriginalName();
-        
+
                 //get filename without extension
                 $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-        
+
                 //get file extension
                 $extension = $request->file('videoSpot')->getClientOriginalExtension();
-        
+
                 //filename to store
-                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
-        
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
+
                 //Upload File to external server
-                Storage::disk('ftp28')->put($filenametostore, fopen($request->file('videoSpot'), 'r+'));
+                Storage::disk('ftp12')->put($filenametostore, fopen($request->file('videoSpot'), 'r+'));
 
                 //Upload name to database
                 $data->videoSpot = $filenametostore;
             }
-            
+
             $data->youtube = $request->youtube;
 
             $data->update();
@@ -204,11 +204,12 @@ class MediaPubController extends Controller
      * @param  \App\Models\MediaPub  $mediaPub
      * @return \Illuminate\Http\Response
      */
-    public function destroy(MediaPub $mediaPub)
+    public function destroy($mediaPub)
     {
+        $mediaPubs = MediaPub::find($mediaPub);
         try {
-            $mediaPub->delete();
-            return redirect()->back()->with('success','Média supprimé avec succès');
+            $mediaPubs->delete();
+            return redirect()->back()->with('success', 'Média supprimé avec succès');
         } catch (Exception $e) {
             return redirect()->back()->with('success', $e->getMessage());
         }

@@ -17,12 +17,11 @@ class HoraireController extends Controller
      */
     public function index()
     {
-        $horaires = DB::table('pays')
-            ->join('categories', 'pays.id', '=', 'categories.pays_id')
+        $horaires = DB::table('categories')
             ->join('sous_categories', 'sous_categories.categorie_id', '=', 'categories.id')
             ->join('entreprises', 'entreprises.souscategorie_id', '=', 'sous_categories.id')
             ->join('horaires', 'entreprises.id', '=', 'horaires.entreprise_id')
-            ->select('*', 'entreprises.nom as entreprise', 'horaires.id as identifiant', 'pays.libelle as pays')
+            ->select('*', 'entreprises.nom as entreprise', 'horaires.id as identifiant')
             ->get();
         return view('horaire.index', compact('horaires'));
     }
@@ -34,12 +33,7 @@ class HoraireController extends Controller
      */
     public function create()
     {
-        $entreprises = DB::table('pays')
-            ->join('categories', 'pays.id', '=', 'categories.pays_id')
-            ->join('sous_categories', 'sous_categories.categorie_id', '=', 'categories.id')
-            ->join('entreprises', 'entreprises.souscategorie_id', '=', 'sous_categories.id')
-            ->select('*', 'entreprises.nom as entreprise', 'pays.libelle as pays')
-            ->get();
+        $entreprises = Entreprise::all();
 
         return view('horaire.add', compact('entreprises'));
     }
@@ -63,7 +57,7 @@ class HoraireController extends Controller
             $data->entreprise_id = $request->entreprise_id;
             $data->jour = $request->jour;
             $data->h_ouverture = $request->h_ouverture;
-            
+
             $data->save();
             return redirect()->back()->with('success', 'Horaire Ajoutée avec succès');
         } catch (Exception $e) {
@@ -90,12 +84,7 @@ class HoraireController extends Controller
      */
     public function edit($horaire)
     {
-        $entreprises = DB::table('pays')
-            ->join('categories', 'pays.id', '=', 'categories.pays_id')
-            ->join('sous_categories', 'sous_categories.categorie_id', '=', 'categories.id')
-            ->join('entreprises', 'entreprises.souscategorie_id', '=', 'sous_categories.id')
-            ->select('*', 'entreprises.nom as entreprise', 'pays.libelle as pays')
-            ->get();
+        $entreprises = Entreprise::all();
 
         $horaires = Horaire::find($horaire);
 
@@ -122,7 +111,7 @@ class HoraireController extends Controller
             $data->entreprise_id = $request->entreprise_id;
             $data->jour = $request->jour;
             $data->h_ouverture = $request->h_ouverture;
-            
+
             $data->update();
             return redirect()->back()->with('success', 'Horaire mis à jour avec succès');
         } catch (Exception $e) {

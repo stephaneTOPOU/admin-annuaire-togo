@@ -17,10 +17,9 @@ class SousCategoryController extends Controller
      */
     public function index()
     {
-        $sousCategories = DB::table('pays')
-            ->join('categories', 'pays.id', '=', 'categories.pays_id')
+        $sousCategories = DB::table('categories')
             ->join('sous_categories', 'sous_categories.categorie_id', '=', 'categories.id')
-            ->select('*','pays.libelle as nom', 'sous_categories.id as identifiant', 'categories.libelle as categorie')
+            ->select('*', 'sous_categories.id as identifiant', 'categories.libelle as categorie')
             ->orderBy('sous_categories.id', 'desc')
             ->get();
         return view('sub-categorie.index', compact('sousCategories'));
@@ -33,10 +32,7 @@ class SousCategoryController extends Controller
      */
     public function create()
     {
-        $categories = DB::table('pays')
-            ->join('categories', 'pays.id', '=', 'categories.pays_id')
-            ->select('*','pays.libelle as nom')
-            ->get();
+        $categories = Categories::all();
         return view('sub-categorie.add', compact('categories'));
     }
 
@@ -84,10 +80,7 @@ class SousCategoryController extends Controller
     public function edit($souscategorie)
     {
         $souscategories = SousCategories::find($souscategorie);
-        $categories = DB::table('pays')
-            ->join('categories', 'pays.id', '=', 'categories.pays_id')
-            ->select('*','pays.libelle as nom')
-            ->get();
+        $categories = Categories::all();
         return view('sub-categorie.update', compact('categories', 'souscategories'));
     }
 

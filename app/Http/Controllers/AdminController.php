@@ -18,10 +18,9 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $admins = DB::table('pays')
-        ->join('admins', 'pays.id', '=', 'admins.pays_id')
-        ->select('*', 'admins.id as identifiant')
-        ->get();
+        $admins = DB::table('admins')
+            ->select('*', 'admins.id as identifiant')
+            ->get();
         return view('admin.index', compact('admins'));
     }
 
@@ -32,8 +31,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        $pays = Pays::all();
-        return view('admin.add', compact('pays'));
+        return view('admin.add');
     }
 
     /**
@@ -45,11 +43,10 @@ class AdminController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name'=>'required|string',
-            'prenoms'=>'required|string',
-            'email'=>'required|email|string',
-            'password'=>'required|string',
-            'pays_id'=>'required|integer'
+            'name' => 'required|string',
+            'prenoms' => 'required|string',
+            'email' => 'required|email|string',
+            'password' => 'required|string',
         ]);
 
         try {
@@ -60,9 +57,8 @@ class AdminController extends Controller
             $data->prenoms = $request->prenoms;
             $data->email = $request->email;
             $data->password = bcrypt($request->password);
-            $data->pays_id = $request->pays_id;
             $data->save();
-            return redirect()->back()->with('success','Admin Ajouté avec succès');
+            return redirect()->back()->with('success', 'Admin Ajouté avec succès');
         } catch (Exception $e) {
             return redirect()->back()->with('success', $e->getMessage());
         }
@@ -85,11 +81,11 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Admin $admin)
+    public function edit($admin)
     {
-        //dd($admin);
-        $pays = Pays::all();
-        return view('admin.update', compact('admin', 'pays'));
+        $admins = Admin::find($admin);
+
+        return view('admin.update', compact('admins'));
     }
 
     /**
@@ -102,28 +98,25 @@ class AdminController extends Controller
     public function update(Request $request, $admin)
     {
         $data = $request->validate([
-            'name'=>'required|string',
-            'prenoms'=>'required|string',
-            'email'=>'required|email|string',
-            'password'=>'required|string',
-            'pays_id'=>'required|integer'
+            'name' => 'required|string',
+            'prenoms' => 'required|string',
+            'email' => 'required|email|string',
+            'password' => 'required|string',
         ]);
 
         try {
+            $d['password'] = bcrypt($data['password']);
+
             $data = Admin::find($admin);
-            if (Hash::check(request('password'), $data->password)) {
-                //$data['password'] = bcrypt($request->new_password);
-                //$admin->update($data);
-                $data->name = $request->name;
-                $data->prenoms = $request->prenoms;
-                $data->email = $request->email;
-                $data->password = bcrypt($request->password);;
-                $data->pays_id = $request->pays_id;
-                $data->update();
-                return redirect()->back()->with('success','Admin mise à jour avec succès');
-            } else {
-                return redirect()->back()->with('success','Mot de pass ne correspondent pas!!!');
-            }
+
+            $data->name = $request->name;
+            $data->prenoms = $request->prenoms;
+            $data->email = $request->email;
+            $data->password = $d['password'];
+            $data->pays_id = $request->pays_id;
+
+            $data->update();
+            return redirect()->back()->with('success', 'Admin mise à jour avec succès');
         } catch (Exception $e) {
             return redirect()->back()->with('success', $e->getMessage());
         }
@@ -135,14 +128,14 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Admin $admin)
+    public function destroy($admin)
     {
+        $admins = Admin::find($admin);
         try {
-            $admin->delete();
-            return redirect()->back()->with('success','Admin supprimé avec succès');
+            $admins->delete();
+            return redirect()->back()->with('success', 'Admin supprimé avec succès');
         } catch (Exception $e) {
             return redirect()->back()->with('success', $e->getMessage());
         }
-        
     }
 }
