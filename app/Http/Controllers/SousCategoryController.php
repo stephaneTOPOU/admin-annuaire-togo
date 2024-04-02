@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\Categories;
 use App\Models\SousCategories;
 use Exception;
@@ -22,7 +23,10 @@ class SousCategoryController extends Controller
             ->select('*', 'sous_categories.id as identifiant', 'categories.libelle as categorie')
             ->orderBy('sous_categories.id', 'desc')
             ->get();
-        return view('sub-categorie.index', compact('sousCategories'));
+
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('sub-categorie.index', compact('sousCategories', 'fonctions'));
     }
 
     /**
@@ -33,7 +37,9 @@ class SousCategoryController extends Controller
     public function create()
     {
         $categories = Categories::all();
-        return view('sub-categorie.add', compact('categories'));
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('sub-categorie.add', compact('categories', 'fonctions'));
     }
 
     /**
@@ -45,8 +51,8 @@ class SousCategoryController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'libelle'=>'required|string',
-            'categorie_id'=>'required|integer',
+            'libelle' => 'required|string',
+            'categorie_id' => 'required|integer',
         ]);
 
         try {
@@ -54,7 +60,7 @@ class SousCategoryController extends Controller
             $data->categorie_id = $request->categorie_id;
             $data->libelle = $request->libelle;
             $data->save();
-            return redirect()->back()->with('success','Sous - catégorie Ajouté avec succès');
+            return redirect()->back()->with('success', 'Sous - catégorie Ajouté avec succès');
         } catch (Exception $e) {
             return redirect()->back()->with('success', $e->getMessage());
         }
@@ -81,7 +87,9 @@ class SousCategoryController extends Controller
     {
         $souscategories = SousCategories::find($souscategorie);
         $categories = Categories::all();
-        return view('sub-categorie.update', compact('categories', 'souscategories'));
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('sub-categorie.update', compact('categories', 'souscategories', 'fonctions'));
     }
 
     /**
@@ -95,8 +103,8 @@ class SousCategoryController extends Controller
     {
 
         $data = $request->validate([
-            'libelle'=>'required|string',
-            'categorie_id'=>'required|integer',
+            'libelle' => 'required|string',
+            'categorie_id' => 'required|integer',
         ]);
 
         try {
@@ -104,7 +112,7 @@ class SousCategoryController extends Controller
             $data->categorie_id = $request->categorie_id;
             $data->libelle = $request->libelle;
             $data->update();
-            return redirect()->back()->with('success','Sous - catégorie mise à jour avec succès');
+            return redirect()->back()->with('success', 'Sous - catégorie mise à jour avec succès');
         } catch (Exception $e) {
             return redirect()->back()->with('success', $e->getMessage());
         }
@@ -121,7 +129,7 @@ class SousCategoryController extends Controller
         $souscategories = SousCategories::find($souscategorie);
         try {
             $souscategories->delete();
-            return redirect()->back()->with('success','Sous - catégorie supprimée avec succès');
+            return redirect()->back()->with('success', 'Sous - catégorie supprimée avec succès');
         } catch (Exception $e) {
             return redirect()->back()->with('success', $e->getMessage());
         }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\Pays;
 use Exception;
 use Illuminate\Http\Request;
@@ -16,7 +17,10 @@ class PaysController extends Controller
     public function index()
     {
         $pays = Pays::all();
-        return view('pays.index', compact('pays'));
+
+        $fonctions = Admin::where('fonction', 'admin')->get();
+        
+        return view('pays.index', compact('pays', 'fonctions'));
     }
 
     /**
@@ -26,7 +30,9 @@ class PaysController extends Controller
      */
     public function create()
     {
-        return view('pays.add');
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('pays.add', compact('fonctions'));
     }
 
     /**
@@ -75,7 +81,9 @@ class PaysController extends Controller
     public function edit($pay)
     {
         $pays = Pays::find($pay);
-        return view('pays.update', compact('pays'));
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('pays.update', compact('pays', 'fonctions'));
     }
 
     /**

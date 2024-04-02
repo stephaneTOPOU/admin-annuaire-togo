@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\Parametre;
 use Exception;
 use Illuminate\Http\Request;
@@ -20,9 +21,12 @@ class ParametreController extends Controller
     public function index()
     {
         $parametres = DB::table('parametres')
-        ->select('*', 'parametres.id as identifiant')
-        ->get();
-        return view('parametre.index', compact('parametres'));
+            ->select('*', 'parametres.id as identifiant')
+            ->get();
+
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('parametre.index', compact('parametres', 'fonctions'));
     }
 
     /**
@@ -33,7 +37,10 @@ class ParametreController extends Controller
     public function create()
     {
         $parametres = Parametre::all();
-        return view('parametre.add', compact('pays', 'parametres'));
+
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('parametre.add', compact('parametres', 'fonctions'));
     }
 
     /**
@@ -45,13 +52,13 @@ class ParametreController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'adresse'=>'required'
+            'adresse' => 'required'
         ]);
 
         try {
             $data = new Parametre();
 
-            
+
             $data->email = $request->email;
             $data->adresse = $request->adresse;
             $data->geolocalisation = $request->geolocalisation;
@@ -61,20 +68,20 @@ class ParametreController extends Controller
             $data->lientwitter = $request->lientwitter;
             $data->lieninsta = $request->lieninsta;
             $data->lienyoutube = $request->lienyoutube;
-            
-            if ($request->hasFile('logo_header') ) {
+
+            if ($request->hasFile('logo_header')) {
 
                 //get filename with extension
                 $filenamewithextension = $request->file('logo_header')->getClientOriginalName();
-        
+
                 //get filename without extension
                 $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-        
+
                 //get file extension
                 $extension = $request->file('logo_header')->getClientOriginalExtension();
-        
+
                 //filename to store
-                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
 
                 //Upload File to external server
                 Storage::disk('ftp19')->put($filenametostore, fopen($request->file('logo_header'), 'r+'));
@@ -94,19 +101,19 @@ class ParametreController extends Controller
             //     $data->logo_footer = $logo_footer;
             // }
 
-            if ($request->hasFile('logo_footer') ) {
+            if ($request->hasFile('logo_footer')) {
 
                 //get filename with extension
                 $filenamewithextension = $request->file('logo_footer')->getClientOriginalName();
-        
+
                 //get filename without extension
                 $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-        
+
                 //get file extension
                 $extension = $request->file('logo_footer')->getClientOriginalExtension();
-        
+
                 //filename to store
-                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
 
                 //Upload File to external server
                 Storage::disk('ftp19')->put($filenametostore, fopen($request->file('logo_footer'), 'r+'));
@@ -141,8 +148,11 @@ class ParametreController extends Controller
      */
     public function edit($parametre)
     {
-        $parametres = Parametre::find($parametre);        
-        return view('parametre.update',compact('parametres'));
+        $parametres = Parametre::find($parametre);
+
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('parametre.update', compact('parametres', 'fonctions'));
     }
 
     /**
@@ -155,13 +165,13 @@ class ParametreController extends Controller
     public function update(Request $request, $parametre)
     {
         $data = $request->validate([
-            'adresse'=>'required'
+            'adresse' => 'required'
         ]);
 
         try {
             $data = Parametre::find($parametre);
 
-            
+
             $data->email = $request->email;
             $data->adresse = $request->adresse;
             $data->geolocalisation = $request->geolocalisation;
@@ -171,20 +181,20 @@ class ParametreController extends Controller
             $data->lientwitter = $request->lientwitter;
             $data->lieninsta = $request->lieninsta;
             $data->lienyoutube = $request->lienyoutube;
-            
-            if ($request->hasFile('logo_header') ) {
+
+            if ($request->hasFile('logo_header')) {
 
                 //get filename with extension
                 $filenamewithextension = $request->file('logo_header')->getClientOriginalName();
-        
+
                 //get filename without extension
                 $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-        
+
                 //get file extension
                 $extension = $request->file('logo_header')->getClientOriginalExtension();
-        
+
                 //filename to store
-                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
 
                 //Upload File to external server
                 Storage::disk('ftp19')->put($filenametostore, fopen($request->file('logo_header'), 'r+'));
@@ -204,19 +214,19 @@ class ParametreController extends Controller
             //     $data->logo_footer = $logo_footer;
             // }
 
-            if ($request->hasFile('logo_footer') ) {
+            if ($request->hasFile('logo_footer')) {
 
                 //get filename with extension
                 $filenamewithextension = $request->file('logo_footer')->getClientOriginalName();
-        
+
                 //get filename without extension
                 $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-        
+
                 //get file extension
                 $extension = $request->file('logo_footer')->getClientOriginalExtension();
-        
+
                 //filename to store
-                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
 
                 //Upload File to external server
                 Storage::disk('ftp19')->put($filenametostore, fopen($request->file('logo_footer'), 'r+'));

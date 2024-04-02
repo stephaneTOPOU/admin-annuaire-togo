@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\Devis;
 use Exception;
 use Illuminate\Http\Request;
@@ -20,7 +21,10 @@ class DevisController extends Controller
             ->join('devis', 'sous_categories.id', '=', 'devis.souscategorie_id')
             ->select('*', 'devis.id as identifiant')
             ->get();
-        return view('devis.index', compact('devis'));
+
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('devis.index', compact('devis', 'fonctions'));
     }
 
     /**
@@ -53,7 +57,9 @@ class DevisController extends Controller
     public function show($devis)
     {
         $devis = Devis::find($devis);
-        return view('devis.front', compact('devis'));
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('devis.front', compact('devis', 'fonctions'));
     }
 
     /**

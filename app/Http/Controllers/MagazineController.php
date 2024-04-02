@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -22,7 +23,10 @@ class MagazineController extends Controller
             ->where('a_magazine', 1)
             ->orderBy('entreprises.id', 'desc')
             ->get();
-        return view('entreprise.index', compact('entreprises'));
+
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('entreprise.index', compact('entreprises', 'fonctions'));
     }
 
     /**

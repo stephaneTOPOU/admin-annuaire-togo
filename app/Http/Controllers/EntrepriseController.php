@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\Entreprise;
 use App\Models\Pays;
 use App\Models\SousCategories;
@@ -25,8 +26,12 @@ class EntrepriseController extends Controller
             ->join('sous_categories', 'sous_categories.categorie_id', '=', 'categories.id')
             ->join('entreprises', 'entreprises.souscategorie_id', '=', 'sous_categories.id')
             ->select('*', 'categories.libelle as categorie', 'entreprises.id as identifiant', 'entreprises.nom as ent', 'sous_categories.libelle as subcat')
+            ->where('entreprises.valide', 1)
             ->get();
-        return view('entreprise.index', compact('entreprises'));
+
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('entreprise.index', compact('entreprises', 'fonctions'));
     }
 
     /**
@@ -41,7 +46,9 @@ class EntrepriseController extends Controller
             ->select('*')
             ->get();
 
-        return view('entreprise.add', compact('souscategories'));
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('entreprise.add', compact('souscategories', 'fonctions'));
     }
 
     /**
@@ -62,6 +69,11 @@ class EntrepriseController extends Controller
         try {
 
             $data = new Entreprise();
+            if ($request->valide) {
+                $data->valide = $request->valide;
+            } else {
+                $data->valide = 0;
+            }
             $data->souscategorie_id = $request->souscategorie_id;
             $data->nom = $request->nom;
             $data->email = $request->email;
@@ -309,7 +321,9 @@ class EntrepriseController extends Controller
             ->select('*')
             ->get();
 
-        return view('entreprise.update', compact('souscategories', 'entreprises'));
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('entreprise.update', compact('souscategories', 'entreprises', 'fonctions'));
     }
 
     /**
@@ -331,6 +345,11 @@ class EntrepriseController extends Controller
         try {
 
             $data = Entreprise::find($entreprise);
+            if ($request->valide) {
+                $data->valide = $request->valide;
+            } else {
+                $data->valide = 0;
+            }
             $data->souscategorie_id = $request->souscategorie_id;
             $data->nom = $request->nom;
             $data->email = $request->email;

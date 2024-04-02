@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\Entreprise;
 use App\Models\Horaire;
 use Exception;
@@ -23,7 +24,10 @@ class HoraireController extends Controller
             ->join('horaires', 'entreprises.id', '=', 'horaires.entreprise_id')
             ->select('*', 'entreprises.nom as entreprise', 'horaires.id as identifiant')
             ->get();
-        return view('horaire.index', compact('horaires'));
+
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('horaire.index', compact('horaires', 'fonctions'));
     }
 
     /**
@@ -35,7 +39,9 @@ class HoraireController extends Controller
     {
         $entreprises = Entreprise::all();
 
-        return view('horaire.add', compact('entreprises'));
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('horaire.add', compact('entreprises', 'fonctions'));
     }
 
     /**
@@ -88,7 +94,9 @@ class HoraireController extends Controller
 
         $horaires = Horaire::find($horaire);
 
-        return view('horaire.update', compact('horaires', 'entreprises'));
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('horaire.update', compact('horaires', 'entreprises', 'fonctions'));
     }
 
     /**

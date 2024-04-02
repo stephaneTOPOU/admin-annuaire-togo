@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\CategorieAnnonce;
 use Exception;
 use Illuminate\Http\Request;
@@ -16,8 +17,9 @@ class CategoryAnnonceController extends Controller
     public function index()
     {
         $cat = CategorieAnnonce::all();
+        $fonctions = Admin::where('fonction', 'admin')->get();
 
-        return view('categorie-annonce.index', compact('cat'));
+        return view('categorie-annonce.index', compact('cat', 'fonctions'));
     }
 
     /**
@@ -27,7 +29,9 @@ class CategoryAnnonceController extends Controller
      */
     public function create()
     {
-        return view('categorie-annonce.add');
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('categorie-annonce.add', compact('fonctions'));
     }
 
     /**
@@ -73,7 +77,9 @@ class CategoryAnnonceController extends Controller
     {
         $categories = CategorieAnnonce::find($categorieAnnonce);
 
-        return view('categorie-annonce.update', compact('categories'));
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('categorie-annonce.update', compact('categories', 'fonctions'));
     }
 
     /**

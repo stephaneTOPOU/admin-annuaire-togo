@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\Entreprise;
 use App\Models\Service;
 use Exception;
@@ -25,7 +26,9 @@ class ServiceController extends Controller
             ->select('*', 'entreprises.nom as entreprise', 'services.id as identifiant')
             ->get();
 
-        return view('service.index', compact('services'));
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('service.index', compact('services', 'fonctions'));
     }
 
     /**
@@ -41,7 +44,9 @@ class ServiceController extends Controller
             ->select('*', 'entreprises.nom as entreprise')
             ->get();
 
-        return view('service.add', compact('entreprises'));
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('service.add', compact('entreprises', 'fonctions'));
     }
 
     /**
@@ -174,7 +179,10 @@ class ServiceController extends Controller
             ->join('entreprises', 'entreprises.souscategorie_id', '=', 'sous_categories.id')
             ->select('*', 'entreprises.nom as entreprise', 'pays.libelle as pays')
             ->get();
-        return view('service.update', compact('entreprises', 'services'));
+
+        $fonctions = Admin::where('fonction', 'admin')->get();
+        
+        return view('service.update', compact('entreprises', 'services', 'fonctions'));
     }
 
     /**

@@ -56,7 +56,7 @@
               <div class="icon">
                 <i class="far fa-building"></i>
               </div>
-              <a href="{{ route('entreprise.index') }}" class="small-box-footer">Détail <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{{ route('entreprise-valide.index') }}" class="small-box-footer">Détail <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->

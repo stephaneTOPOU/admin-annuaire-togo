@@ -33,7 +33,6 @@
                                     <thead>
                                         <tr>
                                             <th>Id</th>
-                                            <th>Pays</th>
                                             <th>Admin</th>
                                             <th>Entreprise</th>
                                             <th>Image</th>
@@ -45,7 +44,7 @@
                                         @foreach ($popups as $popup)
                                             @foreach (explode('|', $popup->image) as $p)
                                                 <tr>
-                                                    <td>{{ $popup->identifiant }}</td>                                                    
+                                                    <td>{{ $popup->identifiant }}</td>
                                                     <td>{{ $popup->admin }}</td>
                                                     <td>{{ $popup->nom }}</td>
                                                     <td><img src="https://annuairestogo.com/assets/images/popup/{{ $p }}"
@@ -135,7 +134,6 @@
                                     <tfoot>
                                         <tr>
                                             <th>Id</th>
-                                            <th>Pays</th>
                                             <th>Admin</th>
                                             <th>Entreprise</th>
                                             <th>Image</th>

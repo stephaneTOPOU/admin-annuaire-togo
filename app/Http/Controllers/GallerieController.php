@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\Entreprise;
 use App\Models\Gallerie_image;
 use Exception;
@@ -24,7 +25,10 @@ class GallerieController extends Controller
             ->join('gallerie_images', 'entreprises.id', '=', 'gallerie_images.entreprise_id')
             ->select('*', 'entreprises.nom as entreprise', 'gallerie_images.id as identifiant')
             ->get();
-        return view('gallerie.index', compact('galleries'));
+
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('gallerie.index', compact('galleries', 'fonctions'));
     }
 
     /**
@@ -36,7 +40,9 @@ class GallerieController extends Controller
     {
         $entreprises = Entreprise::all();
 
-        return view('gallerie.add', compact('entreprises'));
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('gallerie.add', compact('entreprises', 'fonctions'));
     }
 
     /**
@@ -107,7 +113,9 @@ class GallerieController extends Controller
 
         $galleries = Gallerie_image::find($gallerie);
 
-        return view('gallerie.update', compact('entreprises', 'galleries'));
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('gallerie.update', compact('entreprises', 'galleries', 'fonctions'));
     }
 
     /**

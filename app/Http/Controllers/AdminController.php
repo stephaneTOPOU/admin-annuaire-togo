@@ -21,7 +21,10 @@ class AdminController extends Controller
         $admins = DB::table('admins')
             ->select('*', 'admins.id as identifiant')
             ->get();
-        return view('admin.index', compact('admins'));
+
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('admin.index', compact('admins', 'fonctions'));
     }
 
     /**
@@ -31,7 +34,9 @@ class AdminController extends Controller
      */
     public function create()
     {
-        return view('admin.add');
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('admin.add', compact('fonctions'));
     }
 
     /**
@@ -85,7 +90,9 @@ class AdminController extends Controller
     {
         $admins = Admin::find($admin);
 
-        return view('admin.update', compact('admins'));
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('admin.update', compact('admins', 'fonctions'));
     }
 
     /**
@@ -101,7 +108,7 @@ class AdminController extends Controller
             'name' => 'required|string',
             'prenoms' => 'required|string',
             'email' => 'required|email|string',
-            'password' => 'required|string',
+            'password' => 'string',
         ]);
 
         try {

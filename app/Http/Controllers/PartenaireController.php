@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\Entreprise;
 use App\Models\Partenaire;
 use Exception;
@@ -24,7 +25,10 @@ class PartenaireController extends Controller
             ->join('partenaires', 'entreprises.id', '=', 'partenaires.entreprise_id')
             ->select('*', 'entreprises.nom as entreprise', 'partenaires.id as identifiant')
             ->get();
-        return view('partenaire.index', compact('partenaires'));
+
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('partenaire.index', compact('partenaires', 'fonctions'));
     }
 
     /**
@@ -39,7 +43,10 @@ class PartenaireController extends Controller
             ->join('entreprises', 'entreprises.souscategorie_id', '=', 'sous_categories.id')
             ->select('*', 'entreprises.nom as entreprise')
             ->get();
-        return view('partenaire.add', compact('entreprises'));
+
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('partenaire.add', compact('entreprises', 'fonctions'));
     }
 
     /**
@@ -113,8 +120,10 @@ class PartenaireController extends Controller
             ->get();
 
         $partenaires = Partenaire::find($partenaire);
+
+        $fonctions = Admin::where('fonction', 'admin')->get();
         
-        return view('partenaire.update', compact('entreprises','partenaires'));
+        return view('partenaire.update', compact('entreprises','partenaires', 'fonctions'));
     }
 
     /**

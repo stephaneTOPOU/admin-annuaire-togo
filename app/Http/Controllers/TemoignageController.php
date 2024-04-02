@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\Temoignage;
 use Exception;
 use Illuminate\Http\Request;
@@ -17,8 +18,9 @@ class TemoignageController extends Controller
     public function index()
     {
         $testimonies = Temoignage::all();
+        $fonctions = Admin::where('fonction', 'admin')->get();
 
-        return view('testimony.index', compact('testimonies'));
+        return view('testimony.index', compact('testimonies', 'fonctions'));
     }
 
     /**
@@ -28,7 +30,9 @@ class TemoignageController extends Controller
      */
     public function create()
     {
-        return view('testimony.add');
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('testimony.add', compact('fonctions'));
     }
 
     /**
@@ -101,8 +105,9 @@ class TemoignageController extends Controller
     public function edit($temoignage)
     {
         $testimonies = Temoignage::find($temoignage);
+        $fonctions = Admin::where('fonction', 'admin')->get();
 
-        return view('testimony.update', compact('testimonies'));
+        return view('testimony.update', compact('testimonies', 'fonctions'));
     }
 
     /**

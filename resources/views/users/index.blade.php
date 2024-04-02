@@ -16,12 +16,12 @@
                             <div class="card-header">
                                 <div class="row">
                                     <div class="col-md-10">
-                                        <h3 class="card-title">Admins</h3>
+                                        <h3 class="card-title">Utilisateurs</h3>
                                     </div>
-                                    <div class="col-md-2">
-                                        <a href="{{ route('admin.create') }}"
+                                    {{-- <div class="col-md-2">
+                                        <a href="{{ route('user-valide.create') }}"
                                             class="btn btn-block btn-success pull-right"> Ajouter </a>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                             <!-- /.card-header -->
@@ -32,49 +32,42 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th>Id</th>
+                                            <th>Id</th>                                            
                                             <th>Nom</th>
                                             <th>Prénom</th>
-                                            <th>Fonction</th>
                                             <th>Email</th>
+                                            <th>Téléphone</th>
                                             <th>Date</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($admins as $admin)
+                                        @foreach ($users as $user)
                                             <tr>
-                                                <td>{{ $admin->identifiant }}</td>
-                                                <td>{{ $admin->name }}</td>
-                                                <td>{{ $admin->prenoms }}</td>
-                                                <td>{{ $admin->fonction }}</td>
-                                                <td>{{ $admin->email }}</td>
-                                                <td>{{ $admin->created_at }}</td>
+                                                <td>{{ $user->id }}</td>
+                                                <td>{{ $user->name }}</td>
+                                                <td>{{ $user->prenoms }}</td>
+                                                <td>{{ $user->email }}</td>
+                                                <td>{{ $user->telephone1 }}</td>
+                                                <td>{{ $user->created_at }}</td>
                                                 <td>
                                                     <div class="btn-group">
-                                                        <a href="{{ route('admin.edit', $admin->identifiant) }}"
+                                                        <a href="{{ route('user-valide.edit', $user->id) }}"
                                                             class="btn btn-default">
                                                             <i class="fas fa-edit"></i> Modifier
                                                         </a>
                                                     </div>
-                                                    {{-- <form method="POST" action="{{ route('admin.destroy',$admin->identifiant) }}" class="btn-group">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button type="submit" href="" class="btn btn-default" onclick="confirm('Etes-vous sûr de vouloir supprimer ce produit ??? ') || event.stopImmediatePropagation()">
-                                                                    <i class="fas fa-trash"></i> Supprimer
-                                                                </button>
-                                                            </form> --}}
-
+                                                    
                                                     <button class="btn btn-default"
-                                                        onclick="deleteData({{ $admin->identifiant }})"
-                                                        data-id="{{ $admin->identifiant }}"
-                                                        data-target="#default{{ $admin->identifiant }}">
+                                                        onclick="deleteData({{ $user->id }})"
+                                                        data-id="{{ $user->id }}"
+                                                        data-target="#default{{ $user->id }}">
                                                         <i class="fas fa-trash"></i> Supprimer
                                                     </button>
 
                                                     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
                                                     <script>
-                                                        function deleteData(identifiant) {
+                                                        function deleteData(id) {
 
                                                             let table = $('#example1');
 
@@ -89,7 +82,7 @@
                                                             }).then((result) => {
                                                                 if (result.isConfirmed) {
 
-                                                                    let url = "{{ url('admin') }}/" + identifiant
+                                                                    let url = "{{ url('user-valide') }}/" + id
                                                                     window.location.reload();
 
                                                                     //console.log(url);
@@ -99,7 +92,7 @@
                                                                         data: {
                                                                             _method: 'DELETE',
                                                                             _token: "{{ csrf_token() }}",
-                                                                            service: identifiant
+                                                                            service: id
                                                                         },
 
                                                                         success: function() {
@@ -129,11 +122,11 @@
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <th>Id</th>
+                                            <th>Id</th>                                            
                                             <th>Nom</th>
                                             <th>Prénom</th>
-                                            <th>Fonction</th>
                                             <th>Email</th>
+                                            <th>Téléphone</th>
                                             <th>Date</th>
                                             <th>Action</th>
                                         </tr>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\Annonce;
 use App\Models\CategorieAnnonce;
 use Exception;
@@ -18,7 +19,9 @@ class AnnonceController extends Controller
     public function index()
     {
         $annonces = Annonce::all();
-        return view('annonce.index', compact('annonces'));
+        $fonctions = Admin::where('fonction', 'admin')->get();
+        
+        return view('annonce.index', compact('annonces', 'fonctions'));
     }
 
     /**
@@ -29,7 +32,9 @@ class AnnonceController extends Controller
     public function create()
     {
         $categories = CategorieAnnonce::all();
-        return view('annonce.add', compact('categories'));
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('annonce.add', compact('categories', 'fonctions'));
     }
 
     /**
@@ -232,7 +237,9 @@ class AnnonceController extends Controller
 
         $categories = CategorieAnnonce::all();
 
-        return view('annonce.update', compact('annonces', 'categories'));
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('annonce.update', compact('annonces', 'categories', 'fonctions'));
     }
 
     /**

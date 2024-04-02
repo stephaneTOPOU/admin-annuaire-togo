@@ -85,10 +85,18 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('entreprise.index') }}" class="nav-link">
+                            <a href="{{ route('entreprise-non-valide.index') }}" class="nav-link">
                                 <i class="nav-icon far fa-building"></i>
                                 <p>
-                                    Entreprise
+                                    Entreprises non validées
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('entreprise-valide.index') }}" class="nav-link">
+                                <i class="nav-icon far fa-building"></i>
+                                <p>
+                                    Entreprises validées
                                 </p>
                             </a>
                         </li>
@@ -245,34 +253,63 @@
                     </a>
                 </li>
 
+                <li class="nav-header">PARAMETRES</li>
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-users-cog"></i>
                         <p>
-                            PARAMETRE
+                            UTILISATEURS
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('parametre.index') }}" class="nav-link">
-                                <i class="nav-icon fas fa-wrench"></i>
+                            <a href="{{ route('user-non-valide.index') }}" class="nav-link">
+                                <i class="nav-icon fas fa-user"></i>
                                 <p>
-                                    Pamètre
+                                    NON VALIDES
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('admin.index') }}" class="nav-link">
-                                <i class="nav-icon fas fa-user-cog"></i>
+                            <a href="{{ route('user-valide.index') }}" class="nav-link">
+                                <i class="nav-icon fas fa-user"></i>
                                 <p>
-                                    Admin
+                                    VALIDE
                                 </p>
                             </a>
                         </li>
                     </ul>
                 </li>
-
+                @foreach ($fonctions as $admin)
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-users-cog"></i>
+                            <p>
+                                PARAMETRES
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ route('parametre.index') }}" class="nav-link">
+                                    <i class="nav-icon fas fa-wrench"></i>
+                                    <p>
+                                        Pamètre
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('admin.index') }}" class="nav-link">
+                                    <i class="nav-icon fas fa-user-cog"></i>
+                                    <p>
+                                        Admin
+                                    </p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                @endforeach
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

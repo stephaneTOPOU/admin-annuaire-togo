@@ -23,10 +23,20 @@
                         @if (Session::has('success'))
                             <div class="alert alert-success" role="alert">{{ Session::get('success') }}</div>
                         @endif
-                        <form role="form" method="POST" action="{{ route('entreprise.store') }}"
+                        <form role="form" method="POST" action="{{ route('entreprise-valide.store') }}"
                             enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" id="exampleCheck100"
+                                                name="valide" value="1">
+                                            <label class="form-check-label" for="exampleCheck100">Valider
+                                                l'entreprise</label>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">

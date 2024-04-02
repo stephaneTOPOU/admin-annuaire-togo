@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\Entreprise;
 use App\Models\PopUp;
 use Exception;
@@ -28,7 +29,9 @@ class PopupController extends Controller
             ->select('*', 'pop_ups.id as identifiant', 'admins.name as admin')            
             ->get();
 
-        return view('popup.index', compact('popups'));
+            $fonctions = Admin::where('fonction', 'admin')->get();
+            
+        return view('popup.index', compact('popups', 'fonctions'));
     }
 
     /**
@@ -40,7 +43,9 @@ class PopupController extends Controller
     {
         $pays = Pays::all();
         $entreprises = Entreprise::all();
-        return view('popup.add', compact('pays', 'entreprises'));
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('popup.add', compact('pays', 'entreprises', 'fonctions'));
     }
 
     /**
@@ -123,7 +128,9 @@ class PopupController extends Controller
         $popups = PopUp::find($popup);
         $pays = Pays::all();
         $entreprises = Entreprise::all();
-        return view('popup.update', compact('popups', 'pays', 'entreprises'));
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('popup.update', compact('popups', 'pays', 'entreprises', 'fonctions'));
     }
 
     /**

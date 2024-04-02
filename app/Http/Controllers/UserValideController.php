@@ -3,13 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Models\User;
 use Exception;
-use App\Models\Categories;
-use App\Models\Pays;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class CategoryController extends Controller
+class UserValideController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,13 +17,11 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = DB::table('categories')
-            ->select('*', 'categories.libelle as categorie', 'categories.id as identifiant')
-            ->get();
+        $users = User::where('users.valide', 1)->get();
 
         $fonctions = Admin::where('fonction', 'admin')->get();
 
-        return view('categorie.index', compact('categories', 'fonctions'));
+        return view('users.index', compact('users', 'fonctions'));
     }
 
     /**
@@ -34,9 +31,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $fonctions = Admin::where('fonction', 'admin')->get();
-
-        return view('categorie.add', compact('fonctions'));
+        //
     }
 
     /**
@@ -47,27 +42,16 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'libelle'=>'required|string',
-        ]);
-
-        try {
-            $data = new Categories();
-            $data->libelle = $request->libelle;
-            $data->save();
-            return redirect()->back()->with('success','Catégorie Ajouté avec succès');
-        } catch (Exception $e) {
-            return redirect()->back()->with('success', $e->getMessage());
-        }
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
         //
     }
@@ -75,36 +59,40 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit($categorie)
+    public function edit($user)
     {
-        $categories = Categories::find($categorie);
+        $users = User::find($user);
+
         $fonctions = Admin::where('fonction', 'admin')->get();
 
-        return view('categorie.update', compact('categories', 'fonctions'));
+        return view('users.update', compact('users', 'fonctions'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $categorie)
+    public function update(Request $request, $user)
     {
-        
         $data = $request->validate([
-            'libelle'=>'required|string',
+            'name' => 'required|string',
         ]);
 
         try {
-            $data = Categories::find($categorie);            
-            $data->libelle = $request->libelle;
+            $data = User::find($user);
+            if ($request->valide) {
+                $data->valide = $request->valide;
+            } else {
+                $data->valide = 0;
+            }
             $data->update();
-            return redirect()->back()->with('success','Catégorie mise à jour avec succès');
+            return redirect()->back()->with('success', 'Utilisateur validé avec succès');
         } catch (Exception $e) {
             return redirect()->back()->with('success', $e->getMessage());
         }
@@ -113,15 +101,15 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy($categorie)
+    public function destroy($user)
     {
-        $categories = Categories::find($categorie);
+        $users = User::find($user);
         try {
-            $categories->delete();
-            return redirect()->back()->with('success','Catégorie supprimée avec succès');
+            $users->delete();
+            return redirect()->back()->with('success', 'Utilisateur supprimé avec succès');
         } catch (Exception $e) {
             return redirect()->back()->with('success', $e->getMessage());
         }

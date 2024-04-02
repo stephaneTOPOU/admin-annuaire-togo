@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -15,10 +16,13 @@ class PubliereportageController extends Controller
     public function index()
     {
         $entreprises = DB::table('entreprises')
-        ->where('a_publireportage', 1)
-        ->select('*')
-        ->get();
-        return view('entreprise.index', compact('entreprises'));
+            ->where('a_publireportage', 1)
+            ->select('*')
+            ->get();
+
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('entreprise.index', compact('entreprises', 'fonctions'));
     }
 
     /**

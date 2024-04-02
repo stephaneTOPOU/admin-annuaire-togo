@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\Offre;
 use Exception;
 use Illuminate\Http\Request;
@@ -16,7 +17,9 @@ class OffreController extends Controller
     public function index()
     {
         $offres = Offre::all();
-        return view('offre.index', compact('offres'));
+        $fonctions = Admin::where('fonction', 'admin')->get();
+        
+        return view('offre.index', compact('offres', 'fonctions'));
     }
 
     /**
@@ -26,8 +29,9 @@ class OffreController extends Controller
      */
     public function create()
     {
+        $fonctions = Admin::where('fonction', 'admin')->get();
 
-        return view('offre.add');
+        return view('offre.add', compact('fonctions'));
     }
 
     /**
@@ -94,7 +98,10 @@ class OffreController extends Controller
     public function edit($offre)
     {
         $offres = Offre::find($offre);
-        return view('offre.update', compact('offres'));
+
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('offre.update', compact('offres', 'fonctions'));
     }
 
     /**

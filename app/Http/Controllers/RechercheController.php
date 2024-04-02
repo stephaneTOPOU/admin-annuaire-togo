@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\Pays;
 use App\Models\SliderRecherche;
 use Exception;
@@ -23,6 +24,9 @@ class RechercheController extends Controller
             ->join('admins', 'admins.id', '=', 'slider_recherches.admin_id')
             ->select('*', 'admins.name as admin', 'slider_recherches.id as identifiant')
             ->get();
+
+            $fonctions = Admin::where('fonction', 'admin')->get();
+            
         return view('slider-recherche.index', compact('sliders'));
     }
 
@@ -33,7 +37,9 @@ class RechercheController extends Controller
      */
     public function create()
     {        
-        return view('slider-recherche.add');
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('slider-recherche.add', compact('fonctions'));
     }
 
     /**
@@ -106,8 +112,10 @@ class RechercheController extends Controller
      */
     public function edit($slider)
     {
-        $sliders = SliderRecherche::find($slider);        
-        return view('slider-recherche.update', compact('sliders'));
+        $sliders = SliderRecherche::find($slider);       
+        $fonctions = Admin::where('fonction', 'admin')->get();
+        
+        return view('slider-recherche.update', compact('sliders', 'fonctions'));
     }
 
     /**

@@ -23,11 +23,23 @@
                         @if (Session::has('success'))
                             <div class="alert alert-success" role="alert">{{ Session::get('success') }}</div>
                         @endif
-                        <form role="form" method="POST" action="{{ route('entreprise.update', $entreprises->id) }}"
+                        <form role="form" method="POST" action="{{ route('entreprise-valide.update', $entreprises->id) }}"
                             enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" id="exampleCheck1"
+                                                name="valide" data-key="{{ $entreprises->id }}" value="1"
+                                                @if ($entreprises->valide == 1) checked @endif
+                                                @if ($entreprises->valide == 0) unchecked @endif>
+                                            <label class="form-check-label" for="exampleCheck1">Valider
+                                                l'entreprise</label>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">

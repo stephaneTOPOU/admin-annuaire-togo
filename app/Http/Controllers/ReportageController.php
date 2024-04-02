@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\Reportage;
 use Exception;
 use Illuminate\Http\Request;
@@ -22,7 +23,10 @@ class ReportageController extends Controller
             ->join('admins', 'admins.id', '=', 'reportages.admin_id')
             ->select('*', 'admins.name as admin', 'reportages.id as identifiant')
             ->get();
-        return view('reportage.index', compact('reportages'));
+
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('reportage.index', compact('reportages', 'fonctions'));
     }
 
     /**
@@ -65,8 +69,10 @@ class ReportageController extends Controller
      */
     public function edit($reportage)
     {
-        $reportages = Reportage::find($reportage);        
-        return view('reportage.update', compact('reportages'));
+        $reportages = Reportage::find($reportage);
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('reportage.update', compact('reportages', 'fonctions'));
     }
 
     /**
@@ -79,13 +85,13 @@ class ReportageController extends Controller
     public function update(Request $request, $reportage)
     {
         $data = $request->validate([
-            'video' => 'required|string',            
+            'video' => 'required|string',
         ]);
 
         try {
             $data = Reportage::find($reportage);
 
-            $data->admin_id =  Auth::user()->id;        
+            $data->admin_id =  Auth::user()->id;
             $data->video = $request->video;
 
             $data->update();

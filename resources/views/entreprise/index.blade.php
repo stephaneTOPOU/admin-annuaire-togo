@@ -19,7 +19,7 @@
                                         <h3 class="card-title">Tous les Entreprise</h3>
                                     </div>
                                     <div class="col-md-2">
-                                        <a href="{{ route('entreprise.create') }}"
+                                        <a href="{{ route('entreprise-valide.create') }}"
                                             class="btn btn-block btn-success pull-right"> Ajouter </a>
                                     </div>
                                 </div>
@@ -38,6 +38,7 @@
                                             <th>Logo</th>
                                             <th>Nom</th>
                                             <th>Adresse</th>
+                                            <th>Téléphone</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -55,9 +56,10 @@
                                                 @endif
                                                 <td>{{ $entreprise->nom }}</td>
                                                 <td>{{ $entreprise->adresse }}</td>
+                                                <td>{{ $entreprise->telephone1 }}</td>
                                                 <td>
                                                     <div class="btn-group">
-                                                        <a href="{{ route('entreprise.edit', $entreprise->identifiant) }}"
+                                                        <a href="{{ route('entreprise-valide.edit', $entreprise->identifiant) }}"
                                                             class="btn btn-default">
                                                             <i class="fas fa-edit"></i> Modifier
                                                         </a>
@@ -94,7 +96,7 @@
                                                             }).then((result) => {
                                                                 if (result.isConfirmed) {
 
-                                                                    let url = "{{ url('entreprise') }}/" + identifiant
+                                                                    let url = "{{ url('entreprise-valide') }}/" + identifiant
                                                                     window.location.reload();
 
                                                                     //console.log(url);
@@ -141,6 +143,7 @@
                                             <th>Logo</th>
                                             <th>Nom</th>
                                             <th>Adresse</th>
+                                            <th>Téléphone</th>
                                             <th>Action</th>
                                         </tr>
                                     </tfoot>

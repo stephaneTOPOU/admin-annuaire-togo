@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Models\Entreprise;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class PharmacieController extends Controller
+class EntrepriseNonvalideController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,13 +20,11 @@ class PharmacieController extends Controller
             ->join('sous_categories', 'sous_categories.categorie_id', '=', 'categories.id')
             ->join('entreprises', 'entreprises.souscategorie_id', '=', 'sous_categories.id')
             ->select('*', 'categories.libelle as categorie', 'entreprises.id as identifiant', 'entreprises.nom as ent', 'sous_categories.libelle as subcat')
-            ->where('est_pharmacie', 1)
-            ->where('pharmacie_de_garde', 1)
-            ->orderBy('entreprises.id', 'desc')
+            ->where('entreprises.valide', 0)
             ->get();
 
         $fonctions = Admin::where('fonction', 'admin')->get();
-            
+
         return view('entreprise.index', compact('entreprises', 'fonctions'));
     }
 
@@ -53,10 +52,10 @@ class PharmacieController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Entreprise  $entreprise
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Entreprise $entreprise)
     {
         //
     }
@@ -64,10 +63,10 @@ class PharmacieController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Entreprise  $entreprise
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Entreprise $entreprise)
     {
         //
     }
@@ -76,10 +75,10 @@ class PharmacieController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Entreprise  $entreprise
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Entreprise $entreprise)
     {
         //
     }
@@ -87,10 +86,10 @@ class PharmacieController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Entreprise  $entreprise
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Entreprise $entreprise)
     {
         //
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\MiniSpot;
 use App\Models\Pays;
 use Exception;
@@ -23,7 +24,10 @@ class MiniSpotController extends Controller
             ->join('admins', 'admins.id', '=', 'mini_spots.admin_id')
             ->select('*', 'admins.name as admin', 'mini_spots.id as identifiant')
             ->get();
-        return view('mini-spot.index', compact('minspots'));
+
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('mini-spot.index', compact('minspots', 'fonctions'));
     }
 
     /**
@@ -32,8 +36,10 @@ class MiniSpotController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {        
-        return view('mini-spot.add');
+    {
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('mini-spot.add', compact('fonctions'));
     }
 
     /**
@@ -45,33 +51,33 @@ class MiniSpotController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'video'=>'required|file',            
+            'video' => 'required|file',
         ]);
 
         try {
             $data = new MiniSpot();
 
             $data->admin_id =  Auth::user()->id;
-            
+
             // if ($request->video) {
             //     $filename = time() . rand(1, 50) . '.' . $request->video->extension();
             //     $video = $request->file('video')->storeAs('MiniSpot', $filename, 'public');
             //     $data->video = $video;
             // }
 
-            if ($request->hasFile('video') ) {
+            if ($request->hasFile('video')) {
 
                 //get filename with extension
                 $filenamewithextension = $request->file('video')->getClientOriginalName();
-        
+
                 //get filename without extension
                 $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-        
+
                 //get file extension
                 $extension = $request->file('video')->getClientOriginalExtension();
-        
+
                 //filename to store
-                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
 
                 //Upload File to external server
                 Storage::disk('ftp12')->put($filenametostore, fopen($request->file('video'), 'r+'));
@@ -80,19 +86,19 @@ class MiniSpotController extends Controller
                 $data->video = $filenametostore;
             }
 
-            if ($request->hasFile('image') ) {
+            if ($request->hasFile('image')) {
 
                 //get filename with extension
                 $filenamewithextension = $request->file('image')->getClientOriginalName();
-        
+
                 //get filename without extension
                 $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-        
+
                 //get file extension
                 $extension = $request->file('image')->getClientOriginalExtension();
-        
+
                 //filename to store
-                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
 
                 //Upload File to external server
                 Storage::disk('ftp11')->put($filenametostore, fopen($request->file('image'), 'r+'));
@@ -127,8 +133,10 @@ class MiniSpotController extends Controller
      */
     public function edit($minspot)
     {
-        $minspots = MiniSpot::find($minspot);        
-        return view('mini-spot.update', compact('minspots'));
+        $minspots = MiniSpot::find($minspot);
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('mini-spot.update', compact('minspots', 'fonctions'));
     }
 
     /**
@@ -141,33 +149,33 @@ class MiniSpotController extends Controller
     public function update(Request $request, $minspot)
     {
         $data = $request->validate([
-            'video'=>'required|file',            
+            'video' => 'required|file',
         ]);
 
         try {
             $data = MiniSpot::find($minspot);
 
-            $data->admin_id =  Auth::user()->id;            
-            
+            $data->admin_id =  Auth::user()->id;
+
             // if ($request->video) {
             //     $filename = time() . rand(1, 50) . '.' . $request->video->extension();
             //     $video = $request->file('video')->storeAs('MiniSpot', $filename, 'public');
             //     $data->video = $video;
             // }
 
-            if ($request->hasFile('video') ) {
+            if ($request->hasFile('video')) {
 
                 //get filename with extension
                 $filenamewithextension = $request->file('video')->getClientOriginalName();
-        
+
                 //get filename without extension
                 $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-        
+
                 //get file extension
                 $extension = $request->file('video')->getClientOriginalExtension();
-        
+
                 //filename to store
-                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
 
                 //Upload File to external server
                 Storage::disk('ftp12')->put($filenametostore, fopen($request->file('video'), 'r+'));
@@ -176,19 +184,19 @@ class MiniSpotController extends Controller
                 $data->video = $filenametostore;
             }
 
-            if ($request->hasFile('image') ) {
+            if ($request->hasFile('image')) {
 
                 //get filename with extension
                 $filenamewithextension = $request->file('image')->getClientOriginalName();
-        
+
                 //get filename without extension
                 $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-        
+
                 //get file extension
                 $extension = $request->file('image')->getClientOriginalExtension();
-        
+
                 //filename to store
-                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
 
                 //Upload File to external server
                 Storage::disk('ftp11')->put($filenametostore, fopen($request->file('image'), 'r+'));

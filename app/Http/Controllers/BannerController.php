@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\Banner;
 use App\Models\Pays;
 use Exception;
@@ -19,7 +20,9 @@ class BannerController extends Controller
     public function index()
     {
         $banners = Banner::all();
-        return view('banner.index', compact('banners'));
+        $fonctions = Admin::where('fonction', 'admin')->get();
+        
+        return view('banner.index', compact('banners', 'fonctions'));
     }
 
     /**
@@ -29,7 +32,9 @@ class BannerController extends Controller
      */
     public function create()
     {
-        return view('banner.add');
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('banner.add', compact('fonctions'));
     }
 
     /**
@@ -101,7 +106,9 @@ class BannerController extends Controller
     public function edit($banner)
     {
         $banners = Banner::find($banner);
-        return view('banner.update', compact('banners'));
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('banner.update', compact('banners', 'fonctions'));
     }
 
     /**

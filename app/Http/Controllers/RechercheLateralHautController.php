@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\SliderLateral;
 use App\Models\SliderRechercheLateral;
 use Exception;
@@ -24,7 +25,10 @@ class RechercheLateralHautController extends Controller
             ->join('admins', 'admins.id', '=', 'slider_recherche_laterals.admin_id')
             ->select('*', 'admins.name as admin', 'slider_recherche_laterals.id as identifiant')
             ->get();
-        return view('slider-recherche-lateral-haut.index', compact('sliders'));
+
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('slider-recherche-lateral-haut.index', compact('sliders', 'fonctions'));
     }
 
     /**
@@ -34,7 +38,9 @@ class RechercheLateralHautController extends Controller
      */
     public function create()
     {
-        return view('slider-recherche-lateral-haut.add');
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('slider-recherche-lateral-haut.add', compact('fonctions'));
     }
 
     /**
@@ -108,7 +114,9 @@ class RechercheLateralHautController extends Controller
     public function edit($slider)
     {
         $sliders = SliderRechercheLateral::find($slider);
-        return view('slider-recherche-lateral-haut.update', compact('sliders'));
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('slider-recherche-lateral-haut.update', compact('sliders', 'fonctions'));
     }
 
     /**

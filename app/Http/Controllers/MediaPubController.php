@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\MediaPub;
 use App\Models\Pub;
 use Exception;
@@ -22,7 +23,10 @@ class MediaPubController extends Controller
             ->join('media_pubs', 'media_pubs.pubs_id', '=', 'pubs.id')
             ->select('*', 'pubs.entreprise as entreprise', 'media_pubs.id as identifiant')
             ->get();
-        return view('media-pub.index', compact('medias'));
+
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('media-pub.index', compact('medias', 'fonctions'));
     }
 
     /**
@@ -33,7 +37,9 @@ class MediaPubController extends Controller
     public function create()
     {
         $pubs = Pub::all();
-        return view('media-pub.add', compact('pubs'));
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('media-pub.add', compact('pubs', 'fonctions'));
     }
 
     /**
@@ -126,7 +132,9 @@ class MediaPubController extends Controller
 
         $medias = MediaPub::find($mediaPub);
 
-        return view('media-pub.update', compact('pubs', 'medias'));
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('media-pub.update', compact('pubs', 'medias', 'fonctions'));
     }
 
     /**

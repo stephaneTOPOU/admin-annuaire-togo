@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\Pub;
 use Exception;
 use Illuminate\Http\Request;
@@ -17,7 +18,10 @@ class PubController extends Controller
     public function index()
     {
         $pubs = Pub::all();
-        return view('pub.index', compact('pubs'));
+
+        $fonctions = Admin::where('fonction', 'admin')->get();
+        
+        return view('pub.index', compact('pubs', 'fonctions'));
     }
 
     /**
@@ -27,7 +31,9 @@ class PubController extends Controller
      */
     public function create()
     {
-        return view('pub.add');
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('pub.add', compact('fonctions'));
     }
 
     /**
@@ -206,7 +212,9 @@ class PubController extends Controller
     {
         $pubs = Pub::find($pub);
 
-        return view('pub.update', compact('pubs'));
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('pub.update', compact('pubs', 'fonctions'));
     }
 
     /**

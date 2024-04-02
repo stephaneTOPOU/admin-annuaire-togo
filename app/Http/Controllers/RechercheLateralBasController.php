@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\Pays;
 use App\Models\SliderLateralBas;
 use App\Models\SliderRechercheLateralBas;
@@ -21,11 +22,14 @@ class RechercheLateralBasController extends Controller
     public function index()
     {
         $sliders = DB::table('pays')
-        ->join('slider_recherche_lateral_bas', 'pays.id', '=', 'slider_recherche_lateral_bas.pays_id')
-        ->join('admins', 'admins.id', '=', 'slider_recherche_lateral_bas.admin_id')
-        ->select('*', 'admins.name as admin', 'slider_recherche_lateral_bas.id as identifiant')
-        ->get();
-        return view('slider-recherche-lateral-bas.index', compact('sliders'));
+            ->join('slider_recherche_lateral_bas', 'pays.id', '=', 'slider_recherche_lateral_bas.pays_id')
+            ->join('admins', 'admins.id', '=', 'slider_recherche_lateral_bas.admin_id')
+            ->select('*', 'admins.name as admin', 'slider_recherche_lateral_bas.id as identifiant')
+            ->get();
+
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('slider-recherche-lateral-bas.index', compact('sliders', 'fonctions'));
     }
 
     /**
@@ -36,7 +40,9 @@ class RechercheLateralBasController extends Controller
     public function create()
     {
         $pays = Pays::all();
-        return view('slider-recherche-lateral-bas.add', compact('pays'));
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('slider-recherche-lateral-bas.add', compact('pays', 'fonctions'));
     }
 
     /**
@@ -48,8 +54,8 @@ class RechercheLateralBasController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'image'=>'required|file|max:1024',
-            'pays_id'=>'required|integer'
+            'image' => 'required|file|max:1024',
+            'pays_id' => 'required|integer'
         ]);
 
         try {
@@ -57,26 +63,26 @@ class RechercheLateralBasController extends Controller
 
             $data->admin_id =  Auth::user()->id;
             $data->pays_id = $request->pays_id;
-            
+
             // if ($request->image) {
             //     $filename = time() . rand(1, 50) . '.' . $request->image->extension();
             //     $img = $request->file('image')->storeAs('sliders', $filename, 'public');
             //     $data->image = $img;
             // }
 
-            if ($request->hasFile('image') ) {
+            if ($request->hasFile('image')) {
 
                 //get filename with extension
                 $filenamewithextension = $request->file('image')->getClientOriginalName();
-        
+
                 //get filename without extension
                 $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-        
+
                 //get file extension
                 $extension = $request->file('image')->getClientOriginalExtension();
-        
+
                 //filename to store
-                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
 
                 //Upload File to external server
                 Storage::disk('ftp25')->put($filenametostore, fopen($request->file('image'), 'r+'));
@@ -113,7 +119,9 @@ class RechercheLateralBasController extends Controller
     {
         $sliders = SliderRechercheLateralBas::find($slider);
         $pays = Pays::all();
-        return view('slider-recherche-lateral-bas.update', compact('sliders', 'pays'));
+        $fonctions = Admin::where('fonction', 'admin')->get();
+
+        return view('slider-recherche-lateral-bas.update', compact('sliders', 'pays', 'fonctions'));
     }
 
     /**
@@ -126,8 +134,8 @@ class RechercheLateralBasController extends Controller
     public function update(Request $request, $slider)
     {
         $data = $request->validate([
-            'image'=>'required|file|max:1024',
-            'pays_id'=>'required|integer'
+            'image' => 'required|file|max:1024',
+            'pays_id' => 'required|integer'
         ]);
 
         try {
@@ -135,26 +143,26 @@ class RechercheLateralBasController extends Controller
 
             $data->admin_id =  Auth::user()->id;
             $data->pays_id = $request->pays_id;
-            
+
             // if ($request->image) {
             //     $filename = time() . rand(1, 50) . '.' . $request->image->extension();
             //     $img = $request->file('image')->storeAs('sliders', $filename, 'public');
             //     $data->image = $img;
             // }
 
-            if ($request->hasFile('image') ) {
+            if ($request->hasFile('image')) {
 
                 //get filename with extension
                 $filenamewithextension = $request->file('image')->getClientOriginalName();
-        
+
                 //get filename without extension
                 $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-        
+
                 //get file extension
                 $extension = $request->file('image')->getClientOriginalExtension();
-        
+
                 //filename to store
-                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
 
                 //Upload File to external server
                 Storage::disk('ftp25')->put($filenametostore, fopen($request->file('image'), 'r+'));

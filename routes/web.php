@@ -32,10 +32,13 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoryAnnonceController;
 use App\Http\Controllers\PartenaireController;
 use App\Http\Controllers\DevisController;
+use App\Http\Controllers\EntrepriseNonvalideController;
 use App\Http\Controllers\MediaPubController;
 use App\Http\Controllers\OffreController;
 use App\Http\Controllers\PubController;
 use App\Http\Controllers\TemoignageController;
+use App\Http\Controllers\UserNonValideController;
+use App\Http\Controllers\UserValideController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -59,7 +62,8 @@ Route::middleware(['auth'])->group(function () {
 Route::resource('/admin', AdminController::class);
 Route::resource('/category', CategoryController::class);
 Route::resource('/sub-category', SousCategoryController::class);
-Route::resource('/entreprise', EntrepriseController::class);
+Route::resource('/entreprise-valide', EntrepriseController::class);
+Route::resource('/entreprise-non-valide', EntrepriseNonvalideController::class);
 Route::resource('/pharmacie-garde', PharmacieController::class);
 Route::resource('/magazine', MagazineController::class);
 Route::resource('/publiereportage', PubliereportageController::class);
@@ -91,6 +95,8 @@ Route::resource('/offre',OffreController::class);
 Route::resource('/pub', PubController::class);
 Route::resource('media-pub', MediaPubController::class);
 Route::resource('testimony', TemoignageController::class);
+Route::resource('/user-valide', UserValideController::class);
+Route::resource('/user-non-valide', UserNonValideController::class);
 });
 
 Route::get('login',[App\Http\Controllers\AuthController::class,'login'])->name('login');
