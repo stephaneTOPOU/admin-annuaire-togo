@@ -7,6 +7,7 @@ use Exception;
 use App\Models\Categories;
 use App\Models\Pays;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
@@ -22,7 +23,7 @@ class CategoryController extends Controller
             ->select('*', 'categories.libelle as categorie', 'categories.id as identifiant')
             ->get();
 
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
 
         return view('categorie.index', compact('categories', 'fonctions'));
     }
@@ -34,7 +35,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
 
         return view('categorie.add', compact('fonctions'));
     }
@@ -81,7 +82,7 @@ class CategoryController extends Controller
     public function edit($categorie)
     {
         $categories = Categories::find($categorie);
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
 
         return view('categorie.update', compact('categories', 'fonctions'));
     }

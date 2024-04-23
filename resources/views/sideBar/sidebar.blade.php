@@ -253,7 +253,7 @@
                     </a>
                 </li>
 
-                @foreach ($fonctions as $admin)
+                @if ($fonctions->fonction == 'admin')
                     <li class="nav-header">PARAMETRES</li>
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
@@ -309,7 +309,7 @@
                             </li>
                         </ul>
                     </li>
-                @endforeach
+                @endif
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

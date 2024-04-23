@@ -6,6 +6,7 @@ use App\Models\Admin;
 use App\Models\Temoignage;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class TemoignageController extends Controller
@@ -18,7 +19,7 @@ class TemoignageController extends Controller
     public function index()
     {
         $testimonies = Temoignage::all();
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
 
         return view('testimony.index', compact('testimonies', 'fonctions'));
     }
@@ -30,7 +31,7 @@ class TemoignageController extends Controller
      */
     public function create()
     {
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
 
         return view('testimony.add', compact('fonctions'));
     }
@@ -105,7 +106,7 @@ class TemoignageController extends Controller
     public function edit($temoignage)
     {
         $testimonies = Temoignage::find($temoignage);
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
 
         return view('testimony.update', compact('testimonies', 'fonctions'));
     }

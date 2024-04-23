@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Admin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class PharmacieController extends Controller
@@ -24,7 +25,7 @@ class PharmacieController extends Controller
             ->orderBy('entreprises.id', 'desc')
             ->get();
 
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
             
         return view('entreprise.index', compact('entreprises', 'fonctions'));
     }

@@ -7,6 +7,7 @@ use App\Models\Banner;
 use App\Models\Pays;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -20,7 +21,7 @@ class BannerController extends Controller
     public function index()
     {
         $banners = Banner::all();
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
         
         return view('banner.index', compact('banners', 'fonctions'));
     }
@@ -32,7 +33,7 @@ class BannerController extends Controller
      */
     public function create()
     {
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
 
         return view('banner.add', compact('fonctions'));
     }
@@ -46,7 +47,7 @@ class BannerController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'image' => 'required|file|max:1024',
+            'image' => 'required|file',
         ]);
 
         try {
@@ -106,7 +107,7 @@ class BannerController extends Controller
     public function edit($banner)
     {
         $banners = Banner::find($banner);
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
 
         return view('banner.update', compact('banners', 'fonctions'));
     }
@@ -121,7 +122,7 @@ class BannerController extends Controller
     public function update(Request $request, $banner)
     {
         $data = $request->validate([
-            'image' => 'required|file|max:1024',
+            'image' => 'required|file',
         ]);
 
         try {

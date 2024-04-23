@@ -7,6 +7,7 @@ use App\Models\Annonce;
 use App\Models\CategorieAnnonce;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class AnnonceController extends Controller
@@ -19,7 +20,7 @@ class AnnonceController extends Controller
     public function index()
     {
         $annonces = Annonce::all();
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
         
         return view('annonce.index', compact('annonces', 'fonctions'));
     }
@@ -32,7 +33,7 @@ class AnnonceController extends Controller
     public function create()
     {
         $categories = CategorieAnnonce::all();
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
 
         return view('annonce.add', compact('categories', 'fonctions'));
     }
@@ -237,7 +238,7 @@ class AnnonceController extends Controller
 
         $categories = CategorieAnnonce::all();
 
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
 
         return view('annonce.update', compact('annonces', 'categories', 'fonctions'));
     }

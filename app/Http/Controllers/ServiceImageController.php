@@ -6,6 +6,7 @@ use App\Models\Admin;
 use App\Models\ServiceImage;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -27,7 +28,7 @@ class ServiceImageController extends Controller
             ->select('*', 'entreprises.nom as entreprise', 'service_images.id as identifiant', 'pays.libelle as pays')
             ->get();
 
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
 
         return view('service-image.index', compact('images', 'fonctions'));
     }
@@ -47,7 +48,7 @@ class ServiceImageController extends Controller
             ->select('*', 'entreprises.nom as entreprise', 'services.id as identifiant', 'pays.libelle as pays')
             ->get();
 
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
 
         return view('service-image.add', compact('services', 'fonctions'));
     }
@@ -132,7 +133,7 @@ class ServiceImageController extends Controller
             ->select('*', 'entreprises.nom as entreprise', 'services.id as identifiant', 'pays.libelle as pays')
             ->get();
 
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
 
         return view('service-image.update', compact('services', 'images', 'fonctions'));
     }

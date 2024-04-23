@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Admin;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class UserNonValideController extends Controller
@@ -16,7 +17,7 @@ class UserNonValideController extends Controller
      */
     public function index()
     {
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
 
         $users = User::where('users.valide', 0)->get();
 

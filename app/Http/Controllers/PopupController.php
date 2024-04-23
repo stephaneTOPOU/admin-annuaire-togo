@@ -29,7 +29,7 @@ class PopupController extends Controller
             ->select('*', 'pop_ups.id as identifiant', 'admins.name as admin')            
             ->get();
 
-            $fonctions = Admin::where('fonction', 'admin')->get();
+            $fonctions = Auth::user();
             
         return view('popup.index', compact('popups', 'fonctions'));
     }
@@ -43,7 +43,7 @@ class PopupController extends Controller
     {
         $pays = Pays::all();
         $entreprises = Entreprise::all();
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
 
         return view('popup.add', compact('pays', 'entreprises', 'fonctions'));
     }
@@ -128,7 +128,7 @@ class PopupController extends Controller
         $popups = PopUp::find($popup);
         $pays = Pays::all();
         $entreprises = Entreprise::all();
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
 
         return view('popup.update', compact('popups', 'pays', 'entreprises', 'fonctions'));
     }

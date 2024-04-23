@@ -6,6 +6,7 @@ use App\Models\Admin;
 use App\Models\Pub;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class PubController extends Controller
@@ -19,7 +20,7 @@ class PubController extends Controller
     {
         $pubs = Pub::all();
 
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
         
         return view('pub.index', compact('pubs', 'fonctions'));
     }
@@ -31,7 +32,7 @@ class PubController extends Controller
      */
     public function create()
     {
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
 
         return view('pub.add', compact('fonctions'));
     }
@@ -212,7 +213,7 @@ class PubController extends Controller
     {
         $pubs = Pub::find($pub);
 
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
 
         return view('pub.update', compact('pubs', 'fonctions'));
     }

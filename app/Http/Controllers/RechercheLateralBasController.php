@@ -27,7 +27,7 @@ class RechercheLateralBasController extends Controller
             ->select('*', 'admins.name as admin', 'slider_recherche_lateral_bas.id as identifiant')
             ->get();
 
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
 
         return view('slider-recherche-lateral-bas.index', compact('sliders', 'fonctions'));
     }
@@ -40,7 +40,7 @@ class RechercheLateralBasController extends Controller
     public function create()
     {
         $pays = Pays::all();
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
 
         return view('slider-recherche-lateral-bas.add', compact('pays', 'fonctions'));
     }
@@ -54,7 +54,7 @@ class RechercheLateralBasController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'image' => 'required|file|max:1024',
+            'image' => 'required|file',
             'pays_id' => 'required|integer'
         ]);
 
@@ -119,7 +119,7 @@ class RechercheLateralBasController extends Controller
     {
         $sliders = SliderRechercheLateralBas::find($slider);
         $pays = Pays::all();
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
 
         return view('slider-recherche-lateral-bas.update', compact('sliders', 'pays', 'fonctions'));
     }
@@ -134,7 +134,7 @@ class RechercheLateralBasController extends Controller
     public function update(Request $request, $slider)
     {
         $data = $request->validate([
-            'image' => 'required|file|max:1024',
+            'image' => 'required|file',
             'pays_id' => 'required|integer'
         ]);
 

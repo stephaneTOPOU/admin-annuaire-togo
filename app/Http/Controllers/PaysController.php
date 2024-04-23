@@ -6,6 +6,7 @@ use App\Models\Admin;
 use App\Models\Pays;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PaysController extends Controller
 {
@@ -18,7 +19,7 @@ class PaysController extends Controller
     {
         $pays = Pays::all();
 
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
         
         return view('pays.index', compact('pays', 'fonctions'));
     }
@@ -30,7 +31,7 @@ class PaysController extends Controller
      */
     public function create()
     {
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
 
         return view('pays.add', compact('fonctions'));
     }
@@ -81,7 +82,7 @@ class PaysController extends Controller
     public function edit($pay)
     {
         $pays = Pays::find($pay);
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
 
         return view('pays.update', compact('pays', 'fonctions'));
     }

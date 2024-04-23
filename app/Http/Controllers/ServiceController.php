@@ -7,6 +7,7 @@ use App\Models\Entreprise;
 use App\Models\Service;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -26,7 +27,7 @@ class ServiceController extends Controller
             ->select('*', 'entreprises.nom as entreprise', 'services.id as identifiant')
             ->get();
 
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
 
         return view('service.index', compact('services', 'fonctions'));
     }
@@ -44,7 +45,7 @@ class ServiceController extends Controller
             ->select('*', 'entreprises.nom as entreprise')
             ->get();
 
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
 
         return view('service.add', compact('entreprises', 'fonctions'));
     }
@@ -180,7 +181,7 @@ class ServiceController extends Controller
             ->select('*', 'entreprises.nom as entreprise', 'pays.libelle as pays')
             ->get();
 
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
         
         return view('service.update', compact('entreprises', 'services', 'fonctions'));
     }

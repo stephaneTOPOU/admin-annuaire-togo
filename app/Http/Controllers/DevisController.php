@@ -6,6 +6,7 @@ use App\Models\Admin;
 use App\Models\Devis;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class DevisController extends Controller
@@ -22,7 +23,7 @@ class DevisController extends Controller
             ->select('*', 'devis.id as identifiant')
             ->get();
 
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
 
         return view('devis.index', compact('devis', 'fonctions'));
     }
@@ -57,7 +58,7 @@ class DevisController extends Controller
     public function show($devis)
     {
         $devis = Devis::find($devis);
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
 
         return view('devis.front', compact('devis', 'fonctions'));
     }

@@ -6,6 +6,7 @@ use App\Models\Admin;
 use App\Models\Offre;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OffreController extends Controller
 {
@@ -17,7 +18,7 @@ class OffreController extends Controller
     public function index()
     {
         $offres = Offre::all();
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
         
         return view('offre.index', compact('offres', 'fonctions'));
     }
@@ -29,7 +30,7 @@ class OffreController extends Controller
      */
     public function create()
     {
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
 
         return view('offre.add', compact('fonctions'));
     }
@@ -99,7 +100,7 @@ class OffreController extends Controller
     {
         $offres = Offre::find($offre);
 
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
 
         return view('offre.update', compact('offres', 'fonctions'));
     }

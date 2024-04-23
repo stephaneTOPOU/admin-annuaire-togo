@@ -7,6 +7,7 @@ use App\Models\Pays;
 use App\Models\Ville;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class VilleController extends Controller
@@ -23,7 +24,7 @@ class VilleController extends Controller
             ->select('*', 'villes.id as identifiant', 'villes.libelle as ville')
             ->get();
 
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
 
         return view('ville.index', compact('villes', 'admin', 'fonctions'));
     }
@@ -36,7 +37,7 @@ class VilleController extends Controller
     public function create()
     {
         $pays = Pays::all();
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
 
         return view('ville.add', compact('pays', 'fonctions'));
     }
@@ -89,7 +90,7 @@ class VilleController extends Controller
     {
         $villes = Ville::find($ville);
         $pays = Pays::all();
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
 
         return view('ville.update', compact('pays', 'villes', 'fonctions'));
     }

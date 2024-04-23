@@ -24,7 +24,7 @@ class ReportageController extends Controller
             ->select('*', 'admins.name as admin', 'reportages.id as identifiant')
             ->get();
 
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
 
         return view('reportage.index', compact('reportages', 'fonctions'));
     }
@@ -70,7 +70,7 @@ class ReportageController extends Controller
     public function edit($reportage)
     {
         $reportages = Reportage::find($reportage);
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
 
         return view('reportage.update', compact('reportages', 'fonctions'));
     }

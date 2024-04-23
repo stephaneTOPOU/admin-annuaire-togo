@@ -25,7 +25,7 @@ class RechercheController extends Controller
             ->select('*', 'admins.name as admin', 'slider_recherches.id as identifiant')
             ->get();
 
-            $fonctions = Admin::where('fonction', 'admin')->get();
+            $fonctions = Auth::user();
             
         return view('slider-recherche.index', compact('sliders'));
     }
@@ -37,7 +37,7 @@ class RechercheController extends Controller
      */
     public function create()
     {        
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
 
         return view('slider-recherche.add', compact('fonctions'));
     }
@@ -51,7 +51,7 @@ class RechercheController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'image' => 'required|file|max:1024',
+            'image' => 'required|file',
         ]);
 
         try {
@@ -113,7 +113,7 @@ class RechercheController extends Controller
     public function edit($slider)
     {
         $sliders = SliderRecherche::find($slider);       
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
         
         return view('slider-recherche.update', compact('sliders', 'fonctions'));
     }
@@ -128,7 +128,7 @@ class RechercheController extends Controller
     public function update(Request $request, $slider)
     {
         $data = $request->validate([
-            'image' => 'required|file|max:1024',
+            'image' => 'required|file',
         ]);
 
         try {

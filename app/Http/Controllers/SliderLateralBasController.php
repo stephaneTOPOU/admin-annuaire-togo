@@ -26,7 +26,7 @@ class SliderLateralBasController extends Controller
             ->select('*', 'admins.name as admin', 'slider_lateral_bas.id as identifiant')
             ->get();
 
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
 
         return view('slider-lateral-bas.index', compact('sliders', 'fonctions'));
     }
@@ -39,7 +39,7 @@ class SliderLateralBasController extends Controller
     public function create()
     {
         $pays = Pays::all();
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
 
         return view('slider-lateral-bas.add', compact('pays', 'fonctions'));
     }
@@ -53,7 +53,7 @@ class SliderLateralBasController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'image' => 'required|file|max:1024',
+            'image' => 'required|file',
             'pays_id' => 'required|integer'
         ]);
 
@@ -118,7 +118,7 @@ class SliderLateralBasController extends Controller
     {
         $sliders = SliderLateralBas::find($slider);
         $pays = Pays::all();
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
 
         return view('slider-lateral-bas.update', compact('sliders', 'pays',  'fonctions'));
     }
@@ -134,7 +134,7 @@ class SliderLateralBasController extends Controller
     {
         //dd($request);
         $data = $request->validate([
-            'image' => 'required|file|max:1024',
+            'image' => 'required|file',
             'pays_id' => 'required|integer'
         ]);
 

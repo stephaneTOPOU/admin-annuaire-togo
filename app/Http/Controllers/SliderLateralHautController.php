@@ -26,7 +26,7 @@ class SliderLateralHautController extends Controller
             ->select('*', 'admins.name as admin', 'slider_laterals.id as identifiant')
             ->get();
 
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
 
         return view('slider-lateral-haut.index', compact('sliders', 'fonctions'));
     }
@@ -39,7 +39,7 @@ class SliderLateralHautController extends Controller
     public function create()
     {
         $pays = Pays::all();
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
 
         return view('slider-lateral-haut.add', compact('pays', 'fonctions'));
     }
@@ -53,7 +53,7 @@ class SliderLateralHautController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'image' => 'required|file|max:1024',
+            'image' => 'required|file',
             'pays_id' => 'required|integer'
         ]);
 
@@ -118,7 +118,7 @@ class SliderLateralHautController extends Controller
     {
         $pays = Pays::all();
         $sliders = SliderLateral::find($slider);
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
 
         return view('slider-lateral-haut.update', compact('sliders', 'pays', 'fonctions'));
     }
@@ -133,7 +133,7 @@ class SliderLateralHautController extends Controller
     public function update(Request $request, $slider)
     {
         $data = $request->validate([
-            'image' => 'required|file|max:1024',
+            'image' => 'required|file',
             'pays_id' => 'required|integer'
         ]);
 

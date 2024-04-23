@@ -7,6 +7,7 @@ use App\Models\MediaPub;
 use App\Models\Pub;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -24,7 +25,7 @@ class MediaPubController extends Controller
             ->select('*', 'pubs.entreprise as entreprise', 'media_pubs.id as identifiant')
             ->get();
 
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
 
         return view('media-pub.index', compact('medias', 'fonctions'));
     }
@@ -37,7 +38,7 @@ class MediaPubController extends Controller
     public function create()
     {
         $pubs = Pub::all();
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
 
         return view('media-pub.add', compact('pubs', 'fonctions'));
     }
@@ -132,7 +133,7 @@ class MediaPubController extends Controller
 
         $medias = MediaPub::find($mediaPub);
 
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
 
         return view('media-pub.update', compact('pubs', 'medias', 'fonctions'));
     }

@@ -25,7 +25,7 @@ class Slider1Controller extends Controller
             ->select('*', 'admins.name as admin', 'slider1s.id as identifiant')
             ->get();
 
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
 
         return view('slider1.index', compact('slider1s', 'fonctions'));
     }
@@ -37,7 +37,7 @@ class Slider1Controller extends Controller
      */
     public function create()
     {
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
 
         return view('slider1.add', compact('fonctions'));
     }
@@ -51,7 +51,7 @@ class Slider1Controller extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'image' => 'required|file|max:1024',
+            'image' => 'required|file',
         ]);
 
         try {
@@ -113,7 +113,7 @@ class Slider1Controller extends Controller
     public function edit($slider1)
     {
         $slider1s = Slider1::find($slider1);
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
 
         return view('slider1.update', compact('slider1s', 'fonctions'));
     }
@@ -128,7 +128,7 @@ class Slider1Controller extends Controller
     public function update(Request $request, $slider1)
     {
         $data = $request->validate([
-            'image' => 'required|file|max:1024',
+            'image' => 'required|file',
         ]);
 
         try {

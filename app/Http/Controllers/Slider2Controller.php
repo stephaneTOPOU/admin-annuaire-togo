@@ -26,7 +26,7 @@ class Slider2Controller extends Controller
             ->select('*', 'admins.name as admin', 'slider2s.id as identifiant')
             ->get();
 
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
 
         return view('slider2.index', compact('slider2s', 'fonctions'));
     }
@@ -39,7 +39,7 @@ class Slider2Controller extends Controller
     public function create()
     {
         $pays = Pays::all();
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
 
         return view('slider2.add', compact('pays', 'fonctions'));
     }
@@ -53,7 +53,7 @@ class Slider2Controller extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'image' => 'required|file|max:1024',
+            'image' => 'required|file',
             'pays_id' => 'required|integer'
         ]);
 
@@ -118,7 +118,7 @@ class Slider2Controller extends Controller
     {
         $slider2s = Slider2::find($slider2);
         $pays = Pays::all();
-        $fonctions = Admin::where('fonction', 'admin')->get();
+        $fonctions = Auth::user();
 
         return view('slider2.update', compact('slider2s', 'pays', 'fonctions'));
     }
@@ -133,7 +133,7 @@ class Slider2Controller extends Controller
     public function update(Request $request, $slider2)
     {
         $data = $request->validate([
-            'image' => 'required|file|max:1024',
+            'image' => 'required|file',
             'pays_id' => 'required|integer'
         ]);
 
