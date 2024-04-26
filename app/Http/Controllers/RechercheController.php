@@ -27,7 +27,7 @@ class RechercheController extends Controller
 
             $fonctions = Auth::user();
             
-        return view('slider-recherche.index', compact('sliders'));
+        return view('slider-recherche.index', compact('sliders', 'fonctions'));
     }
 
     /**
