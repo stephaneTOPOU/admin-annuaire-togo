@@ -47,7 +47,6 @@ class OffreController extends Controller
             'categorie' => 'required|string',
             'entreprise' => 'required|string',
             'titre' => 'required|string',
-            'description' => 'required|string'
         ]);
 
         try {
@@ -118,7 +117,6 @@ class OffreController extends Controller
             'categorie' => 'required|string',
             'entreprise' => 'required|string',
             'titre' => 'required|string',
-            'description' => 'required|string'
         ]);
 
         try {
