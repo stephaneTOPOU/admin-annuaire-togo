@@ -53,13 +53,13 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Qui sommes-nous</label>
-                                            <textarea id="summernote-1" name="libelle"></textarea>                                            
+                                            <textarea id="summernote-1" name="libelle"></textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Notre mission</label>
-                                            <textarea id="summernote-2" name="description"></textarea>                                            
+                                            <textarea id="summernote-2" name="description"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -97,34 +97,47 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="exampleInputFile1">Notre mission (suite)</label>
-                                            <textarea id="summernote-3" name="image1"></textarea>                                            
+                                            <textarea id="summernote-3" name="image1"></textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="exampleInputFile4">Nos objectifs</label>
-                                            <textarea id="summernote-4" name="image5"></textarea>                                            
+                                            <textarea id="summernote-4" name="image5"></textarea>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Lien youtube</label>
                                             <input type="text" class="form-control"
                                                 placeholder="Entrez le Lien youtube" name="image8">
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="exampleInputFile3">Vidéo</label>
+                                            <label for="exampleInputFile3">Vidéo de spot</label>
                                             <div class="input-group">
                                                 <div class="custom-file">
                                                     <input type="file" class="custom-file-input"
                                                         id="exampleInputFile3" name="image7">
                                                     <label class="custom-file-label" for="exampleInputFile3">Choisir la
                                                         vidéo</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="exampleInputFile3">Image de spot</label>
+                                            <div class="input-group">
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input"
+                                                        id="exampleInputFile3" name="image6">
+                                                    <label class="custom-file-label" for="exampleInputFile3">Choisir
+                                                        l'image</label>
                                                 </div>
                                             </div>
                                         </div>

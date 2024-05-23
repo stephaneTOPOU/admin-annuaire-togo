@@ -147,8 +147,29 @@ class ServiceController extends Controller
                 $data->image7 = $filenametostore;
             }
 
+            if ($request->hasFile('image6')) {
+
+                //get filename with extension
+                $filenamewithextension = $request->file('image6')->getClientOriginalName();
+
+                //get filename without extension
+                $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+
+                //get file extension
+                $extension = $request->file('image6')->getClientOriginalExtension();
+
+                //filename to store
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
+
+                //Upload File to external server
+                Storage::disk('ftp14')->put($filenametostore, fopen($request->file('image6'), 'r+'));
+
+                //Upload name to database
+                $data->image6 = $filenametostore;
+            }
+
             $data->save();
-            return redirect()->back()->with('success', 'Service Ajouté avec succès');
+            return redirect()->back()->with('success', 'Présentation ajoutée avec succès');
         } catch (Exception $e) {
             return redirect()->back()->with('success', $e->getMessage());
         }
@@ -284,8 +305,29 @@ class ServiceController extends Controller
                 $data->image7 = $filenametostore;
             }
 
+            if ($request->hasFile('image6')) {
+
+                //get filename with extension
+                $filenamewithextension = $request->file('image6')->getClientOriginalName();
+
+                //get filename without extension
+                $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+
+                //get file extension
+                $extension = $request->file('image6')->getClientOriginalExtension();
+
+                //filename to store
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
+
+                //Upload File to external server
+                Storage::disk('ftp14')->put($filenametostore, fopen($request->file('image6'), 'r+'));
+
+                //Upload name to database
+                $data->image6 = $filenametostore;
+            }
+
             $data->update();
-            return redirect()->back()->with('success', 'Service modifié avec succès');
+            return redirect()->back()->with('success', 'Présentation  modifiée avec succès');
         } catch (Exception $e) {
             return redirect()->back()->with('success', $e->getMessage());
         }
@@ -302,7 +344,7 @@ class ServiceController extends Controller
         $services = Service::find($service);
         try {
             $services->delete();
-            return redirect()->back()->with('success', 'Service supprimée avec succès');
+            return redirect()->back()->with('success', 'Présentation supprimée avec succès');
         } catch (Exception $e) {
             return redirect()->back()->with('success', $e->getMessage());
         }

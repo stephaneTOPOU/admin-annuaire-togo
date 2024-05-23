@@ -113,7 +113,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Lien youtube</label>
                                             <input type="text" class="form-control"
@@ -121,9 +121,9 @@
                                                 value="{{ old('image8') ?? $services->image8 }}">
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="exampleInputFile">Vidéo</label>
+                                            <label for="exampleInputFile">Vidéo de spot</label>
                                             <div class="input-group">
                                                 <div class="custom-file">
                                                     <input type="file" class="custom-file-input"
@@ -131,6 +131,20 @@
                                                         value="{{ old('image7') ?? $services->image7 }}">
                                                     <label class="custom-file-label"
                                                         for="exampleInputFile">{{ old('image7') ?? $services->image7 }}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="exampleInputFile">Image de spot</label>
+                                            <div class="input-group">
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input"
+                                                        id="exampleInputFile" name="image6"
+                                                        value="{{ old('image6') ?? $services->image6 }}">
+                                                    <label class="custom-file-label"
+                                                        for="exampleInputFile">{{ old('image6') ?? $services->image6 }}</label>
                                                 </div>
                                             </div>
                                         </div>
